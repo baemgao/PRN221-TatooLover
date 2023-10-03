@@ -78,6 +78,13 @@ Create table Booking (
 	ArtistFeedBack nvarchar(255),
 	ServiceFeedBack nvarchar(255),
 	Status int Not null
+	
+	--Booking status:
+	-- 0: Pending (After booking, waiting to booking date time)
+	-- 1: Check in (After customer come to studio)
+	-- 2: done (finish service)
+	-- 3: checkout (after pay bill, warranty time)
+	-- 4: finish (out of warranty, finish booking)
 );
 
 Create table BookingDetail (
@@ -93,4 +100,9 @@ Create table Bill (
 	BookingID int Not null FOREIGN KEY REFERENCES Booking(BookingID),
 	Note nvarchar(255),
 	Status int Not null
+
+	--Bill Status
+	-- 0: Open
+	-- 1: Close
+	-- 2: Finish
 );
