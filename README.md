@@ -7,6 +7,6 @@ Welcome to TatooLover Booking Platform, a simple and user-friendly system that a
 Our team has 4 member
 
 - [PhucBH](https://github.com/maotou-spy)
-- [DucBH](https://github.com/beamgao)
+- [DucBH](https://github.com/baemgao)
 - [ThanhND]()
 - [TruongHD]()
