@@ -38,13 +38,13 @@ public partial class Prn221TatooLoverContext : DbContext
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer(GetConnectionString());
 
-    String GetConnectionString()
+    public String GetConnectionString()
     {
         IConfiguration config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-        return config["ConnectionString:PRN221_TatooLover"];
+        return config["ConnectionStrings:PRN221_TatooLover"];
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
