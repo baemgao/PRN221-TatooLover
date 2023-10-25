@@ -12,11 +12,15 @@ namespace TattooRazorPages.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly ICustomerRepository _context;
+        private readonly ICustomerRepository _cus;
+        private readonly IStudioRepository _stu;
+        private readonly IArtistRepository _art;
 
-        public LoginModel(ICustomerRepository context)
+        public LoginModel(ICustomerRepository cus, IArtistRepository art, IStudioRepository stu)
         {
-            _context = context;
+            _cus = cus;
+            _stu = stu;
+            _art = art;
         }
 
         public void OnGet()
@@ -24,19 +28,35 @@ namespace TattooRazorPages.Pages
         }
 
         [BindProperty]
-        public Customer Customer { get; set; } = default!;
+        public string Email { get; set; }
+
+        [BindProperty]
+        public string Password { get; set; }
 
 
         public IActionResult OnPost()
         {
-            var account = _context.GetCustomers().FirstOrDefault(a => a.Email.Equals(Customer.Email) && a.Password.Equals(Customer.Password));
-            if (account == null)
+            var cus = _cus.GetCustomers().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
+            var art = _art.GetArtists().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
+            var stu = _stu.GetStudios().FirstOrDefault(a => a.Code.Equals(Email) && a.Password.Equals(Password));
+
+            if (cus != null)
             {
-                ViewData["Message"] = "You do not have permission to do this function!";
-                return Page();
+                HttpContext.Session.SetString("email", cus.Email);
+                return RedirectToPage("./Customer/Index");
             }
-            HttpContext.Session.SetString("email", account.Email);
-            return RedirectToPage("./Index");
+            if (art != null)
+            {
+                HttpContext.Session.SetString("email", art.Email);
+                return RedirectToPage("./Artist/Index");
+            }
+            if (stu != null)
+            {
+                HttpContext.Session.SetString("email", stu.Code);
+                return RedirectToPage("./Studio/Index");
+            }
+            ViewData["Message"] = "You do not have permission to do this function!";
+            return Page();
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataAccessObjects
 {
-    public class CustomerDAO
+    public class StudioDAO
     {
         Prn221TatooLoverContext db = new Prn221TatooLoverContext();
-        public List<Customer> GetCustomers()  => db.Customers.ToList();
+        public List<Studio> GetStudios() => db.Studios.ToList();
     }
 }
