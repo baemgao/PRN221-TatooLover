@@ -1,0 +1,50 @@
+﻿@page
+@model TattooRazorPages.Pages.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-danger">@ViewData["Message"]</div>
+}
+<style>
+    .form-group {
+        margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi form-group */
+    }
+
+    .card-header {
+        font-size: 24px; /* Đặt kích thước chữ cho card-header là 24px */
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" id="Email" name="email" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="Password" name="password" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
