@@ -9,6 +9,11 @@ namespace Repositories
 {
     public interface ICustomerRepository
     {
-        public List<Customer> GetCustomers();
+        List<Customer> GetCustomers();
+        Customer GetCustomerById(int id);
+        void SaveCustomer(Customer c);
+        void DeleteCustomer(Customer c);
+        void UpdateCustomer(Customer c);
+        Customer AuthenticateCustomer(string email, string password);
     }
 }

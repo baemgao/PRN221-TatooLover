@@ -1,5 +1,6 @@
 ﻿using BusinessObjects.Models;
 using DataAccessObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,19 @@ namespace Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        CustomerDAO customerDAO = new CustomerDAO();
-        public List<Customer> GetCustomers() => customerDAO.GetCustomers();
+        public void DeleteCustomer(Customer c) => CustomerDAO.DeleteCustomer(c);
+
+        public Customer GetCustomerById(int id) => CustomerDAO.GetCustomerById(id);
+
+        public List<Customer> GetCustomers() => CustomerDAO.GetCustomers();
+
+        public void SaveCustomer(Customer c) => CustomerDAO.SaveCustomer(c);
+
+        public void UpdateCustomer(Customer c) => CustomerDAO.UpdateCustomer(c);
+
+        public Customer AuthenticateCustomer(string email, string password)
+        {
+            return CustomerDAO.AuthenticateCustomer(email, password);
+        }
     }
 }
