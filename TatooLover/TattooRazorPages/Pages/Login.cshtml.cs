@@ -60,7 +60,7 @@ namespace TattooRazorPages.Pages
 
             if (cus != null)
             {
-                HttpContext.Session.SetString("cus_email", cus.Email);
+                HttpContext.Session.SetString("email", cus.Email);
                 return RedirectToPage("./Customer/Index");
             }
             if (art != null)
