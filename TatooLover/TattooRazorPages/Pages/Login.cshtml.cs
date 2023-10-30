@@ -25,8 +25,6 @@ namespace TattooRazorPages.Pages
 
         public void OnGet()
         {
-            HttpContext.Session.GetString("email");
-            HttpContext.Session.GetString("password");
         }
 
         [BindProperty]
@@ -51,8 +49,6 @@ namespace TattooRazorPages.Pages
             {
                 return Page();
             }
-            HttpContext.Session.SetString("email", Email);
-            HttpContext.Session.SetString("password", Password);
 
             var cus = _cus.GetCustomers().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
             var art = _art.GetArtists().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
