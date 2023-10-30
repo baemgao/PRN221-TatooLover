@@ -1,4 +1,3 @@
-using BusinessObjects.Models;
 using Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +8,8 @@ builder.Services.AddSession();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
+builder.Services.AddScoped<IBookingRepository , BookingRepository>();
+builder.Services.AddHttpContextAccessor();
 
 
 var app = builder.Build();

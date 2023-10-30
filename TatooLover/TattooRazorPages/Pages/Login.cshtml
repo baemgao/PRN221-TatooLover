@@ -9,13 +9,21 @@
 {
     <div class="alert alert-danger">@ViewData["Message"]</div>
 }
+@if (ViewData["MessageEmail"] != null)
+{
+    <div class="alert alert-danger">@ViewData["MessageEmail"]</div>
+}
+@if (ViewData["MessagePassword"] != null)
+{
+    <div class="alert alert-danger">@ViewData["MessagePassword"]</div>
+}
 <style>
     .form-group {
-        margin-bottom: 20px; /* Thêm khoảng cách dưới mỗi form-group */
+        margin-bottom: 20px;
     }
 
     .card-header {
-        font-size: 24px; /* Đặt kích thước chữ cho card-header là 24px */
+        font-size: 24px; 
     }
 </style>
 
@@ -48,3 +56,24 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    document.getElementById("Email").addEventListener("change", function () {
+        var emailValue = this.value;
+        localStorage.setItem("savedEmail", emailValue);
+    });
+
+    document.getElementById("Password").addEventListener("change", function () {
+        var passwordValue = this.value;
+        localStorage.setItem("savedPassword", passwordValue);
+    });
+    window.onload = function () {
+        var savedEmail = localStorage.getItem("savedEmail");
+        var savedPassword = localStorage.getItem("savedPassword");
+        if (savedEmail) {
+            document.getElementById("Email").value = savedEmail;
+        }
+        if (savedPassword) {
+            document.getElementById("Password").value = savedPassword;
+        }
+    };
+</script>
