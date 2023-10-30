@@ -8,6 +8,7 @@ builder.Services.AddSession();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 
 var app = builder.Build();
