@@ -16,15 +16,19 @@ namespace TattooRazorPages.Pages
         private readonly IStudioRepository _stu;
         private readonly IArtistRepository _art;
 
-        public LoginModel(ICustomerRepository cus, IArtistRepository art, IStudioRepository stu)
+        private readonly IConfiguration _config;
+
+        public LoginModel(ICustomerRepository cus, IArtistRepository art, IStudioRepository stu, IConfiguration config)
         {
             _cus = cus;
             _stu = stu;
             _art = art;
+            _config = config;
         }
 
         public void OnGet()
         {
+            
         }
 
         [BindProperty]
@@ -36,27 +40,51 @@ namespace TattooRazorPages.Pages
 
         public IActionResult OnPost()
         {
+            if (string.IsNullOrEmpty(Email))
+            {
+                ViewData["MessageEmail"] = "Please enter your email!";
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                ViewData["MessagePassword"] = "Please enter your password!";
+            }
+
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
+                return Page();
+            }
+
             var cus = _cus.GetCustomers().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
             var art = _art.GetArtists().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
             var stu = _stu.GetStudios().FirstOrDefault(a => a.Code.Equals(Email) && a.Password.Equals(Password));
 
-            if (cus != null)
+
+            var adminEmail = _config["AdminAccount:Email"];
+            var adminPass = _config["AdminAccount:Password"];
+
+            if (adminEmail == Email && adminPass == Password)
             {
-                HttpContext.Session.SetString("email", cus.Email);
-                return RedirectToPage("./Index");
-            }
-            if (art != null)
+                return RedirectToPage("./Admin/AdminHome");
+            } else
             {
-                HttpContext.Session.SetString("email", art.Email);
-                return RedirectToPage("./Artist/Index");
+                if (cus != null)
+                {
+                    HttpContext.Session.SetString("email", cus.Email);
+                    return RedirectToPage("./Customer/Index");
+                }
+                if (art != null)
+                {
+                    HttpContext.Session.SetString("art_email", art.Email);
+                    return RedirectToPage("./Artist/Index");
+                }
+                if (stu != null)
+                {
+                    HttpContext.Session.SetString("code", stu.Code);
+                    return RedirectToPage("./Studio/Index");
+                }
+                ViewData["Message"] = "Your email or password is wrong!";
+                return Page();
             }
-            if (stu != null)
-            {
-                HttpContext.Session.SetString("email", stu.Code);
-                return RedirectToPage("./Studio/Index");
-            }
-            ViewData["Message"] = "You do not have permission to do this function!";
-            return Page();
         }
     }
 }
