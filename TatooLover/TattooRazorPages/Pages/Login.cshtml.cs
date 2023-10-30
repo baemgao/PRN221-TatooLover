@@ -37,6 +37,20 @@ namespace TattooRazorPages.Pages
 
         public IActionResult OnPost()
         {
+            if (string.IsNullOrEmpty(Email))
+            {
+                ViewData["MessageEmail"] = "Please enter your email!";
+            }
+            if (string.IsNullOrEmpty(Password))
+            {
+                ViewData["MessagePassword"] = "Please enter your password!";
+            }
+
+            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            {
+                return Page();
+            }
+
             var cus = _cus.GetCustomers().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
             var art = _art.GetArtists().FirstOrDefault(a => a.Email.Equals(Email) && a.Password.Equals(Password));
             var stu = _stu.GetStudios().FirstOrDefault(a => a.Code.Equals(Email) && a.Password.Equals(Password));
@@ -44,19 +58,19 @@ namespace TattooRazorPages.Pages
             if (cus != null)
             {
                 HttpContext.Session.SetString("email", cus.Email);
-                return RedirectToPage("./Index");
+                return RedirectToPage("./Customer/Index");
             }
             if (art != null)
             {
-                HttpContext.Session.SetString("email", art.Email);
+                HttpContext.Session.SetString("art_email", art.Email);
                 return RedirectToPage("./Artist/Index");
             }
             if (stu != null)
             {
-                HttpContext.Session.SetString("email", stu.Code);
+                HttpContext.Session.SetString("code", stu.Code);
                 return RedirectToPage("./Studio/Index");
             }
-            ViewData["Message"] = "You do not have permission to do this function!";
+            ViewData["Message"] = "Your email or password is wrong!";
             return Page();
         }
     }

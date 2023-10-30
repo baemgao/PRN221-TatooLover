@@ -11,6 +11,14 @@
 {
     <div class="alert alert-danger">@ViewData["Message"]</div>
 }
+@if (ViewData["MessageEmail"] != null)
+{
+    <div class="alert alert-danger">@ViewData["MessageEmail"]</div>
+}
+@if (ViewData["MessagePassword"] != null)
+{
+    <div class="alert alert-danger">@ViewData["MessagePassword"]</div>
+}
 <style>
 
     * {
@@ -217,3 +225,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+<script src="~/js/login.js"></script>

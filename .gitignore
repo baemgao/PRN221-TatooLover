@@ -820,3 +820,11 @@ FodyWeavers.xsd
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
+/TatooLover/BusinessObjects/Models/Prn221TatooLoverContext.cs
+/TatooLover/DataAccessObjects/CustomerDAO.cs
+/TatooLover/Repositories/CustomerRepository.cs
+/TatooLover/Repositories/ICustomerRepository.cs
+/TatooLover/TattooRazorPages/TattooRazorPages.csproj
+/TatooLover/TattooRazorPages/Program.cs
+/TatooLover/TattooRazorPages/appsettings.json
+/TatooLover/TattooRazorPages/wwwroot/js/logout.js

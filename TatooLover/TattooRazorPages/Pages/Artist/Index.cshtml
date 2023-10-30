@@ -1,5 +1,119 @@
 ﻿@page
 @model TattooRazorPages.Pages.Artist.IndexModel
+
 @{
+    ViewData["Title"] = "Index";
 }
-<h1>Artist</h1>
+<style>
+    .error-message {
+        color: red;
+        font-weight: bold; 
+    }
+</style>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-danger">@ViewData["Message"]</div>
+}
+<h1>Booking List</h1>
+<form method="post">
+    <div class="form-group">
+        <label for="searchDate">Date:</label>
+        <input type="date" name="searchDate" id="searchDate" class="form-control" />
+    </div>
+    <div style="margin-top: 10px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<p style="margin-top: 20px;">
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].BookingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Point)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].ArtistFeedBack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].ServiceFeedBack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Booking != null)
+        {
+            @foreach (var item in Model.Booking)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Point)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArtistFeedBack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceFeedBack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Artist.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.BookingId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p class="error-message">Please enter the date!</p>
+        }
+    </tbody>
+</table>
+<script src="~/js/searchDate.js"></script>
+
