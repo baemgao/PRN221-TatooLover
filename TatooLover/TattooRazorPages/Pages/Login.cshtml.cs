@@ -25,6 +25,7 @@ namespace TattooRazorPages.Pages
 
         public void OnGet()
         {
+            
         }
 
         [BindProperty]
