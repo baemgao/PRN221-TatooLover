@@ -72,7 +72,7 @@ Create table Booking (
 	ArtistID int Not null FOREIGN KEY REFERENCES Artist(ArtistID),
 	Price Float Not null,
 	BookingDate DateTime Not null,
-	BookingTime Time Not null,
+	BookingDateTime DateTime Not null,
 	Note nvarchar(255),
 	Point int,
 	ArtistFeedBack nvarchar(255),
