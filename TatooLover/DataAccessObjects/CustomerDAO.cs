@@ -44,6 +44,23 @@ namespace DataAccessObjects
             return customer;
         }
 
+        public static Customer GetCustomerByEmail(string email)
+        {
+            Customer customer = new Customer();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    customer = context.Customers.SingleOrDefault(f => f.Email == email);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return customer;
+        }
+
         public static void SaveCustomer(Customer customer)
         {
             try
