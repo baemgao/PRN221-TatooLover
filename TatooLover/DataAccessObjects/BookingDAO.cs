@@ -14,5 +14,8 @@ namespace DataAccessObjects
         public List<Booking> GetDay(DateTime date) => db.Bookings
             .Where(b => b.BookingDate.Date == date.Date)
             .ToList();
+        public List<Booking> GetBookingsByArtistId(int artistId) => db.Bookings
+            .Where(a => a.ArtistId == artistId)
+            .ToList();
     }
 }

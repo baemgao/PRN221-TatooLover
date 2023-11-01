@@ -34,7 +34,6 @@ namespace TattooRazorPages.Pages
         [BindProperty]
         public string Password { get; set; }
 
-
         public IActionResult OnPost()
         {
             if (string.IsNullOrEmpty(Email))

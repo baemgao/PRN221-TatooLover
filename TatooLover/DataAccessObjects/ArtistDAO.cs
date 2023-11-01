@@ -11,5 +11,13 @@ namespace DataAccessObjects
     {
         Prn221TatooLoverContext db = new Prn221TatooLoverContext();
         public List<Artist> GetArtists() => db.Artists.ToList();
+        public List<Artist> GetArtistByStudioId(int StudioId)
+        {
+            List<Artist> artistList = GetArtists();
+
+            return artistList
+              .Where(a => a.StudioId == StudioId)
+              .ToList();
+        }
     }
 }
