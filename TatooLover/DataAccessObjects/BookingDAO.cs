@@ -11,7 +11,7 @@ namespace DataAccessObjects
         public List<Booking> GetBookings() => db.Bookings
             .Include(b => b.Customer)
             .Include(c => c.Artist).ToList();
-        public List<Booking> GetDayByArtistId(DateTime date, int id) => db.Bookings
+        public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => db.Bookings
             .Where(b => b.ArtistId == id && b.BookingDate.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)

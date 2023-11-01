@@ -34,7 +34,7 @@ namespace TattooRazorPages.Pages.Artist
             if (HttpContext.Session.GetInt32("art_email") != null)
             {
                 int artistId = HttpContext.Session.GetInt32("art_email").Value;
-                Booking = _context.GetDayByArtistId(searchDate, artistId)
+                Booking = _context.GetBookingInDayByArtistId(searchDate, artistId)
                     .ToList();
 
                 if (!Booking.Any())
