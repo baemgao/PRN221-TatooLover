@@ -29,7 +29,7 @@ namespace TattooRazorPages.Pages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {

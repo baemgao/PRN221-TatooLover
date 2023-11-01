@@ -12,6 +12,7 @@ namespace Repositories
     {
         BookingDAO bookingDAO = new BookingDAO();
         public List<Booking> GetBookings() => bookingDAO.GetBookings();
-        public List<Booking> GetDay(DateTime date) => bookingDAO.GetDay(date);
+        public List<Booking> GetDayByArtistId(DateTime date, int id) => bookingDAO.GetDayByArtistId(date, id);
+        public List<Booking> GetBookingByArtistId(int id) => bookingDAO.GetBookingByArtistId(id);
     }
 }

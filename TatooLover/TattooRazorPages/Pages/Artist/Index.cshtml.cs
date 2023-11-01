@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Repositories;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Numerics;
 
 namespace TattooRazorPages.Pages.Artist
 {
@@ -25,23 +18,25 @@ namespace TattooRazorPages.Pages.Artist
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.Equals("art_email"))
+            if (HttpContext.Session.GetInt32("art_email") == null)
             {
-                return RedirectToPage("./Login");
+                return RedirectToPage("/Login");
             }
-            if (_context.GetBookings != null)
+            int artistId = HttpContext.Session.GetInt32("art_email").Value;
+            if (_context.GetBookingByArtistId(artistId) != null)
             {
-                Booking = _context.GetBookings();
+                Booking = _context.GetBookingByArtistId(artistId);
             }
             return Page();
         }
-        public IActionResult OnPost(DateTime? searchDate)
+        public IActionResult OnPost(DateTime searchDate)
         {
-            if (searchDate != null)
+            if (HttpContext.Session.GetInt32("art_email") != null)
             {
-                Booking = _context.GetBookings()
-                 .Where(a => a.BookingDate.Date == searchDate)
-                 .ToList();
+                int artistId = HttpContext.Session.GetInt32("art_email").Value;
+                Booking = _context.GetDayByArtistId(searchDate, artistId)
+                    .ToList();
+
                 if (!Booking.Any())
                 {
                     ViewData["Message"] = "No bookings found for the selected date!";
