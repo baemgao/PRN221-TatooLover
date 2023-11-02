@@ -1,0 +1,71 @@
+﻿@page
+@model TattooRazorPages.Pages.CustomerPage.CustomerDetailModel
+@{
+    ViewData["Title"] = "Customer Detail";
+}
+<h1>Customer Detail</h1>
+
+<div class="customer-details">
+    <h4>Customer Information</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">
+            Customer Code:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Code
+        </dd>
+
+        <dt class="col-sm-3">
+            Email:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Email
+        </dd>
+
+        <dt class="col-sm-3">
+            Password:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Password
+        </dd>
+
+        <dt class="col-sm-3">
+            Name:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Name
+        </dd>
+
+        <dt class="col-sm-3">
+            Address:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Address
+        </dd>
+
+        <dt class="col-sm-3">
+            Phone:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.Customer?.Phone
+        </dd>
+
+        <dt class="col-sm-3">
+            Avatar:
+        </dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.Customer?.Avatar))
+            {
+                <img src="@Model.Customer?.Avatar" alt="Avatar" class="img-fluid" />
+            }
+        </dd>
+    </dl>
+</div>
+
+<div class="customer-actions">
+    <a asp-page="/CustomerPage/Edit" asp-route-id="@Model.Customer.CustomerId" class="btn btn-primary">Edit</a> |
+    <a asp-page="/BookingPage/Booking" class="btn btn-secondary">Booking</a>
+    <a asp-page="/BookingPage/BookingHistory" class="btn btn-secondary">Booking History</a>
+</div>
