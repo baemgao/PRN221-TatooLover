@@ -10,6 +10,6 @@ namespace Repositories
     public interface IStudioRepository
     {
         public List<Studio> GetStudios(); 
-        public Studio GetStudioByCode(String code);
+        public Studio GetStudioById(int id);
     }
 }

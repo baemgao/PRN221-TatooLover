@@ -78,7 +78,7 @@ namespace TattooRazorPages.Pages
                 }
                 if (stu != null)
                 {
-                    HttpContext.Session.SetString("code", stu.Code);
+                    HttpContext.Session.SetInt32("id", stu.StudioId);
                     return RedirectToPage("./Studio/Index");
                 }
                 ViewData["Message"] = "Your email or password is wrong!";

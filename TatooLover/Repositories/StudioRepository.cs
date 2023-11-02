@@ -12,7 +12,11 @@ namespace Repositories
     {
         StudioDAO studioDAO = new StudioDAO();
 
-        public Studio GetStudioByCode(string code) => studioDAO.GetStudioByCode(code);
+        public Studio GetStudioById(int id)
+        {
+            Studio? studio = GetStudios().FirstOrDefault(x => x.StudioId == id);
+            return studio;
+        }
 
         public List<Studio> GetStudios() => studioDAO.GetStudios();
     }
