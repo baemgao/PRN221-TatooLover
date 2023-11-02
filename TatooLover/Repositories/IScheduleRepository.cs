@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Repositories
 {
-    public interface IArtistRepository
+    public interface IScheduleRepository
     {
-        List<Artist> GetArtists();
+        public List<Schedule> GetSchedules();
+        public List<Schedule> GetSchedulesByArtistId(int artistId);
     }
 }

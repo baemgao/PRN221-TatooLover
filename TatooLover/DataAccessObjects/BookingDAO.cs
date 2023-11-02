@@ -14,25 +14,36 @@ namespace DataAccessObjects
 
 
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => db.Bookings
-            .Where(b => b.ArtistId == id && b.BookingDate.Date == date.Date)
+            .Where(b => b.ArtistId == id && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
-            .ToList();
-        public List<Booking> GetBookingsByArtistId(int artistId) => db.Bookings
-            .Where(a => a.ArtistId == artistId)
             .ToList();
         public List<Booking> GetBookingByArtistId(int id) => db.Bookings
+            .Where(b => b.ArtistId == id)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
-            .Where(b => b.ArtistId == id).ToList();
+            .ToList();
         public List<Booking> GetDay(DateTime date) => db.Bookings
            .Where(b => b.BookingDate.Date == date.Date)
            .ToList();
-        //public List<Booking> GetBookinsInDayByStudioId(int studioId, DateTime date) => db.Bookings
-        //              .Where(b => b.BookingDateTime.Date.Ticks == date.Ticks)
-        //              .Include(b => b.Artist)
-        //              .Include(b => b.Customer)
-        //              .ToList();
+        public List<BookingDTO> GetBookinsInDayByStudioId(int studioId, DateTime date)
+        {
+            List<BookingDTO> bookingDTOs = new List<BookingDTO>();
+            var artists = db.Artists.Where(a => a.StudioId == studioId).ToList();
+
+            foreach (var artist in artists)
+            {
+                BookingDTO bookingDTO;
+                List<Booking> bookings1 = GetBookingsByArtistId(artist.ArtistId);
+                foreach (var booking in bookings1)
+                {
+                    Customer customer = db.Customers.Where(c => c.CustomerId == booking.CustomerId).FirstOrDefault();
+                    bookingDTO = new BookingDTO(booking, customer, artist);
+                    bookingDTOs.Add(bookingDTO);
+                }
+            }
+            return bookingDTOs;
+        }
         public static Booking GetBookingById(int id)
         {
             Booking booking = new Booking();

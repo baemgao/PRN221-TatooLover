@@ -74,12 +74,12 @@ namespace TattooRazorPages.Pages
                 if (art != null)
                 {
                     HttpContext.Session.SetInt32("art_email", art.ArtistId);
-                    return RedirectToPage("./Artist/Index");
+                    return RedirectToPage("./ArtistPage/Index");
                 }
                 if (stu != null)
                 {
                     HttpContext.Session.SetInt32("id", stu.StudioId);
-                    return RedirectToPage("./StudioPage/Home");
+                    return RedirectToPage("./StudioPage/Index");
                 }
                 ViewData["Message"] = "Your email or password is wrong!";
                 return Page();
