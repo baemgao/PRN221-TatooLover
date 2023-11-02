@@ -1,0 +1,81 @@
+﻿@page
+@model TattooRazorPages.Pages.ArtistPage.EditAccountModel
+
+@{
+    ViewData["Title"] = "EditAccount";
+}
+
+<h1>Edit Profile</h1>
+
+<h4>@Model.Artist.Name</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Artist.ArtistId" />
+            <div class="form-group">
+                <label asp-for="Artist.StudioId" class="control-label">Studio Address</label>
+                <select asp-for="Artist.StudioId" class="form-control" asp-items="ViewBag.StudioId"></select>
+                <span asp-validation-for="Artist.StudioId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Code" class="control-label"></label>
+                <input asp-for="Artist.Code" class="form-control" disabled/>
+                <span asp-validation-for="Artist.Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Name" class="control-label"></label>
+                <input asp-for="Artist.Name" class="form-control" />
+                <span asp-validation-for="Artist.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Email" class="control-label"></label>
+                <input asp-for="Artist.Email" class="form-control" />
+                <span asp-validation-for="Artist.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Password" class="control-label"></label>
+                <input asp-for="Artist.Password" class="form-control" type="password" value="*****" disabled/>
+                <span asp-validation-for="Artist.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Phone" class="control-label"></label>
+                <input asp-for="Artist.Phone" class="form-control" />
+                <span asp-validation-for="Artist.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Address" class="control-label"></label>
+                <input asp-for="Artist.Address" class="form-control" />
+                <span asp-validation-for="Artist.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Avatar" class="control-label"></label>
+                <input asp-for="Artist.Avatar" class="form-control" />
+                <span asp-validation-for="Artist.Avatar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Certificate" class="control-label"></label>
+                <input asp-for="Artist.Certificate" class="form-control" />
+                <span asp-validation-for="Artist.Certificate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Artist.Status" class="control-label"></label>
+                <input asp-for="Artist.Status" class="form-control" />
+                <span asp-validation-for="Artist.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Account">Back to Profile</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

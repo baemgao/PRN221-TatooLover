@@ -15,7 +15,7 @@
 {
     <div class="alert alert-danger">@ViewData["Message"]</div>
 }
-<h1>Booking List</h1>
+<h1>All Booking</h1>
 <form method="post">
     <div class="form-group">
         <label for="searchDate">Date:</label>
@@ -26,9 +26,6 @@
     </div>
 </form>
 
-<p style="margin-top: 20px;">
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -93,7 +90,27 @@
                         @Html.DisplayFor(modelItem => item.ServiceFeedBack)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
+                        @switch (item.Status)
+                        {
+                            case 0:
+                                <span style="color: blue">Pending</span>
+                                break;
+                            case 1:
+                                <span style="color: green">Check-in</span>
+                                break;
+                            case 2:
+                                <span style="color: green">Done</span>
+                                break;
+                            case 3:
+                                <span style="color: green">Check-out</span>
+                                break;
+                            case 4:
+                                <span style="color: green">Finished</span>
+                                break;
+                            default:
+                                <span style="color: red">Unknown Status</span>
+                                break;
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Artist.Name)
@@ -102,9 +119,7 @@
                         @Html.DisplayFor(modelItem => item.Customer.Name)
                     </td>
                     <td>
-                        <a asp-page="./Edit" asp-route-id="@item.BookingId">Edit</a> |
                         <a asp-page="./Details" asp-route-id="@item.BookingId">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
                     </td>
                 </tr>
             }

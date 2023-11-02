@@ -1,16 +1,12 @@
 ﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DataAccessObjects
 {
     public class ArtistDAO
     {
-        
+        Prn221TatooLoverContext db = new Prn221TatooLoverContext();
         public List<Artist> GetArtistByStudioId(int StudioId)
         {
             List<Artist> artistList = GetArtists();
@@ -37,6 +33,18 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
             return artists;
+        }
+        public Artist? GetArtistById(int? id)
+        {
+            return db.Artists             
+              .Include(s => s.Studio)
+              .SingleOrDefault(a => a.ArtistId == id);
+        }
+        public Artist UpdateArtist(Artist artist)
+        {
+            db.Entry<Artist>(artist).State = EntityState.Modified;
+            db.SaveChanges();
+            return artist;
         }
     }
 }
