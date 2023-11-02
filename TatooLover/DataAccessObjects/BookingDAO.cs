@@ -1,4 +1,5 @@
-﻿using BusinessObjects.Models;
+﻿using BusinessObjects.DTO;
+using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
@@ -29,20 +30,23 @@ namespace DataAccessObjects
         public List<Booking> GetDay(DateTime date) => db.Bookings
            .Where(b => b.BookingDate.Date == date.Date)
            .ToList();
-        public List<Booking> GetBookinsInDayByStudioId(int studioId, DateTime date)
+        public List<BookingDTO> GetBookinsInDayByStudioId(int studioId, DateTime date)
         {
-            List<Booking> bookings = new List<Booking>();
+            List<BookingDTO> bookingDTOs = new List<BookingDTO>();
             var artists = db.Artists.Where(a => a.StudioId == studioId).ToList();
 
             foreach (var artist in artists)
             {
+                BookingDTO bookingDTO;
                 List<Booking> bookings1 = GetBookingsByArtistId(artist.ArtistId);
                 foreach (var booking in bookings1)
                 {
-                    bookings.Add(booking);
+                    Customer customer = db.Customers.Where(c => c.CustomerId == booking.CustomerId).FirstOrDefault();
+                    bookingDTO = new BookingDTO(booking, customer, artist);
+                    bookingDTOs.Add(bookingDTO);
                 }
             }
-            return bookings;
+            return bookingDTOs;
         }
     }
 }

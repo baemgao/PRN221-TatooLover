@@ -1,4 +1,5 @@
-﻿using BusinessObjects.Models;
+﻿using BusinessObjects.DTO;
+using BusinessObjects.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Repositories
         public List<Booking> GetBookings();
         public Booking? GetBookingById(int bookingID);
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id);
-        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId);
+        public List<BookingDTO> GetBookingInDayByStudioId(DateTime date, int studioId);
         public List<Booking> GetBookingByArtistId(int id);
     }
 }

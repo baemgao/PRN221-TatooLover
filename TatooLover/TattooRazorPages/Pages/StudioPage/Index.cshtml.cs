@@ -1,3 +1,4 @@
+using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,8 +15,10 @@ namespace TattooRazorPages.Pages.StudioPage
         public IArtistRepository artistRepository = new ArtistRepository();
 
         int id;
+        public Customer customer { get; set; }
         public Studio studio { get; set; }
         public List<Booking> bookingList { get; set; }
+        public List<BookingDTO> bookingDTOList { get; set; }
         public DateTime today { get; set; }
 
         public async Task OnGetAsync()
@@ -25,7 +28,7 @@ namespace TattooRazorPages.Pages.StudioPage
             {
                 today = DateTime.Today;
                 studio = studioRepository.GetStudioById(id);
-                bookingList = bookingRepository.GetBookingInDayByStudioId(today, id);
+                bookingDTOList = bookingRepository.GetBookingInDayByStudioId(today, id);
             }
         }
     }
