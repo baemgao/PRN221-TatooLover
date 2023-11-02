@@ -20,38 +20,43 @@ namespace TattooRazorPages.Pages.CustomerPage
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
+            int? customerId = HttpContext.Session.GetInt32("customerId");
+
+            if (!customerId.HasValue)
             {
-                return NotFound();
+                return RedirectToPage("/Login");
             }
 
-            Customer = _customer.GetCustomerById(id.Value);
+            Customer = _customer.GetCustomerById(customerId.Value);
             if (Customer == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            int? customerId = HttpContext.Session.GetInt32("customerId");
+
+            if (!ModelState.IsValid || !customerId.HasValue)
             {
                 return Page();
             }
 
             try
             {
-                // Kiểm tra xem khách hàng có tồn tại dựa trên ID
-                if (!CustomerExists(Customer.CustomerId))
+                if (!CustomerExists(customerId.Value))
                 {
                     return NotFound();
                 }
 
-                // Gọi phương thức để cập nhật thông tin khách hàng
+                Customer.CustomerId = customerId.Value;
+
                 _customer.UpdateCustomer(Customer);
 
-                return RedirectToPage("./Index");
+                return RedirectToPage("/CustomerPage/CustomerDetail");
             }
             catch
             {
@@ -61,10 +66,10 @@ namespace TattooRazorPages.Pages.CustomerPage
 
         private bool CustomerExists(int id)
         {
-            // kiểm tra xem khách hàng có tồn tại dựa trên ID
+
             Customer customer = _customer.GetCustomerById(id);
 
-            // Trả về true nếu khách hàng tồn tại, ngược lại trả về false
+
             return customer != null;
         }
     }

@@ -2,6 +2,7 @@ using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 namespace TattooRazorPages.Pages.StudioPage
@@ -14,33 +15,38 @@ namespace TattooRazorPages.Pages.StudioPage
         public ICustomerRepository customerRepository = new CustomerRepository();
         public IArtistRepository artistRepository = new ArtistRepository();
 
-        public Customer customer { get; set; }
-        public Studio studio { get; set; }
-        public List<Booking> bookingList { get; set; }
+        public Studio studio { get; set; } = default!;
+        public List<Booking> bookingList { get; set; } = default!;
         public DateTime today { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            var id = HttpContext.Session.GetInt32("id") != null ?
-           (int)HttpContext.Session.GetInt32("id")! : -1;
+            if (HttpContext.Session.GetInt32("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            int studioId = HttpContext.Session.GetInt32("id").Value;
+            if (bookingRepository.GetBookingByStudioId(studioId) != null) {
+                today = DateTime.Today;
+                studio = studioRepository.GetStudioById(studioId);
+                bookingList = bookingRepository.GetBookingByStudioId(studioId);
+            }
+                return Page();
+        }
+        public IActionResult OnPost(DateTime searchDate)
+        {
+            if (HttpContext.Session.GetInt32("id") != null)
+            {
+                int studioId = HttpContext.Session.GetInt32("id").Value;
+                bookingList = bookingRepository.GetBookingInDayByStudioId(searchDate, studioId)
+                    .ToList();
 
-            if (id == null || id < 0)
-            {
-                NotFound(); return;
-            }
-            else
-            {
-                try
+                if (!bookingList.Any())
                 {
-                    today = DateTime.Today.Date;
-                    studio = studioRepository.GetStudioById(id);
-                    bookingList = bookingRepository.GetBookings();
-                }
-                catch (Exception ex)
-                {
-                    ViewData["Message"] = "Error getting data";
+                    ViewData["Message"] = "No bookings found for the selected date!";
                 }
             }
+            return Page();
         }
     }
 }

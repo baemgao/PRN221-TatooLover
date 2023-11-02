@@ -4,3 +4,131 @@
     ViewData["Title"] = "Home";
     Layout = "_StudioLayout";
 }
+<style>
+    .small-box {
+        border-radius: 15px;
+        background-color: #000033;
+        padding: 5px;
+        text-align: center;
+        margin: 10px 0;
+        color: #fff;
+    }
+
+    table th {
+        text-align: center;
+    }
+</style>
+@if (Model.studio != null)
+{
+    <h1>Hello @Model.studio.Code - @Model.studio.Name comeback</h1>
+}
+<h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="small-box">
+                <h3>Member</h3>
+                <p>40</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box">
+                <h3>Studio</h3>
+                <p>40</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box">
+                <h3>Artist</h3>
+                <p>40</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box">
+                <h3>Booking</h3>
+                <p>40</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<h2>
+    Today's Booking
+</h2>
+<br />
+
+<form method="post">
+    <div class="form-group">
+        <label for="searchDate">Date:</label>
+        <input type="date" name="searchDate" id="searchDate" class="form-control" />
+    </div>
+    <div style="margin-top: 10px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<table class="table table-primary ">
+    <thead>
+        <tr table-primary>
+            <th>Id</th>
+            <th>Artist Code</th>
+            <th>Artis Name</th>
+            <th>Customer code</th>
+            <th>Customer Name</th>
+            <th>Booking Date</th>
+            <th>Booking Date Time</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.bookingList.Count; i++)
+        {
+            <tr table-secondary>
+                <td>@(i + 1)</td>
+                <td>@Model.bookingList[i].Artist.Code</td>
+                <td>@Model.bookingList[i].Artist.Name</td>
+                <td>@Model.bookingList[i].Customer.Code</td>
+                <td>@Model.bookingList[i].Customer.Name</td>
+                <td>@Model.bookingList[i].BookingDate</td>
+                <td>@Model.bookingList[i].BookingDate.ToString("dd-MM-yyyy")</td>
+                <td>@Model.bookingList[i].BookingDateTime</td>
+                <td>@Model.bookingList[i].Price</td>
+                <td>
+                    @switch (Model.bookingList[i].Status)
+                    {
+                        case 0:
+                            {
+                                <span style="color:blue">Pending</span>
+                            }
+                            break;
+                        case 1:
+                            {
+                                <span style="color:green">Check-in</span>
+                            }
+                            break;
+                        case 2:
+                            {
+                                <span style="color:green">Done </span>
+                            }
+                            break;
+                        case 3:
+                            {
+                                <span style="color:green">Check-ut</span>
+                            }
+                            break;
+                        case 4:
+                            {
+                                <span style="color:green">Finished</span>
+                            }
+                            break;
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
