@@ -34,17 +34,5 @@ namespace DataAccessObjects
             }
             return artists;
         }
-        public Artist? GetArtistById(int? id)
-        {
-            return db.Artists             
-              .Include(s => s.Studio)
-              .SingleOrDefault(a => a.ArtistId == id);
-        }
-        public Artist UpdateArtist(Artist artist)
-        {
-            db.Entry<Artist>(artist).State = EntityState.Modified;
-            db.SaveChanges();
-            return artist;
-        }
     }
 }

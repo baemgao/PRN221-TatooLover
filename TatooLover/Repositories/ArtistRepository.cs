@@ -13,7 +13,6 @@ namespace Repositories
         ArtistDAO artistDAO = new ArtistDAO();
         public List<Artist> GetArtists() => ArtistDAO.GetArtists();
 
-        public Artist? GetArtistById(int? id) => artistDAO.GetArtistById(id);
-        public Artist UpdateArtist(Artist artist) => artistDAO.UpdateArtist(artist);
+        public Artist GetArtistById(int id) => ArtistDAO.GetArtists().SingleOrDefault(a => a.ArtistId == id);
     }
 }

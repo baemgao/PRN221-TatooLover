@@ -10,7 +10,6 @@ namespace Repositories
     public interface IArtistRepository
     {
         List<Artist> GetArtists();
-        Artist? GetArtistById(int? id);
-        Artist UpdateArtist(Artist artist);
+        Artist GetArtistById(int id);
     }
 }
