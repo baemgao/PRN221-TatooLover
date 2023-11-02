@@ -20,7 +20,7 @@ namespace Repositories
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => bookingDAO.GetBookingInDayByArtistId(date, id);
         public List<Booking> GetBookingByArtistId(int id) => bookingDAO.GetBookingByArtistId(id);
 
-        public List<BookingDTO> GetBookingInDayByStudioId(DateTime date, int studioId) => bookingDAO.GetBookinsInDayByStudioId(studioId, date);
+        /*public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => bookingDAO.GetBookinsInDayByStudioId(studioId, date);*/
 
         public List<Booking> GetBookings() => BookingDAO.GetBookings();
         public Booking GetBookingById(int id) => BookingDAO.GetBookingById(id);

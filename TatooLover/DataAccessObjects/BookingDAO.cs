@@ -28,24 +28,11 @@ namespace DataAccessObjects
         public List<Booking> GetDay(DateTime date) => db.Bookings
            .Where(b => b.BookingDate.Date == date.Date)
            .ToList();
-        public List<BookingDTO> GetBookinsInDayByStudioId(int studioId, DateTime date)
-        {
-            List<BookingDTO> bookingDTOs = new List<BookingDTO>();
-            var artists = db.Artists.Where(a => a.StudioId == studioId).ToList();
-
-            foreach (var artist in artists)
-            {
-                BookingDTO bookingDTO;
-                List<Booking> bookings1 = GetBookingsByArtistId(artist.ArtistId);
-                foreach (var booking in bookings1)
-                {
-                    Customer customer = db.Customers.Where(c => c.CustomerId == booking.CustomerId).FirstOrDefault();
-                    bookingDTO = new BookingDTO(booking, customer, artist);
-                    bookingDTOs.Add(bookingDTO);
-                }
-            }
-            return bookingDTOs;
-        }
+        //public List<Booking> GetBookinsInDayByStudioId(int studioId, DateTime date) => db.Bookings
+        //              .Where(b => b.BookingDateTime.Date.Ticks == date.Ticks)
+        //              .Include(b => b.Artist)
+        //              .Include(b => b.Customer)
+        //              .ToList();
         public static Booking GetBookingById(int id)
         {
             Booking booking = new Booking();
@@ -56,6 +43,7 @@ namespace DataAccessObjects
                     booking = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
+                        .Include(c => c.BookingDetails)
                         .SingleOrDefault(f => f.BookingId == id);
                 }
             }
@@ -75,6 +63,8 @@ namespace DataAccessObjects
                     bookings = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
+                        .Include(c => c.BookingDetails)
+                        .OrderByDescending(b => b.BookingDateTime)
                         .ToList();
                 }
             }
