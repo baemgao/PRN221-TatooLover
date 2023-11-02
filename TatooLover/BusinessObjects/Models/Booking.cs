@@ -25,7 +25,7 @@ public partial class Booking
 
     public string? ServiceFeedBack { get; set; }
 
-    public int Status { get; set; }
+    public int Status { get; set; } = 0;
 
     public virtual Artist Artist { get; set; } = null!;
 
