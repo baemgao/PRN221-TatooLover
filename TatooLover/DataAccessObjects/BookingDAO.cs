@@ -1,6 +1,8 @@
 ﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccessObjects
 {
@@ -24,28 +26,23 @@ namespace DataAccessObjects
             .Include(b => b.Customer)
             .Include(c => c.Artist)
             .Where(b => b.ArtistId == id).ToList();
-        public Booking? GetBookingById(int bookingID) => db.Bookings.FirstOrDefault(a => a.BookingId == bookingID);
-
-        public List<Booking> GetBookingByStudioId(int studioId)
+        public List<Booking> GetDay(DateTime date) => db.Bookings
+           .Where(b => b.BookingDate.Date == date.Date)
+           .ToList();
+        public List<Booking> GetBookinsInDayByStudioId(int studioId, DateTime date)
         {
+            List<Booking> bookings = new List<Booking>();
+            var artists = db.Artists.Where(a => a.StudioId == studioId).ToList();
 
-            var artists = artistDAO.GetArtistByStudioId(studioId);
-
-            return db.Bookings
-              .Where(b => artists.Contains(b.Artist))
-              .ToList();
-        }
-
-        public List<Booking> GetBookingsByDay() => db.Bookings.OrderByDescending(b => b.BookingDate).ToList();
-
-        public List<Booking> GetBookingToday(int studioID)
-        {
-            List<Booking> bookingList = new List<Booking>();
-            List<Artist> artistList = artistDAO.GetArtistByStudioId(studioID);
-
-            return db.Bookings
-                .Where(b => artistList.Contains(b.Artist) && b.BookingDate == DateTime.Today)
-                .ToList();
+            foreach (var artist in artists)
+            {
+                List<Booking> bookings1 = GetBookingsByArtistId(artist.ArtistId);
+                foreach (var booking in bookings1)
+                {
+                    bookings.Add(booking);
+                }
+            }
+            return bookings;
         }
     }
 }

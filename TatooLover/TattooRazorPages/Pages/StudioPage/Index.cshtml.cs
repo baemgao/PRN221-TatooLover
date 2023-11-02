@@ -5,6 +5,7 @@ using Repositories;
 
 namespace TattooRazorPages.Pages.StudioPage
 {
+
     public class IndexModel : PageModel
     {
         public IBookingRepository bookingRepository = new BookingRepository();
@@ -12,15 +13,19 @@ namespace TattooRazorPages.Pages.StudioPage
         public ICustomerRepository customerRepository = new CustomerRepository();
         public IArtistRepository artistRepository = new ArtistRepository();
 
-        string? code;
-        Studio studio;
+        int id;
+        public Studio studio { get; set; }
+        public List<Booking> bookingList { get; set; }
+        public DateTime today { get; set; }
 
         public async Task OnGetAsync()
         {
-            code = HttpContext.Session.GetString("code") ?? "default";
-            if (!code.Equals("default"))
+            id = (int)HttpContext.Session.GetInt32("id");
+            if (id != null && id >= 0)
             {
-                studio = studioRepository.GetStudioByCode(code);
+                today = DateTime.Today;
+                studio = studioRepository.GetStudioById(id);
+                bookingList = bookingRepository.GetBookingInDayByStudioId(today, id);
             }
         }
     }

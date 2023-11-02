@@ -15,7 +15,7 @@ public partial class Booking
 
     public DateTime BookingDate { get; set; }
 
-    public TimeSpan BookingTime { get; set; }
+    public DateTime BookingDateTime { get; set; }
 
     public string? Note { get; set; }
 

@@ -11,13 +11,15 @@ namespace Repositories
     public class BookingRepository : IBookingRepository
     {
         BookingDAO bookingDAO = new BookingDAO();
-        
-        public List<Booking> GetBookings() => bookingDAO.GetBookings();
+        ArtistDAO artistDAO = new ArtistDAO();
+
+        public Booking? GetBookingById(int bookingID) => bookingDAO.GetBookings().FirstOrDefault(a => a.BookingId == bookingID);
+        public List<Booking> GetBookings() => bookingDAO.GetBookings().OrderByDescending(b => b.BookingDate).ToList();
+        public List<Booking> GetDay(DateTime date) => bookingDAO.GetDay(date);
+        //public List<Booking> GetBookings() => bookingDAO.GetBookings();
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => bookingDAO.GetBookingInDayByArtistId(date, id);
         public List<Booking> GetBookingByArtistId(int id) => bookingDAO.GetBookingByArtistId(id);
-        public List<Booking> GetBookingsByDay() => bookingDAO.GetBookingsByDay();
-        public List<Booking> GetBookingToday(int studioID) => bookingDAO.GetBookingToday(studioID);
-        public List<Booking> GetBookingByStudioId(int studioId) => bookingDAO.GetBookingByStudioId(studioId);
-        public Booking? GetBookingById(int bookingID) => bookingDAO.GetBookingById(bookingID);
+
+        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => bookingDAO.GetBookinsInDayByStudioId(studioId, date);
     }
 }
