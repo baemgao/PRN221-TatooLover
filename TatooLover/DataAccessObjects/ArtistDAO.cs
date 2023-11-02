@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace DataAccessObjects
                 using (var context = new Prn221TatooLoverContext())
                 {
                     artists = context.Artists
+                        .Include(s => s.Studio)
                         .ToList();
                 }
             }
