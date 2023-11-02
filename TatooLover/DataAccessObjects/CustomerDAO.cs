@@ -61,6 +61,30 @@ namespace DataAccessObjects
             return customer;
         }
 
+        public static List<Customer> GetCustomerByName(string searchText)
+        {
+            List<Customer> customers = new List<Customer>();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        customers = context.Customers.Where(c => c.Name.Contains(searchText)).ToList();
+                    }
+                    else
+                    {
+                        customers = context.Customers.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return customers;
+        }
+
         public static void SaveCustomer(Customer customer)
         {
             try

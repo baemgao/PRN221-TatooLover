@@ -1,0 +1,54 @@
+﻿@page
+@model TattooRazorPages.Pages.Admin.AdminStudioModel
+@{
+}
+
+<style>
+    table th {
+        text-align: center;
+    }
+</style>
+
+<br />
+<div class="navbar-right col-6 justify-content-end">
+    <form class="d-flex" role="search" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchText">
+        <button class="btn btn-info" style="color: #fff" type="submit">Search</button>
+    </form>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <h3>Studio List</h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr class="table-danger">
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>Open Hour</th>
+                    <th>Close Hour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.studioList)
+                {
+                    <tr>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.OpenHour)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.CloseHour)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Status)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<button class="btn btn-outline-success" style="color: #fff" type="submit"><a href="AdminHome" style="text-decoration:none">Home</a></button>

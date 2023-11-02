@@ -11,5 +11,7 @@ namespace Repositories
     {
         List<Artist> GetArtists();
         Artist GetArtistById(int id);
+
+        List<Artist> GetArtistByName(string name);
     }
 }

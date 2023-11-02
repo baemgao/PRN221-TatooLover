@@ -20,6 +20,7 @@ namespace Repositories
         }
 
         public List<Studio> GetStudios() => studioDAO.GetStudios();
+        public List<Studio> GetStudioByName(string name) => StudioDAO.GetStudioByName(name);
         public List<Service> GetServices() => serviceDAO.GetServices();
 
         public List<Service> GetServiceByStudioId(int studioId) => serviceDAO.GetServiceByStudioId(studioId);
