@@ -15,6 +15,7 @@ namespace Repositories
 
         public Customer GetCustomerById(int id) => CustomerDAO.GetCustomerById(id);
         public Customer GetCustomerByEmail(string email) => CustomerDAO.GetCustomerByEmail(email);
+        public List<Customer> GetCustomerByName(string name) => CustomerDAO.GetCustomerByName(name);
 
         public List<Customer> GetCustomers() => CustomerDAO.GetCustomers();
 

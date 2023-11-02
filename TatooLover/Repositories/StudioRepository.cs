@@ -19,5 +19,7 @@ namespace Repositories
         }
 
         public List<Studio> GetStudios() => studioDAO.GetStudios();
+
+        public List<Studio> GetStudioByName(string name) => StudioDAO.GetStudioByName(name);
     }
 }

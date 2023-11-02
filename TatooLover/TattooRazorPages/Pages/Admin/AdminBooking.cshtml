@@ -1,0 +1,60 @@
+﻿@page
+@model TattooRazorPages.Pages.Admin.AdminBookingModel
+@{
+}
+
+<style>
+    table th {
+        text-align: center;
+    }
+</style>
+
+<br />
+<div class="navbar-right col-6 justify-content-end">
+    <form class="d-flex" role="search" method="get">
+        @* <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchText"> *@
+        <button class="btn btn-info" style="color: #fff" type="submit">Search</button>
+    </form>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <h3>Booking List</h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr class="table-info">
+                    <th>Customer</th>
+                    <th>Artist</th>
+                    <th>Price</th>
+                    <th>Booking Date</th>
+                    <th>Booking Date Time</th>
+                    <th>Note</th>
+                    <th>Point</th>
+                    <th>Artist Feedback</th>
+                    <th>Service Feedback</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.bookingList)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Customer.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Artist.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.BookingDateTime)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Note)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Point)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ArtistFeedBack)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ServiceFeedBack)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<button class="btn btn-outline-success" style="color: #fff" type="submit"><a href="AdminHome" style="text-decoration:none">Home</a></button>

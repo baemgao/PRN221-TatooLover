@@ -11,5 +11,6 @@ namespace Repositories
     {
         public List<Studio> GetStudios(); 
         public Studio GetStudioById(int id);
+        List<Studio> GetStudioByName(string name);
     }
 }

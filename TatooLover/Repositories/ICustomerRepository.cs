@@ -12,6 +12,7 @@ namespace Repositories
         List<Customer> GetCustomers();
         Customer GetCustomerById(int id);
         Customer GetCustomerByEmail(string email);
+        List<Customer> GetCustomerByName(string name);
         void SaveCustomer(Customer c);
         void DeleteCustomer(Customer c);
         void UpdateCustomer(Customer c);

@@ -38,5 +38,29 @@ namespace DataAccessObjects
             }
             return artists;
         }
+
+        public static List<Artist> GetArtistByName(string searchText)
+        {
+            List<Artist> customers = new List<Artist>();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        customers = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
+                    }
+                    else
+                    {
+                        customers = context.Artists.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return customers;
+        }
     }
 }
