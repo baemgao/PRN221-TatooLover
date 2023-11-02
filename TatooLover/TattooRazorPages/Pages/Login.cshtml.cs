@@ -74,7 +74,7 @@ namespace TattooRazorPages.Pages
                 }
                 if (art != null)
                 {
-                    HttpContext.Session.SetString("art_email", art.Email);
+                    HttpContext.Session.SetInt32("art_email", art.ArtistId);
                     return RedirectToPage("./Artist/Index");
                 }
                 if (stu != null)
