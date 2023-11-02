@@ -1,10 +1,5 @@
 ﻿using BusinessObjects.Models;
 using DataAccessObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories
 {
@@ -12,6 +7,10 @@ namespace Repositories
     {
         ScheduleDAO scheduleDAO = new ScheduleDAO();
         public List<Schedule> GetSchedules() => scheduleDAO.GetSchedules();
-        public List<Schedule> GetSchedulesByArtistId(int artistId) => scheduleDAO.GetSchedulesByArtistId(artistId);
+        public Schedule? GetSchedulesById(int? id) => scheduleDAO.GetSchedulesById(id);
+        public List<Schedule> GetListScheduleByArtistId(int? artistId) => scheduleDAO.GetListScheduleByArtistId(artistId);
+        public void CreateSchedule(Schedule schedule) => scheduleDAO.CreateSchedule(schedule);
+        public void UpdateSchedule(Schedule schedule) => scheduleDAO.UpdateSchedule(schedule);
+        public void DeleteSchedule(Schedule schedule) => scheduleDAO.DeleteSchedule(schedule);
     }
 }
