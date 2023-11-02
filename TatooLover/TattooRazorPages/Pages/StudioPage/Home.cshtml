@@ -1,10 +1,9 @@
 ﻿@page
-@model TattooRazorPages.Pages.StudioPage.IndexModel
+@model TattooRazorPages.Pages.StudioPage.HomeModel
 @{
-    ViewData["Title"] = "Studio Homepage";
-    Layout = "_StudioLayout"; // Đặt Layout cho trang này
+    ViewData["Title"] = "Home";
+    Layout = "_StudioLayout";
 }
-
 <style>
     .small-box {
         border-radius: 15px;
@@ -14,6 +13,7 @@
         margin: 10px 0;
         color: #fff;
     }
+
     table th {
         text-align: center;
     }
@@ -22,7 +22,7 @@
 {
     <h1>Hello @Model.studio.Code - @Model.studio.Name comeback</h1>
 }
- <h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
+<h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
 <br />
 
 <div class="container">
@@ -127,13 +127,6 @@
                             }
                             break;
                     }
-                </td>
-                <td>
-
-                    <a asp-page="./Edit" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-info">Edit</a>
-                    <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-primary">Details</a>
-                    <a asp-page="./Delete" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-danger">Delete</a>
-                    <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-info">Detail</a>
                 </td>
             </tr>
         }
