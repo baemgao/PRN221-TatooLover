@@ -20,6 +20,13 @@ namespace TattooRazorPages.Pages.Admin
             customerList = customerRepository.GetCustomers();
             bookingList = bookingRepository.GetBookings();
             studioList = studioRepository.GetStudios();
+        public ICustomerRepository _customer = new CustomerRepository();
+
+        public IList<Customer> Customer { get; set; } = default!;
+        
+        public async Task OnGetAsync()
+        {
+            Customer = _customer.GetCustomers();
         }
     }
 }

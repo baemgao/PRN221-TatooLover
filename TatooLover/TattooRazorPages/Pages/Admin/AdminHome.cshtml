@@ -3,3 +3,142 @@
 @{
     ViewData["Title"] = "Admin Homepage";
 }
+
+<style>
+    .sidebar {
+        background-color: #000033;
+        color: #fff;
+        padding: 15px;
+        height: 100vh;
+    }
+
+    .small-box {
+        border-radius: 30px;
+        background-color: #d1d0d0;
+        padding: 10px;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .sidebar h1{
+        text-align: center;
+        font-size: 70px;
+        font-weight: 1000;
+    }
+
+    .sidebar h3 {
+        background-color: #000033;
+        padding: 10px;
+    }
+
+        .sidebar h3:hover{
+            background-color: #000066;
+        }
+
+        .sidebar h3 a{
+            text-decoration: none;
+            color: #ffffff;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="sidebar">
+
+                <h1>TAR2</h1>
+
+                <h3><a href="#">Customer</a></h3>
+
+                <h3><a href="#">Studio</a></h3>
+
+                <h3><a href="#">Artist</a></h3>
+
+                <h3><a href="#">Booking</a></h3>
+
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="small-box">
+                            <h3>Member</h3>
+                            <p>40</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="small-box">
+                            <h3>Studio</h3>
+                            <p>40</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="small-box">
+                            <h3>Artist</h3>
+                            <p>40</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="small-box">
+                            <h3>Booking</h3>
+                            <p>40</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>Customer List</h3>
+                        <p>
+                            <a asp-page="Create" class="btn btn-primary">Create New</a>
+                        </p>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Email</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Avatar</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Customer)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.Avatar))
+                                                {
+                                                    <img src="@item.Avatar" alt="Avatar" width="50" height="50" />
+                                                }
+                                            </td>
+                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                            <td>
+                                                <a asp-page="./Details" asp-route-id="@item.CustomerId" class="btn btn-outline-success">Details</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
