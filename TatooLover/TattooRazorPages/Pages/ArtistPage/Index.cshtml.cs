@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessObjects.Models;
 using Repositories;
 
-namespace TattooRazorPages.Pages.Artist
+namespace TattooRazorPages.Pages.ArtistPage
 {
     public class IndexModel : PageModel
     {

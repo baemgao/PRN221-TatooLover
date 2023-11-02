@@ -10,10 +10,16 @@ namespace Repositories
 {
     public interface IBookingRepository
     {
-        public List<Booking> GetBookings();
-        public Booking? GetBookingById(int bookingID);
+
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id);
         public List<BookingDTO> GetBookingInDayByStudioId(DateTime date, int studioId);
         public List<Booking> GetBookingByArtistId(int id);
+
+        List<Booking> GetBookings();
+        List<Booking> GetBookingsByCustomerId(int customerId);
+        Booking GetBookingById(int id);
+        void SaveBooking(Booking c);
+        void DeleteBooking(Booking c);
+        void UpdateBooking(Booking c);
     }
 }
