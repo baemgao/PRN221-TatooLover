@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 
-namespace TattooRazorPages.Pages.Artist
+namespace TattooRazorPages.Pages.ArtistPage
 {
     public class ScheduleModel : PageModel
     {

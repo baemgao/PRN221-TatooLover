@@ -1,0 +1,29 @@
+﻿@page
+@model TattooRazorPages.Pages.BookingPage.BookingHistoryModel
+@{
+    ViewData["Title"] = "Booking History";
+}
+
+<h1>Booking History</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Booking Date</th>
+            <th>Artist</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model.CustomerBookings)
+        {
+            <tr>
+                <td>@booking.BookingDate.ToShortDateString()</td>
+                <td>@booking.Artist.Name</td>
+                <td>@booking.Price</td>
+                <td>@booking.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

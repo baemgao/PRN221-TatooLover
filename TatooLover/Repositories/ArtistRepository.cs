@@ -10,7 +10,6 @@ namespace Repositories
 {
     public class ArtistRepository : IArtistRepository
     {
-        ArtistDAO artistDAO = new ArtistDAO();
-        public List<Artist> GetArtists() => artistDAO.GetArtists();
+        public List<Artist> GetArtists() => ArtistDAO.GetArtists();
     }
 }

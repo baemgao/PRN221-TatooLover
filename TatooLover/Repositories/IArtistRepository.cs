@@ -9,6 +9,6 @@ namespace Repositories
 {
     public interface IArtistRepository
     {
-        public List<Artist> GetArtists();
+        List<Artist> GetArtists();
     }
 }

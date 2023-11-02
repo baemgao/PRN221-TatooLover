@@ -14,13 +14,20 @@ namespace Repositories
         BookingDAO bookingDAO = new BookingDAO();
         ArtistDAO artistDAO = new ArtistDAO();
 
-        public Booking? GetBookingById(int bookingID) => bookingDAO.GetBookings().FirstOrDefault(a => a.BookingId == bookingID);
-        public List<Booking> GetBookings() => bookingDAO.GetBookings().OrderByDescending(b => b.BookingDate).ToList();
+
         public List<Booking> GetDay(DateTime date) => bookingDAO.GetDay(date);
         //public List<Booking> GetBookings() => bookingDAO.GetBookings();
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => bookingDAO.GetBookingInDayByArtistId(date, id);
         public List<Booking> GetBookingByArtistId(int id) => bookingDAO.GetBookingByArtistId(id);
 
         public List<BookingDTO> GetBookingInDayByStudioId(DateTime date, int studioId) => bookingDAO.GetBookinsInDayByStudioId(studioId, date);
+
+        public List<Booking> GetBookings() => BookingDAO.GetBookings();
+        public Booking GetBookingById(int id) => BookingDAO.GetBookingById(id);
+        public void SaveBooking(Booking c) => BookingDAO.SaveBooking(c);
+        public void UpdateBooking(Booking c) => BookingDAO.UpdateBooking(c);
+        public void DeleteBooking(Booking c) => BookingDAO.DeleteBooking(c);
+
+        public List<Booking> GetBookingsByCustomerId(int customerId) => BookingDAO.GetBookingsByCustomerId(customerId);
     }
 }
