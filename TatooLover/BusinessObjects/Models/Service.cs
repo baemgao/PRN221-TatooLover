@@ -23,7 +23,7 @@ public partial class Service
 
     public virtual ICollection<ArtistDetail> ArtistDetails { get; set; } = new List<ArtistDetail>();
 
-    public virtual ICollection<BookingDetail> BookingDetails { get; set; } = new List<BookingDetail>();
+    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public virtual Studio? Studio { get; set; }
 }

@@ -42,7 +42,6 @@ namespace DataAccessObjects
                     bookings = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
-                        .Include(c => c.BookingDetails)
                         .Where(w => w.Artist.StudioId == id)
                         .ToList();
                 }
@@ -82,7 +81,6 @@ namespace DataAccessObjects
                     bookings = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
-                        .Include(c => c.BookingDetails)
                         .OrderByDescending(b => b.BookingDateTime)
                         .ToList();
                 }
