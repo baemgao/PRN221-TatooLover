@@ -15,36 +15,21 @@ namespace TattooRazorPages.Pages.StudioPage
         public ICustomerRepository customerRepository = new CustomerRepository();
         public IArtistRepository artistRepository = new ArtistRepository();
 
-        public Studio studio { get; set; } = default!;
-        public List<Booking> bookingList { get; set; } = default!;
+        int id;
+        public Customer customer { get; set; }
+        public Studio studio { get; set; }
+        public List<Booking> bookingList { get; set; }
+        public List<BookingDTO> bookingDTOList { get; set; }
         public DateTime today { get; set; }
 
-        public IActionResult OnGet(int id)
+        public async Task OnGetAsync()
         {
-            if (HttpContext.Session.GetInt32("id") == null)
-            {
-                return RedirectToPage("/Login");
-            }
+            id = (int)HttpContext.Session.GetInt32("id");
             if (id != null && id >= 0)
             {
                 today = DateTime.Today;
                 studio = studioRepository.GetStudioById(id);
-                bookingList = bookingRepository.GetBookingInDayByStudioId(id, today);
-            }
-            return Page();
-        }
-        public IActionResult OnPost(DateTime searchDate)
-        {
-            if (HttpContext.Session.GetInt32("id") != null)
-            {
-                int artistId = HttpContext.Session.GetInt32("id").Value;
-                bookingList = bookingRepository.GetBookingInDayByStudioId(artistId, searchDate)
-                    .ToList();
-
-                if (!bookingList.Any())
-                {
-                    ViewData["Message"] = "No bookings found for the selected date!";
-                }
+                bookingDTOList = bookingRepository.GetBookingInDayByStudioId(today, id);
             }
             return Page();
         }

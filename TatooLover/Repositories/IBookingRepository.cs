@@ -12,7 +12,7 @@ namespace Repositories
     {
 
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id);
-        public List<Booking> GetBookingInDayByStudioId(int studioId, DateTime date);
+        public List<BookingDTO> GetBookingInDayByStudioId(DateTime date, int studioId);
         public List<Booking> GetBookingByArtistId(int id);
 
         List<Booking> GetBookings();
