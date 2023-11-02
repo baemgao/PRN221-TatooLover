@@ -1,5 +1,4 @@
-﻿using BusinessObjects.DTO;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using DataAccessObjects;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace Repositories
         public void SaveBooking(Booking c) => BookingDAO.SaveBooking(c);
         public void UpdateBooking(Booking c) => BookingDAO.UpdateBooking(c);
         public void DeleteBooking(Booking c) => BookingDAO.DeleteBooking(c);
-
         public List<Booking> GetBookingsByCustomerId(int customerId) => BookingDAO.GetBookingsByCustomerId(customerId);
+        public List<Bill> GetBillByStudioId(int studioId) => bookingDAO.GetBillByStudioId(studioId);
     }
 }

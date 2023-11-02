@@ -10,12 +10,10 @@ namespace DataAccessObjects
 {
     public class ArtistDAO
     {
-        
-        public List<Artist> GetArtistByStudioId(int StudioId)
-        {
-            List<Artist> artistList = GetArtists();
+        public static List<Artist> GetArtistByStudioId(int StudioId)
+        { 
 
-            return artistList
+            return GetArtists()
               .Where(a => a.StudioId == StudioId)
               .ToList();
         }
@@ -28,6 +26,8 @@ namespace DataAccessObjects
                 using (var context = new Prn221TatooLoverContext())
                 {
                     artists = context.Artists
+                        .Include(a => a.ArtistDetails)
+                        .ThenInclude(a => a.Service)
                         .Include(s => s.Studio)
                         .ToList();
                 }
@@ -41,18 +41,18 @@ namespace DataAccessObjects
 
         public static List<Artist> GetArtistByName(string searchText)
         {
-            List<Artist> customers = new List<Artist>();
+            List<Artist> artists = new List<Artist>();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
                 {
                     if (!string.IsNullOrEmpty(searchText))
                     {
-                        customers = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
+                        artists = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
                     }
                     else
                     {
-                        customers = context.Artists.ToList();
+                        artists = context.Artists.ToList();
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace DataAccessObjects
             {
                 throw new Exception(ex.Message);
             }
-            return customers;
+            return artists;
         }
     }
 }

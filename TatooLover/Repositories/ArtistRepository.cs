@@ -14,5 +14,6 @@ namespace Repositories
 
         public Artist GetArtistById(int id) => ArtistDAO.GetArtists().SingleOrDefault(a => a.ArtistId == id);
         public List<Artist> GetArtistByName(string name) => ArtistDAO.GetArtistByName(name);
+        public List<Artist> GetArtistsByStudioId(int studioId) => ArtistDAO.GetArtistByStudioId(studioId);
     }
 }

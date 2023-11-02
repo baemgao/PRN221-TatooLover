@@ -1,5 +1,4 @@
-﻿using BusinessObjects.DTO;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
@@ -31,6 +30,7 @@ namespace DataAccessObjects
             .Include(c => c.Artist)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include(b => b.Bills)
             .ToList();
         public List<Booking> GetBookingByStudioId(int id)
         {
@@ -158,5 +158,15 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        //Only get bill of booking where booking status in (2;4] => after done
+        public List<Bill> GetBillByStudioId(int id) => db.Bills
+            .Where(b => b.Booking.Artist.Studio.StudioId == id)
+            .Include(b => b.Booking)
+            .Include (b => b.Booking.Customer)
+            .Include(b => b.Booking.Artist)
+            .Where(b => b.Booking.Status <= 4 && b.Booking.Status > 2)
+            .ToList();
+
     }
 }
