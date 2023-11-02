@@ -28,6 +28,7 @@ namespace DataAccessObjects
                 using (var context = new Prn221TatooLoverContext())
                 {
                     artists = context.Artists
+                        .Include(s => s.Studio)
                         .ToList();
                 }
             }
