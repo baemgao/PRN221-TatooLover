@@ -13,10 +13,10 @@
     .small-box {
         border-radius: 30px;
         background-color: #000333;
-        padding: 10px;
+        padding: 5px;
         text-align: center;
         color: #fff;
-        margin: 10px 0;
+        margin: 20px 0;
     }
 
         .small-box:hover{
@@ -113,7 +113,6 @@
                                         <th>Phone</th>
                                         <th>Avatar</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -132,9 +131,6 @@
                                                 }
                                             </td>
                                             <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                            <td>
-                                                <a asp-page="./Details" asp-route-id="@item.CustomerId" class="btn btn-outline-success">Details</a>
-                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -150,7 +146,7 @@
                     <div class="table-responsive">
                         <table class="table table-dark table-striped">
                             <thead>
-                                <tr class="table-secondary">
+                                <tr class="table-warning">
                                     <th>Code</th>
                                     <th>Name</th>
                                     <th>Email</th>
@@ -160,7 +156,6 @@
                                     <th>Avatar</th>
                                     <th>Certificate</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,9 +176,6 @@
                                         </td>
                                         <td>@Html.DisplayFor(modelItem => item.Certificate)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            <a asp-page="./Details" asp-route-id="@item.ArtistId" class="btn btn-outline-success">Details</a>
-                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -206,7 +198,6 @@
                                     <th>Open Hour</th>
                                     <th>Close Hour</th>
                                     <th>Status</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -220,9 +211,6 @@
                                         <td>@Html.DisplayFor(modelItem => item.OpenHour)</td>
                                         <td>@Html.DisplayFor(modelItem => item.CloseHour)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            <a asp-page="./Details" asp-route-id="@item.StudioId" class="btn btn-outline-success">Details</a>
-                                        </td>
                                     </tr>
                                 }
                             </tbody>
