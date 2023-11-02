@@ -11,11 +11,17 @@ namespace DataAccessObjects
         public List<Booking> GetBookings() => db.Bookings
             .Include(b => b.Customer)
             .Include(c => c.Artist).ToList();
-        public List<Booking> GetDay(DateTime date) => db.Bookings
-            .Where(b => b.BookingDate.Date == date.Date)
+        public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => db.Bookings
+            .Where(b => b.ArtistId == id && b.BookingDate.Date == date.Date)
+            .Include(b => b.Customer)
+            .Include(c => c.Artist)
             .ToList();
         public List<Booking> GetBookingsByArtistId(int artistId) => db.Bookings
             .Where(a => a.ArtistId == artistId)
             .ToList();
+        public List<Booking> GetBookingByArtistId(int id) => db.Bookings
+            .Include(b => b.Customer)
+            .Include(c => c.Artist)
+            .Where(b => b.ArtistId == id).ToList();
     }
 }

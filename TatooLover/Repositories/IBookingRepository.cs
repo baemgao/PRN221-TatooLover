@@ -14,5 +14,7 @@ namespace Repositories
         public List<Booking> GetBookingByStudioId(int studioId);
         public Booking? GetBookingById(int bookingID);
         public List<Booking> GetDay(DateTime date);
+        public List<Booking> GetBookingInDayByArtistId(DateTime date, int id);
+        public List<Booking> GetBookingByArtistId(int id);
     }
 }
