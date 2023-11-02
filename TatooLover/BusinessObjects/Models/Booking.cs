@@ -32,7 +32,7 @@ public partial class Booking
 
     public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
 
-    public virtual Service Service { get; set; } = null;
+    public virtual Service Service { get; set; } = null!;
 
     public virtual Customer Customer { get; set; } = null!;
 }

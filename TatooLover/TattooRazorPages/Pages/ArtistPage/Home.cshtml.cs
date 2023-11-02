@@ -5,27 +5,30 @@ using Repositories;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
-    public class ScheduleModel : PageModel
+    public class HomeModel : PageModel
     {
-        private readonly IScheduleRepository _context;
+        private readonly IBookingRepository _context;
 
-        public ScheduleModel(IScheduleRepository context)
+        public HomeModel(IBookingRepository context)
         {
             _context = context;
         }
 
-        public IList<Schedule> Schedule { get;set; } = default!;
+        public IList<Booking> Booking { get;set; } = default!;
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(DateTime today)
         {
             if (HttpContext.Session.GetInt32("art_email") == null)
             {
                 return RedirectToPage("/Login");
+                
             }
             int artistId = HttpContext.Session.GetInt32("art_email").Value;
-            if (_context.GetSchedules() != null)
+            if (_context.GetBookings() != null)
             {
-                Schedule = _context.GetListScheduleByArtistId(artistId);
+                today = DateTime.Today;
+                Booking = _context.GetBookingInDayByArtistId(today, artistId);
+                
             }
             return Page();
         }

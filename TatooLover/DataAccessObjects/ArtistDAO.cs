@@ -10,8 +10,10 @@ namespace DataAccessObjects
 {
     public class ArtistDAO
     {
-        public static List<Artist> GetArtistByStudioId(int StudioId)
-        { 
+        Prn221TatooLoverContext db = new Prn221TatooLoverContext();
+        public List<Artist> GetArtistByStudioId(int StudioId)
+        {
+            List<Artist> artistList = GetArtists();
 
             return GetArtists()
               .Where(a => a.StudioId == StudioId)
@@ -61,6 +63,17 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
             return artists;
+        }
+        public Artist? GetArtistById(int? id)
+        {
+            return db.Artists
+              .Include(s => s.Studio)
+              .SingleOrDefault(a => a.ArtistId == id);
+        }
+        public void UpdateArtist(Artist artist)
+        {
+            db.Entry<Artist>(artist).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

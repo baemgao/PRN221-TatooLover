@@ -16,7 +16,7 @@ namespace Repositories
         public List<Booking> GetBookingByStudioId(int studioId);
         List<Booking> GetBookings();
         List<Booking> GetBookingsByCustomerId(int customerId);
-        Booking GetBookingById(int id);
+        Booking? GetBookingById(int? id);
         void SaveBooking(Booking c);
         void DeleteBooking(Booking c);
         void UpdateBooking(Booking c);
