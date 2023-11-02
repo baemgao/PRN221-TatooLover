@@ -14,8 +14,8 @@
         color: #fff;
     }
 </style>
-<h1>Hello @Model.studio.Code - @Model.studio.Name comeback, </h1>
-<h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
+ <h1>Hello @Model.studio.Code - @Model.studio.Name comeback, </h1>
+ <h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
 <br />
 
 <div class="container">
@@ -53,8 +53,14 @@
 </h2>
 <br />
 
-<form method = "post" >
-
+<form method="post">
+    <div class="form-group">
+        <label for="searchDate">Date:</label>
+        <input type="date" name="searchDate" id="searchDate" class="form-control" />
+    </div>
+    <div style="margin-top: 10px;">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
 </form>
 
 <table class="table table-primary ">
@@ -73,19 +79,19 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.bookingDTOList.Count; i++)
+        @for (int i = 0; i < Model.bookingList.Count; i++)
         {
             <tr table-secondary>
                 <td>@(i + 1)</td>
-                <td>@Model.bookingDTOList[i].Artist.Code</td>
-                <td>@Model.bookingDTOList[i].Artist.Name</td>
-                <td>@Model.bookingDTOList[i].Customer.Code</td>
-                <td>@Model.bookingDTOList[i].Customer.Name</td>
-                <td>@Model.bookingDTOList[i].Booking.BookingDate</td>
-                <td>@Model.bookingDTOList[i].Booking.BookingDateTime</td>
-                <td>@Model.bookingDTOList[i].Booking.Price</td>
+                <td>@Model.bookingList[i].Artist.Code</td>
+                <td>@Model.bookingList[i].Artist.Name</td>
+                <td>@Model.bookingList[i].Customer.Code</td>
+                <td>@Model.bookingList[i].Customer.Name</td>
+                <td>@Model.bookingList[i].BookingDate</td>
+                <td>@Model.bookingList[i].BookingDateTime</td>
+                <td>@Model.bookingList[i].Price</td>
                 <td>
-                    @switch (Model.bookingDTOList[i].Booking.Status)
+                    @switch (Model.bookingList[i].Status)
                     {
                         case 0:
                             {
@@ -115,9 +121,9 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@Model.bookingDTOList[i].Booking.BookingId" class="btn btn-info">Edit</a>
-                    <a asp-page="./Details" asp-route-id="@Model.bookingDTOList[i].Booking.BookingId" class="btn btn-primary">Details</a>
-                    <a asp-page="./Delete" asp-route-id="@Model.bookingDTOList[i].Booking.BookingId" class="btn btn-danger">Delete</a>
+                    <a asp-page="./Edit" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-info">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-primary">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
