@@ -86,49 +86,55 @@
         </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.bookingList.Count; i++)
+        @if (Model.bookingList != null)
         {
-            <tr table-secondary>
-                <td>@(i + 1)</td>
-                <td>@Model.bookingList[i].Artist.Code</td>
-                <td>@Model.bookingList[i].Artist.Name</td>
-                <td>@Model.bookingList[i].Customer.Code</td>
-                <td>@Model.bookingList[i].Customer.Name</td>
-                <td>@Model.bookingList[i].BookingDate</td>
-                <td>@Model.bookingList[i].BookingDate.ToString("dd-MM-yyyy")</td>
-                <td>@Model.bookingList[i].BookingDateTime</td>
-                <td>@Model.bookingList[i].Price</td>
-                <td>
-                    @switch (Model.bookingList[i].Status)
-                    {
-                        case 0:
-                            {
-                                <span style="color:blue">Pending</span>
-                            }
-                            break;
-                        case 1:
-                            {
-                                <span style="color:green">Check-in</span>
-                            }
-                            break;
-                        case 2:
-                            {
-                                <span style="color:green">Done </span>
-                            }
-                            break;
-                        case 3:
-                            {
-                                <span style="color:green">Check-ut</span>
-                            }
-                            break;
-                        case 4:
-                            {
-                                <span style="color:green">Finished</span>
-                            }
-                            break;
-                    }
-                </td>
-            </tr>
+            @for (int i = 0; i < Model.bookingList.Count; i++)
+            {
+                <tr table-secondary>
+                    <td>@(i + 1)</td>
+                    <td>@Model.bookingList[i].Artist.Code</td>
+                    <td>@Model.bookingList[i].Artist.Name</td>
+                    <td>@Model.bookingList[i].Customer.Code</td>
+                    <td>@Model.bookingList[i].Customer.Name</td>
+                    <td>@Model.bookingList[i].BookingDate</td>
+                    <td>@Model.bookingList[i].BookingDate.ToString("dd-MM-yyyy")</td>
+                    <td>@Model.bookingList[i].BookingDateTime</td>
+                    <td>@Model.bookingList[i].Price</td>
+                    <td>
+                        @switch (Model.bookingList[i].Status)
+                        {
+                            case 0:
+                                {
+                                    <span style="color:blue">Pending</span>
+                                }
+                                break;
+                            case 1:
+                                {
+                                    <span style="color:green">Check-in</span>
+                                }
+                                break;
+                            case 2:
+                                {
+                                    <span style="color:green">Done </span>
+                                }
+                                break;
+                            case 3:
+                                {
+                                    <span style="color:green">Check-ut</span>
+                                }
+                                break;
+                            case 4:
+                                {
+                                    <span style="color:green">Finished</span>
+                                }
+                                break;
+                        }
+                    </td>
+                </tr>
+            }
+        } else
+        {
+            <h4>Empty list!</h4>
         }
     </tbody>
 </table>

@@ -38,13 +38,13 @@
                 @foreach (var item in Model.studioList)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Code)</td>
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                        <td>@Html.DisplayFor(modelItem => item.OpenHour)</td>
-                        <td>@Html.DisplayFor(modelItem => item.CloseHour)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Phone)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.OpenHour)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.CloseHour)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Status)</td>
                     </tr>
                 }
             </tbody>

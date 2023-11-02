@@ -46,17 +46,10 @@ VALUES
     (2, '2023-10-03', '12:00', '17:00', 1);
 
 -- Insert sample data into the Booking table
-INSERT INTO Booking (CustomerID, ArtistID, Price, BookingDate, BookingDateTime, Note, Point, ArtistFeedBack, ServiceFeedBack, Status)
+INSERT INTO Booking (CustomerID, ArtistID, ServiceID, Price, BookingDate, BookingDateTime, Note, Point, ArtistFeedBack, ServiceFeedBack, Status)
 VALUES
-    (1, 1, 50.0, '2023-10-01', '2023-10-09', 'Note for Booking 1', 5, 'Feedback for Artist 1', 'Feedback for Service 1', 1),
-    (2, 2, 60.0, '2023-10-03', '2023-10-06', 'Note for Booking 2', 3, 'Feedback for Artist 2', 'Feedback for Service 3', 1);
-
--- Insert sample data into the BookingDetail table
-INSERT INTO BookingDetail (BookingID, ServiceID, Description, Status)
-VALUES
-    (1, 1, 'Description for Service 1', 1),
-    (2, 3, 'Description for Service 3', 1);
-
+    (1, 1, 1, 50.0, '2023-10-01', '2023-10-09', 'Note for Booking 1', 5, 'Feedback for Artist 1', 'Feedback for Service 1', 1),
+    (2, 2, 3, 60.0, '2023-10-03', '2023-10-06', 'Note for Booking 2', 3, 'Feedback for Artist 2', 'Feedback for Service 3', 1);
 -- Insert sample data into the Bill table
 INSERT INTO Bill (BookingID, Note, Status)
 VALUES

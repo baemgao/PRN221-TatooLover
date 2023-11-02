@@ -31,7 +31,6 @@
                     <th>Studio</th>
                     <th>Address</th>
                     <th>Phone</th>
-                    <th>Avatar</th>
                     <th>Certificate</th>
                     <th>Status</th>
                 </tr>
@@ -40,20 +39,14 @@
                 @foreach (var item in Model.artistList)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Code)</td>
                         <td>@Html.DisplayFor(modelItem => item.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Email)</td>
                         <td>@Html.DisplayFor(modelItem => item.Studio.Name)</td>
                         <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                        <td>
-                            @if (!string.IsNullOrEmpty(item.Avatar))
-                            {
-                                <img src="@item.Avatar" alt="Avatar" width="50" height="50" />
-                            }
-                        </td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Phone)</td>
                         <td>@Html.DisplayFor(modelItem => item.Certificate)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Status)</td>
                     </tr>
                 }
             </tbody>
