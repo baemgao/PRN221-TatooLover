@@ -6,27 +6,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
     public class ScheduleModel : PageModel
     {
-        private readonly BusinessObjects.Models.Prn221TatooLoverContext _context;
+        private readonly IScheduleRepository _context;
 
-        public ScheduleModel(BusinessObjects.Models.Prn221TatooLoverContext context)
+        public ScheduleModel(IScheduleRepository context)
         {
             _context = context;
         }
 
         public IList<Schedule> Schedule { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            if (_context.Schedules != null)
+            if (HttpContext.Session.GetInt32("art_email") == null)
             {
-                Schedule = await _context.Schedules
-                .Include(s => s.Artist).ToListAsync();
+                return RedirectToPage("/Login");
             }
+            int artistId = HttpContext.Session.GetInt32("art_email").Value;
+            if (_context.GetSchedules() != null)
+            {
+                Schedule = _context.GetSchedulesByArtistId(artistId);
+            }
+            return Page();
         }
     }
 }

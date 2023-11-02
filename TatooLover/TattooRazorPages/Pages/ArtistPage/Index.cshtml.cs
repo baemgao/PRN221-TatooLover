@@ -23,7 +23,7 @@ namespace TattooRazorPages.Pages.ArtistPage
                 return RedirectToPage("/Login");
             }
             int artistId = HttpContext.Session.GetInt32("art_email").Value;
-            if (_context.GetBookingByArtistId(artistId) != null)
+            if (_context.GetBookings() != null)
             {
                 Booking = _context.GetBookingByArtistId(artistId);
             }
