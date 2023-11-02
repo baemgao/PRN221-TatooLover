@@ -23,35 +23,21 @@ namespace DataAccessObjects
             .Include(b => b.Customer)
             .Include(c => c.Artist)
             .ToList();
-        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings.Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
-            .Include(b => b.Customer)
-            .Include(c => c.Artist)
+        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings
+            .Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
             .ToList();
-        public List<Booking> GetBookingByStudioId(int id)
-        {
-            List<Booking> bookings = new List<Booking>();
-            try
-            {
-                using (var context = new Prn221TatooLoverContext())
-                {
-                    bookings = context.Bookings
-                        .Include(c => c.Artist)
-                        .Include(b => b.Customer)
-                        .Where(w => w.Artist.StudioId == id)
-                        .ToList();
-                }
-            } catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return bookings;
-        }
+        public List<Booking> GetBookingByStudioId(int studioId) => db.Bookings
+            .Where(s => s.Artist.StudioId == studioId)
+            .Include(b => b.Customer)
+            .Include(c => c.Artist)
+            .ToList();
+        
 
-        public static Booking GetBookingById(int id)
+        public static Booking? GetBookingById(int? id)
         {
-            Booking booking = new Booking();
+            Booking? booking = new Booking();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
@@ -77,6 +63,7 @@ namespace DataAccessObjects
                 {
                     bookings = context.Bookings
                         .Include(c => c.Artist)
+                        .Include(s => s.Service)
                         .Include(b => b.Customer)
                         .OrderByDescending(b => b.BookingDateTime)
                         .ToList();

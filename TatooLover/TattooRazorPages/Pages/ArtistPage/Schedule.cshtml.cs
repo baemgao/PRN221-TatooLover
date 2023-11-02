@@ -25,7 +25,7 @@ namespace TattooRazorPages.Pages.ArtistPage
             int artistId = HttpContext.Session.GetInt32("art_email").Value;
             if (_context.GetSchedules() != null)
             {
-                Schedule = _context.GetSchedulesByArtistId(artistId);
+                Schedule = _context.GetListScheduleByArtistId(artistId);
             }
             return Page();
         }

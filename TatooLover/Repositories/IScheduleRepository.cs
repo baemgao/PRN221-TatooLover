@@ -10,6 +10,10 @@ namespace Repositories
     public interface IScheduleRepository
     {
         public List<Schedule> GetSchedules();
-        public List<Schedule> GetSchedulesByArtistId(int artistId);
+        public Schedule? GetSchedulesById(int? id);
+        public List<Schedule> GetListScheduleByArtistId(int? artistId);
+        public void CreateSchedule(Schedule schedule);
+        public void UpdateSchedule(Schedule schedule);
+        public void DeleteSchedule(Schedule schedule);
     }
 }

@@ -24,4 +24,5 @@ public partial class Customer
     public int Status { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+
 }

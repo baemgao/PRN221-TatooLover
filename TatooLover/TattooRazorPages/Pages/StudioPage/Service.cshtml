@@ -1,0 +1,63 @@
+﻿@page
+@model TattooRazorPages.Pages.StudioPage.ServiceModel
+@{
+    Path = "";
+    ViewData["Title"] = "Studio Homepage";
+    Layout = "_StudioLayout"; // Đặt Layout cho trang này
+}
+
+<style>
+    h1 {
+        color: blueviolet
+    }
+</style>
+
+<h1>Service Management</h1>
+<br />
+
+<table class="table table-primary ">
+    <thead>
+        <tr table-primary>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Service Name</th>
+            <th>Service Description</th>
+            <th>Duration</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.services.Count; i++)
+        {
+            <tr table-secondary>
+                <td>@(i + 1)</td>
+                <td>@Model.services[i].Code</td>
+                <td>@Model.services[i].Name</td>
+                <td>@Model.services[i].Description</td>
+                <td>@Model.services[i].Time</td>
+                <td>@Model.services[i].Price</td>
+                <td>
+                    @switch (Model.services[i].Status)
+                    {
+                        case 0:
+                            {
+                                <span style="color:red">In-active</span>
+                            }
+                            break;
+                        case 1:
+                            {
+                                <span style="color:green">Active</span>
+                            }
+                            break;
+                    }
+                </td>
+                <td>
+                    <a asp-page="./ServiceDetails" asp-route-id="@Model.services[i].ServiceId" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

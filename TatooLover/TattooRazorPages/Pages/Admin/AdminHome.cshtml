@@ -9,62 +9,61 @@
     .small-chart {
         width: 200px; /* Điều chỉnh kích thước theo mong muốn */
         height: 100px; /* Điều chỉnh kích thước theo mong muốn */
-    }
-    .small-box {
-        border-radius: 30px;
-        background-color: #000333;
+        background-color:#eee;
         padding: 10px;
+        border-radius: 20px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    div.col-2 {
+        background-color: #006666;
+        padding: 5px;
         text-align: center;
+        border-radius: 20px;
+        margin: 10px 20px;
+    }
+
+    h3 {
         color: #fff;
-        margin: 10px 0;
     }
 
-        .small-box:hover{
-            background-color: #066666;
-        }
-
-    .small-box h3{
-        font-weight: 700;
-        font-size: 30px;
-    }
-
-    .small-box p{
-        font-size: 25px;
-    }
-
-    table th{
-        text-align: center;
+    p {
+        margin: 0 0 8px;
+        color: #fff;
     }
 </style>
-
+<br>
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="main-content">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="small-box">
+                <div class="row" style="display: flex;justify-content: center;align-items: center;">
+                    <div class="col-2">
+                        <a href="AdminCustomer" class="small-box">
                             <h3>Customer</h3>
                             <p>@Model.CustomerCount</p>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-3">
-                        <div class="small-box">
+                    <div class="col-2">
+                        <a href="AdminStudio" class="small-box">
                             <h3>Studio</h3>
                             <p>@Model.StudioCount</p>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-3">
-                        <div class="small-box">
+                    <div class="col-2">
+                        <a href="AdminArtist" class="small-box">
                             <h3>Artist</h3>
                             <p>@Model.ArtistCount</p>
-                        </div>
+                        </a>
                     </div>
-                    <div class="col-3">
-                        <div class="small-box">
+                    <div class="col-2">
+                        <a href="AdminBooking" class="small-box">
                             <h3>Booking</h3>
                             <p>@Model.BookingCount</p>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <br />
@@ -96,178 +95,6 @@
                             });
                         </script>
 
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Customer List</h3>
-                        <div>
-                            <table class="table table-dark table-striped">
-                                <thead>
-                                    <tr class="table-primary">
-                                        <th>Code</th>
-                                        <th>Email</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Avatar</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.customerList)
-                                    {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Code)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                            <td>
-                                                @if (!string.IsNullOrEmpty(item.Avatar))
-                                                {
-                                                    <img src="@item.Avatar" alt="Avatar" width="50" height="50" />
-                                                }
-                                            </td>
-                                            <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                            <td>
-                                                <a asp-page="./Details" asp-route-id="@item.CustomerId" class="btn btn-outline-success">Details</a>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Artist List</h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped">
-                            <thead>
-                                <tr class="table-secondary">
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Studio</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Avatar</th>
-                                    <th>Certificate</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.artistList)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Studio.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                        <td>
-                                            @if (!string.IsNullOrEmpty(item.Avatar))
-                                            {
-                                                <img src="@item.Avatar" alt="Avatar" width="50" height="50" />
-                                            }
-                                        </td>
-                                        <td>@Html.DisplayFor(modelItem => item.Certificate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            <a asp-page="./Details" asp-route-id="@item.ArtistId" class="btn btn-outline-success">Details</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Studio List</h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped">
-                            <thead>
-                                <tr class="table-danger">
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Open Hour</th>
-                                    <th>Close Hour</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.studioList)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Code)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.OpenHour)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.CloseHour)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td>
-                                            <a asp-page="./Details" asp-route-id="@item.StudioId" class="btn btn-outline-success">Details</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="col-12">
-                        <h3>Booking List</h3>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-dark table-striped">
-                            <thead>
-                                <tr class="table-info">
-                                    <th>Customer</th>
-                                    <th>Artist</th>
-                                    <th>Price</th>
-                                    <th>Booking Date</th>
-                                    <th>Booking Date Time</th>
-                                    <th>Note</th>
-                                    <th>Point</th>
-                                    <th>Artist Feedback</th>
-                                    <th>Service Feedback</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.bookingList)
-                                {
-                                    <tr>
-                                        <td>@Html.DisplayFor(modelItem => item.Customer.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Artist.Name)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.BookingDateTime)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Note)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Point)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ArtistFeedBack)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ServiceFeedBack)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

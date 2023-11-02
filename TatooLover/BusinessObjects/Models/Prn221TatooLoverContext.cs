@@ -24,8 +24,6 @@ public partial class Prn221TatooLoverContext : DbContext
 
     public virtual DbSet<Booking> Bookings { get; set; }
 
-    public virtual DbSet<BookingDetail> BookingDetails { get; set; }
-
     public virtual DbSet<Customer> Customers { get; set; }
 
     public virtual DbSet<Schedule> Schedules { get; set; }
@@ -150,27 +148,27 @@ public partial class Prn221TatooLoverContext : DbContext
                 .HasConstraintName("FK__Booking__Custome__59FA5E80");
         });
 
-        modelBuilder.Entity<BookingDetail>(entity =>
-        {
-            entity.HasKey(e => e.BookingDetailId).HasName("PK__BookingD__8136D47ADDAE68CA");
+        //modelBuilder.Entity<BookingDetail>(entity =>
+        //{
+        //    entity.HasKey(e => e.BookingDetailId).HasName("PK__BookingD__8136D47ADDAE68CA");
 
-            entity.ToTable("BookingDetail");
+        //    entity.ToTable("BookingDetail");
 
-            entity.Property(e => e.BookingDetailId).HasColumnName("BookingDetailID");
-            entity.Property(e => e.BookingId).HasColumnName("BookingID");
-            entity.Property(e => e.Description).HasMaxLength(255);
-            entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
+        //    entity.Property(e => e.BookingDetailId).HasColumnName("BookingDetailID");
+        //    entity.Property(e => e.BookingId).HasColumnName("BookingID");
+        //    entity.Property(e => e.Description).HasMaxLength(255);
+        //    entity.Property(e => e.ServiceId).HasColumnName("ServiceID");
 
-            entity.HasOne(d => d.Booking).WithMany(p => p.BookingDetails)
-                .HasForeignKey(d => d.BookingId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BookingDe__Booki__5DCAEF64");
+        //    entity.HasOne(d => d.Booking).WithMany(p => p.BookingDetails)
+        //        .HasForeignKey(d => d.BookingId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__BookingDe__Booki__5DCAEF64");
 
-            entity.HasOne(d => d.Service).WithMany(p => p.BookingDetails)
-                .HasForeignKey(d => d.ServiceId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__BookingDe__Servi__5EBF139D");
-        });
+        //    entity.HasOne(d => d.Service).WithMany(p => p.BookingDetails)
+        //        .HasForeignKey(d => d.ServiceId)
+        //        .OnDelete(DeleteBehavior.ClientSetNull)
+        //        .HasConstraintName("FK__BookingDe__Servi__5EBF139D");
+        //});
 
         modelBuilder.Entity<Customer>(entity =>
         {

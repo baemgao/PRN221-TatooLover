@@ -70,6 +70,7 @@ Create table Booking (
 	BookingID int not null Primary key Identity(1,1),
 	CustomerID int Not null FOREIGN KEY REFERENCES Customer(CustomerID), 
 	ArtistID int Not null FOREIGN KEY REFERENCES Artist(ArtistID),
+	ServiceID int Not null FOREIGN KEY REFERENCES Service(ServiceID),
 	Price Float Not null,
 	BookingDate DateTime Not null,
 	BookingDateTime DateTime Not null,
@@ -85,14 +86,6 @@ Create table Booking (
 	-- 2: done (finish service)
 	-- 3: checkout (after pay bill, warranty time)
 	-- 4: finish (out of warranty, finish booking)
-);
-
-Create table BookingDetail (
-	BookingDetailID int not null Primary key Identity(1,1),
-	BookingID int Not null FOREIGN KEY REFERENCES Booking(BookingID),
-	ServiceID int Not null FOREIGN KEY REFERENCES Service(ServiceID),
-	Description nvarchar(255),
-	Status int Not null
 );
 
 Create table Bill (

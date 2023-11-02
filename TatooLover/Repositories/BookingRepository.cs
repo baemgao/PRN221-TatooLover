@@ -21,7 +21,7 @@ namespace Repositories
         public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => bookingDAO.GetBookingInDayByStudioId(date, studioId);
 
         public List<Booking> GetBookings() => BookingDAO.GetBookings();
-        public Booking GetBookingById(int id) => BookingDAO.GetBookingById(id);
+        public Booking? GetBookingById(int? id) => BookingDAO.GetBookingById(id);
         public void SaveBooking(Booking c) => BookingDAO.SaveBooking(c);
         public void UpdateBooking(Booking c) => BookingDAO.UpdateBooking(c);
         public void DeleteBooking(Booking c) => BookingDAO.DeleteBooking(c);

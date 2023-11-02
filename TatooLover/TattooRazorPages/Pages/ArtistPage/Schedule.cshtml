@@ -6,9 +6,8 @@
 }
 
 <h1>Schedule</h1>
-
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="CreateSchedule" class="btn btn-primary">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -50,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Artist.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ScheduleId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ScheduleId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ScheduleId">Delete</a>
+                    <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> |
+                    <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
+                    <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
             </td>
         </tr>
 }

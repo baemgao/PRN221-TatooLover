@@ -11,6 +11,7 @@ namespace Repositories
     public class StudioRepository : IStudioRepository
     {
         StudioDAO studioDAO = new StudioDAO();
+        ServiceDAO serviceDAO = new ServiceDAO(); 
 
         public Studio GetStudioById(int id)
         {
@@ -19,5 +20,9 @@ namespace Repositories
         }
 
         public List<Studio> GetStudios() => studioDAO.GetStudios();
+        public List<Studio> GetStudioByName(string name) => StudioDAO.GetStudioByName(name);
+        public List<Service> GetServices() => serviceDAO.GetServices();
+
+        public List<Service> GetServiceByStudioId(int studioId) => serviceDAO.GetServiceByStudioId(studioId);
     }
 }
