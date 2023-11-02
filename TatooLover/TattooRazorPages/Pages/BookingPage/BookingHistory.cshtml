@@ -10,9 +10,10 @@
     <thead>
         <tr>
             <th>Booking Date</th>
+            <th>Booking DateTime</th>
             <th>Artist</th>
             <th>Price</th>
-            <th>Status</th>
+@*             <th>Status</th> *@
         </tr>
     </thead>
     <tbody>
@@ -20,9 +21,10 @@
         {
             <tr>
                 <td>@booking.BookingDate.ToShortDateString()</td>
+                <td>@booking.BookingDateTime.ToShortDateString()</td>
                 <td>@booking.Artist.Name</td>
                 <td>@booking.Price</td>
-                <td>@booking.Status</td>
+@*                 <td>@booking.Status</td> *@
             </tr>
         }
     </tbody>

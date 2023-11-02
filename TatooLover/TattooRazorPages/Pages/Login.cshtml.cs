@@ -69,7 +69,7 @@ namespace TattooRazorPages.Pages
                 if (cus != null)
                 {
                     HttpContext.Session.SetInt32("customerId", cus.CustomerId);
-                    return RedirectToPage("./BookingPage/Booking");
+                    return RedirectToPage("./CustomerPage/CustomerDetail");
                 }
                 if (art != null)
                 {

@@ -47,7 +47,7 @@ namespace TattooRazorPages.Pages.BookingPage
                 BookingDate = Booking.BookingDate,
                 BookingDateTime = Booking.BookingDateTime, 
                 Note = Booking.Note,
-                Status = Booking.Status
+                //Status = Booking.Status
             };
             _bookingRepo.SaveBooking(booking);
             TempData["BookingSuccess"] = "Booking thành công!";
