@@ -1,7 +1,7 @@
 ﻿@page
 @model TattooRazorPages.Pages.StudioPage.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Studio Homepage";
 }
 
 <style>
@@ -78,7 +78,7 @@
             <tr table-secondary>
                 <td>@(i + 1)</td>
                 <td>@Model.bookingDTOList[i].Artist.Code</td>
-                <td>@Model.bookingDTOList[i].Artist.Code</td>
+                <td>@Model.bookingDTOList[i].Artist.Name</td>
                 <td>@Model.bookingDTOList[i].Customer.Code</td>
                 <td>@Model.bookingDTOList[i].Customer.Name</td>
                 <td>@Model.bookingDTOList[i].Booking.BookingDate</td>
