@@ -10,6 +10,7 @@ public partial class Booking
     public int CustomerId { get; set; }
 
     public int ArtistId { get; set; }
+    public int ServiceId { get; set; }
 
     public double Price { get; set; }
 
@@ -31,7 +32,7 @@ public partial class Booking
 
     public virtual ICollection<Bill> Bills { get; set; } = new List<Bill>();
 
-    public virtual ICollection<BookingDetail> BookingDetails { get; set; } = new List<BookingDetail>();
+    public virtual Service Service { get; set; } = null;
 
     public virtual Customer Customer { get; set; } = null!;
 }

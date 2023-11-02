@@ -9,7 +9,9 @@ namespace Repositories
 {
     public interface IStudioRepository
     {
-        public List<Studio> GetStudios(); 
+        public List<Studio> GetStudios();
+        public List<Service> GetServices();
         public Studio GetStudioById(int id);
+        public List<Service> GetServiceByStudioId(int studioId);
     }
 }

@@ -1,6 +1,7 @@
 ﻿@page
 @model TattooRazorPages.Pages.StudioPage.IndexModel
 @{
+    Path = "";
     ViewData["Title"] = "Studio Homepage";
     Layout = "_StudioLayout"; // Đặt Layout cho trang này
 }
@@ -17,6 +18,11 @@
     table th {
         text-align: center;
     }
+
+    .th-d {
+        text-align: center;
+    }
+    
 </style>
 @if (Model.studio != null)
 {
@@ -55,9 +61,6 @@
 </div>
 
 <br />
-<h2>
-    Today's Booking
-</h2>
 <br />
 
 <form method="post">
@@ -89,51 +92,51 @@
         @for (int i = 0; i < Model.bookingList.Count; i++)
         {
             <tr table-secondary>
-                <td>@(i + 1)</td>
-                <td>@Model.bookingList[i].Artist.Code</td>
+                <td class="th-d">@(i + 1)</td>
+                <td class="th-d">@Model.bookingList[i].Artist.Code</td>
                 <td>@Model.bookingList[i].Artist.Name</td>
-                <td>@Model.bookingList[i].Customer.Code</td>
+                <td class="th-d">@Model.bookingList[i].Customer.Code</td>
                 <td>@Model.bookingList[i].Customer.Name</td>
-                <td>@Model.bookingList[i].BookingDate</td>
-                <td>@Model.bookingList[i].BookingDate.ToString("dd-MM-yyyy")</td>
-                <td>@Model.bookingList[i].BookingDateTime</td>
-                <td>@Model.bookingList[i].Price</td>
-                <td>
+                <td class="th-d">@Model.bookingList[i].BookingDate.ToString("dd-MM-yyyy")</td>
+                <td class="th-d">@Model.bookingList[i].BookingDateTime</td>
+                <td class="th-d">@Model.bookingList[i].Price</td>
+                <td class="th-d">
                     @switch (Model.bookingList[i].Status)
                     {
                         case 0:
                             {
-                                <span style="color:blue">Pending</span>
+                                <span style="color:green">Pending</span>
                             }
                             break;
                         case 1:
                             {
-                                <span style="color:green">Check-in</span>
+                                <span style="color:orange">Check-in</span>
                             }
                             break;
                         case 2:
                             {
-                                <span style="color:green">Done </span>
+                                <span style="color:yellow">Done </span>
                             }
                             break;
                         case 3:
                             {
-                                <span style="color:green">Check-ut</span>
+                                <span style="color:blue">Check-out</span>
                             }
                             break;
                         case 4:
                             {
-                                <span style="color:green">Finished</span>
+                                <span style="color:brown">Finished</span>
                             }
                             break;
+                        case 5:
+                            {
+                                <span style="color:black">Closed</span>
+                                break;
+                            }
                     }
                 </td>
                 <td>
-
-                    <a asp-page="./Edit" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-info">Edit</a>
                     <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-primary">Details</a>
-                    <a asp-page="./Delete" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-danger">Delete</a>
-                    <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-info">Detail</a>
                 </td>
             </tr>
         }

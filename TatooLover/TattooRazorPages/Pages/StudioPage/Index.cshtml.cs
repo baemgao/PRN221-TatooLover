@@ -1,4 +1,3 @@
-using BusinessObjects.DTO;
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,17 +20,18 @@ namespace TattooRazorPages.Pages.StudioPage
 
         public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("id") == null)
+            if (HttpContext.Session.GetInt32("id") == null || HttpContext.Session.GetInt32("id") < 0)
             {
                 return RedirectToPage("/Login");
             }
             int studioId = HttpContext.Session.GetInt32("id").Value;
-            if (bookingRepository.GetBookingByStudioId(studioId) != null) {
+            if (bookingRepository.GetBookingByStudioId(studioId) != null)
+            {
                 today = DateTime.Today;
                 studio = studioRepository.GetStudioById(studioId);
                 bookingList = bookingRepository.GetBookingByStudioId(studioId);
             }
-                return Page();
+            return Page();
         }
         public IActionResult OnPost(DateTime searchDate)
         {

@@ -11,33 +11,89 @@
     <h4>Booking Information</h4>
     <hr />
 
-    <dl class="row">
-        <dt class="col-sm-3">
-            Booking ID:
-        </dt>
-        <dd class="col-sm-9">
-            @Model.booking.BookingId
-        </dd>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Booking ID:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.booking.BookingId
+                    </dd>
 
-        <dt class="col-sm-3">
-            Date:
-        </dt>
-        <dd class="col-sm-9">
-            @Model.booking.BookingDate
-        </dd>
-        <dd class="col-sm-9">
-            @Model.booking.BookingDateTime
-        </dd>
-        <dd class="col-sm-9">
-            <a asp-asp-route="./CustomerPage/Details" asp-route-id="@Model.booking.Customer.CustomerId">@Model.booking.Customer.Name</a>
-        </dd>
-        <dd class="col-sm-9">
-            <a asp-asp-route="./ArtistPage/Details" asp-route-id="@Model.booking.Artist.ArtistId">@Model.booking.Artist.Name</a>
-        </dd>
-    </dl>
-    <dl>
+                    <dt class="col-sm-3">
+                        Date:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.booking.BookingDate
+                    </dd>
 
-    </dl>
+                    <dt class="col-sm-3">
+                        Booking Date Time:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.booking.BookingDateTime
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Customer:
+                    </dt>
+                    <dd class="col-sm-9">
+                        <a asp-page="./CustomerPage/Details" asp-route-id="@Model.booking.Customer.CustomerId">@Model.booking.Customer.Name</a>
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Artist:
+                    </dt>
+                    <dd class="col-sm-9">
+                        <a asp-page="./ArtistPage/Details" asp-route-id="@Model.booking.Artist.ArtistId">@Model.booking.Artist.Name</a>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="col-6">
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Service:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @* @Model.booking.BookingDetails *@
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Description:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.booking.BookingDate
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Booking Date TIme:
+                    </dt>
+                    <dd class="col-sm-9">
+                        @Model.booking.BookingDateTime
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Customer:
+                    </dt>
+                    <dd class="col-sm-9">
+                        
+                    </dd>
+
+                    <dt class="col-sm-3">
+                        Artist:
+                    </dt>
+                    <dd class="col-sm-9">
+                        <a asp-asp-route="./ArtistPage/Details" asp-route-id="@Model.booking.Artist.ArtistId">@Model.booking.Artist.Name</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    
 </div>
 
 <div class="booking-actions">
