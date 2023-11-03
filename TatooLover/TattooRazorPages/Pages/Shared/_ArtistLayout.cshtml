@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <title>@ViewBag.Title</title>
+    <style>
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #000010;
+            border-color: #000010;
+        }
+
+        button.accept-policy {
+            font-size: 1rem;
+            line-height: inherit;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            white-space: nowrap;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        ul li.nav-item a.nav-link:hover {
+            background-color: #006666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #000010; color: #fff">
+        <div class="container">
+            <a class="navbar-brand" style="font-size: 50px; font-weight: 900; color: #fff">TAR2</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #fff" href="Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #fff;" href="Index">Booking Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #fff;" href="Schedule">Schedule Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #fff;" href="Account">Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-right">
+                <button class="btn btn-primary" onclick="window.location.href='/Login'">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main body -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            </br></br>
+            @RenderBody()
+            </br></br>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Tar2 - Tattoo Lover <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

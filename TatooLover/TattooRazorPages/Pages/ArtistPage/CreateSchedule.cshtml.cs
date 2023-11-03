@@ -23,7 +23,11 @@ namespace TattooRazorPages.Pages.ArtistPage
 
         public IActionResult OnGet()
         {
-        ViewData["ArtistId"] = new SelectList(_art.GetArtists(), "ArtistId", "Code");
+            if (HttpContext.Session.GetInt32("art_email") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            ViewData["ArtistId"] = new SelectList(_art.GetArtists(), "ArtistId", "Code");
             return Page();
         }
 
@@ -31,14 +35,13 @@ namespace TattooRazorPages.Pages.ArtistPage
         public Schedule Schedule { get; set; } = default!;
         
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
           if (!ModelState.IsValid || _sch.GetSchedules() == null || Schedule == null)
             {
                 return Page();
             }
-
+            Schedule.Status = 0;
             _sch.CreateSchedule(Schedule);
 
             return RedirectToPage("./Schedule");

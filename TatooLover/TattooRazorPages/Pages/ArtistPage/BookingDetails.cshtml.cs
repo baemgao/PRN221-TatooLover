@@ -23,6 +23,10 @@ namespace TattooRazorPages.Pages.ArtistPage
 
         public IActionResult OnGet(int? id)
         {
+            if (HttpContext.Session.GetInt32("art_email") == null)
+            {
+                return RedirectToPage("/Login");
+            }
             if (id == null || _context.GetBookings() == null)
             {
                 return NotFound();
