@@ -12,6 +12,7 @@ namespace Repositories
         public List<Studio> GetStudios();
         public List<Service> GetServices();
         public Studio GetStudioById(int id);
+        public void CreateStudio(Studio studio);
         List<Studio> GetStudioByName(string name);
         public List<Service> GetServiceByStudioId(int studioId);
         public void UpdateStudio(Studio studio);
