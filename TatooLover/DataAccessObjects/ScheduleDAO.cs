@@ -19,6 +19,10 @@ namespace DataAccessObjects
             .Where(a => a.ScheduleId == artistId)
             .Include(a => a.Artist)
             .ToList();
+        public List<Schedule> GetScheduleInDayByArtistId(DateTime date, int id) => db.Schedules
+            .Where(b => b.ScheduleId == id && b.Date.Date == date.Date)
+            .Include(c => c.Artist)
+            .ToList();
         public void CreateSchedule(Schedule schedule)
         {
             db.Schedules.Add(schedule);

@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "BookingDetails";
+    Layout = "_ArtistLayout";
 }
 
 <h1>BookingDetails</h1>
@@ -57,19 +58,39 @@
             @Html.DisplayNameFor(model => model.Booking.Status)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Booking.Status)
+            @switch (Model.Booking.Status)
+                {
+                    case 0:
+                        <span style="color: blue">Pending</span>
+                        break;
+                    case 1:
+                        <span style="color: green">Check-in</span>
+                        break;
+                    case 2:
+                        <span style="color: green">Done</span>
+                        break;
+                    case 3:
+                        <span style="color: green">Check-out</span>
+                        break;
+                    case 4:
+                        <span style="color: green">Finished</span>
+                        break;
+                    default:
+                        <span style="color: red">Unknown Status</span>
+                        break;
+                }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Booking.Artist)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Booking.Artist.Code)
+            @Html.DisplayFor(model => model.Booking.Artist.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Booking.Service)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Booking.Service.Code)
+            @Html.DisplayFor(model => model.Booking.Service.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Booking.Customer)
