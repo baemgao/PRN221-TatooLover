@@ -45,6 +45,7 @@ namespace DataAccessObjects
                     booking = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
+                        .Include(b => b.Service)
                         .SingleOrDefault(f => f.BookingId == id);
                 }
             }
@@ -86,6 +87,7 @@ namespace DataAccessObjects
                     bookings = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
+                        .Include(b => b.Service)
                         .Where(b => b.CustomerId == id)
                         .ToList();
                 }
