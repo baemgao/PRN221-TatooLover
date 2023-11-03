@@ -11,14 +11,14 @@ namespace DataAccessObjects
     public class ArtistDAO
     {
         Prn221TatooLoverContext db = new Prn221TatooLoverContext();
-        public List<Artist> GetArtistByStudioId(int StudioId)
-        {
-            List<Artist> artistList = GetArtists();
+        //public  List<Artist> GetArtistByStudioId(int StudioId)
+        //{
+        //    List<Artist> artistList = GetArtists();
 
-            return GetArtists()
-              .Where(a => a.StudioId == StudioId)
-              .ToList();
-        }
+        //    return GetArtists()
+        //      .Where(a => a.StudioId == StudioId)
+        //      .ToList();
+        //}
 
         public static List<Artist> GetArtists()
         {
