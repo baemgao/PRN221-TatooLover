@@ -15,5 +15,6 @@ namespace Repositories
         List<Studio> GetStudioByName(string name);
         public List<Service> GetServiceByStudioId(int studioId);
         public void UpdateStudio(Studio studio);
+        public void UpdateServiceStatus(int serviceId);
     }
 }

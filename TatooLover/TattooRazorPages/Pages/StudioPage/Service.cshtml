@@ -12,7 +12,13 @@
     }
 </style>
 
-<h1>Service Management</h1>
+<div>
+    <div><h1>Service Management</h1></div>
+    <div>
+        <a asp-page="./ServiceAdd" class="btn btn-info">Add Service</a>
+    </div>
+</div>
+
 <br />
 
 <table class="table table-primary ">
@@ -54,7 +60,18 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="./ServiceDetails" asp-route-id="@Model.services[i].ServiceId" class="btn btn-primary">Details</a>
+                    <form method="post">
+                        <div class="row justify-content-center">
+                            <input type="hidden" name="serviceId" value="@Model.services[i].ServiceId"></input>
+                            
+                            @if (Model.services[i].Status == 1)
+                            {
+                                <button type="submit" class="btn btn-primary" style="width: 100px">Ban</button>
+                            } else {
+                                <button type="submit" class="btn btn-primary" style="width: 100px">Unban</button>
+                            }
+                        </div>
+                    </form>
                 </td>
             </tr>
         }
