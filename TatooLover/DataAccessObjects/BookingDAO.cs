@@ -1,5 +1,4 @@
-﻿using BusinessObjects.DTO;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
@@ -29,6 +28,7 @@ namespace DataAccessObjects
             .Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include(b => b.Bills)
             .ToList();
         public List<Booking> GetBookingByStudioId(int studioId) => db.Bookings
             .Where(s => s.Artist.StudioId == studioId)
@@ -47,7 +47,6 @@ namespace DataAccessObjects
                     booking = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
-                        .Include(s => s.Service)
                         .SingleOrDefault(f => f.BookingId == id);
                 }
             }
@@ -89,7 +88,6 @@ namespace DataAccessObjects
                     bookings = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
-                        .Include(s => s.Service)
                         .Where(b => b.CustomerId == id)
                         .ToList();
                 }
@@ -146,5 +144,15 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        //Only get bill of booking where booking status in (2;4] => after done
+        public List<Bill> GetBillByStudioId(int id) => db.Bills
+            .Where(b => b.Booking.Artist.Studio.StudioId == id)
+            .Include(b => b.Booking)
+            .Include (b => b.Booking.Customer)
+            .Include(b => b.Booking.Artist)
+            .Where(b => b.Booking.Status <= 4 && b.Booking.Status > 2)
+            .ToList();
+
     }
 }

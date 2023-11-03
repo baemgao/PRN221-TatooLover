@@ -1,0 +1,71 @@
+﻿@page
+@model TattooRazorPages.Pages.StudioPage.ArtistModel
+@{
+    ViewData["Title"] = "Artist Management";
+    Layout = "_StudioLayout";
+}
+
+<style>
+    .small-box {
+        border-radius: 15px;
+        background-color: #000033;
+        padding: 5px;
+        text-align: center;
+        margin: 10px 0;
+        color: #fff;
+    }
+
+    table th {
+        text-align: center;
+    }
+
+    .th-d {
+        text-align: center;
+    }
+</style>
+
+<table class="table table-primary ">
+    <thead>
+        <tr table-primary>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.artists.Count; i++)
+        {
+            <tr table-secondary>
+                <td class="th-d">@(i + 1)</td>
+                <td class="th-d">@Model.artists[i].Code</td>
+                <td>@Model.artists[i].Name</td>
+                <td class="th-d">@Model.artists[i].Email</td>
+                <td class="th-d">@Model.artists[i].Phone</td>
+                <td>@Model.artists[i].Address</td>
+                <td class="th-d">
+                    @switch (Model.artists[i].Status)
+                    {
+                        case 0:
+                            {
+                                <span style="color:red">In-active</span>
+                            }
+                            break;
+                        case 1:
+                            {
+                                <span style="color:green">Active</span>
+                            }
+                            break;
+                    }
+                </td>
+                <td>
+                    <a asp-page="./ArtistDetails" asp-route-id="@Model.artists[i].ArtistId" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
