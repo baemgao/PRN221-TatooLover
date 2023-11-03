@@ -44,7 +44,21 @@
                         <td style="text-align: center">@Html.DisplayFor(modelItem => item.Phone)</td>
                         <td style="text-align: center">@Html.DisplayFor(modelItem => item.OpenHour)</td>
                         <td style="text-align: center">@Html.DisplayFor(modelItem => item.CloseHour)</td>
-                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td style="text-align: center">
+                            @switch (item.Status)
+                            {
+                                case 0:
+                                    {
+                                        <span style="color:red">In-active</span>
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        <span style="color:green">Active</span>
+                                    }
+                                    break;
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

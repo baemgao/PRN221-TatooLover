@@ -1,0 +1,55 @@
+﻿@page
+@model TattooRazorPages.Pages.HomePageTar2Model
+@{
+}
+
+<style>
+    .full-screen-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Để đảm bảo ảnh hiển thị phía sau nội dung khác */
+    }
+
+        .full-screen-image img {
+            width: 100vh;
+            object-fit: cover;
+        }
+
+    h1{
+        font-size: 60px;
+        font-weight: 900;
+    }
+
+    div.img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+
+<div class="full-screen-video">
+    <video playsinline autoplay loop muted>
+        <source src="https://morgansinktattoo.com/wp-content/themes/morgansink/assets/video/tattoo_making_video.mp4" type="video/mp4">
+        <source src="https://morgansinktattoo.com/wp-content/themes/morgansink/assets/video/tattoo_making_video.webm" type="video/webm">
+    </video>
+</div>
+<div class="row">
+    <div class="col-6">
+        <h1>TATTOO</h1>
+        <H3>
+            Free consultation, comfy space , safe hygiene , safety are always on top.
+        </H3>
+        <button class="btn btn-outline-warning">Read more</button>
+    </div>
+    <div class="col-6">
+        <div class="img">
+            <img src="https://th.bing.com/th/id/OIP.2mKh__Ew57x4ZhRpJqePUAAAAA?pid=ImgDet&rs=1" alt="Full Screen Image">
+        </div>
+    </div>
+</div>
+
+

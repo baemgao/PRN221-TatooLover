@@ -7,6 +7,9 @@ namespace TattooRazorPages.Pages.StudioPage
 {
     public class ServiceModel : PageModel
     {
+        [BindProperty(SupportsGet = true)]
+        public string SearchText { get; set; }
+
         StudioRepository studioRepository = new StudioRepository();
         public List<Service> services = new List<Service>();
         public void OnGet()

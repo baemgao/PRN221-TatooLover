@@ -52,5 +52,32 @@ namespace DataAccessObjects
 
             return services;
         }
+
+        public static List<Service> GetServiceByName(string searchText, int studioId)
+        {
+            List<Service> services = new List<Service>();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        services = context.Services
+                            .Where(s => s.Name.Contains(searchText) && s.StudioId == studioId)
+                            .Include(s => s.Studio)
+                            .ToList();
+                    }
+                    else
+                    {
+                        services = context.Services.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return services;
+        }
     }
 }
