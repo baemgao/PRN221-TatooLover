@@ -19,12 +19,22 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Booking.ArtistId" class="control-label"></label>
+                <label asp-for="Booking.ArtistId" class="control-label">Artist Name</label>
                 <select asp-for="Booking.ArtistId" class="form-control" asp-items="ViewBag.ArtistId">
                     <option value="">-- Chọn Thợ xăm --</option>
                     @foreach (var artist in Model.Artists)
                     {
                         <option value="@artist.ArtistId">@artist.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Booking.ServiceId" class="control-label">Sẻvice Name</label>
+                <select asp-for="Booking.ServiceId" class="form-control" asp-items="ViewBag.ServiceId">
+                    <option value="">-- Chọn dịch vụ --</option>
+                    @foreach (var service in Model.Services)
+                    {
+                        <option value="@service.ServiceId">@service.Name</option>
                     }
                 </select>
             </div>
@@ -48,11 +58,7 @@
                 <input asp-for="Booking.Note" class="form-control" />
                 <span asp-validation-for="Booking.Note" class="text-danger"></span>
             </div>
-@*             <div class="form-group">
-                <label asp-for="Booking.Status" class="control-label"></label>
-                <input asp-for="Booking.Status" class="form-control" />
-                <span asp-validation-for="Booking.Status" class="text-danger"></span>
-            </div> *@
+
             <div class="form-group">
                 <input type="submit" value="Booking" class="btn btn-primary" />
             </div>

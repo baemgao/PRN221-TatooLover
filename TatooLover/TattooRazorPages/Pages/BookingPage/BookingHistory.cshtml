@@ -12,8 +12,9 @@
             <th>Booking Date</th>
             <th>Booking DateTime</th>
             <th>Artist</th>
+            <th>Service</th>
             <th>Price</th>
-@*             <th>Status</th> *@
+
         </tr>
     </thead>
     <tbody>
@@ -23,8 +24,18 @@
                 <td>@booking.BookingDate.ToShortDateString()</td>
                 <td>@booking.BookingDateTime.ToShortDateString()</td>
                 <td>@booking.Artist.Name</td>
+                <td>@booking.Service.Name</td>
                 <td>@booking.Price</td>
-@*                 <td>@booking.Status</td> *@
+                <td>
+                    @if (booking.Status == 0)
+                    {
+                        <a asp-page="/BookingPage/Payment" asp-route-bookingId="@booking.BookingId" class="btn btn-primary">Thanh toán</a>
+                    }
+                    else
+                    {
+                        <span class="text-success">Đã thanh toán</span>
+                    }
+                </td>
             </tr>
         }
     </tbody>

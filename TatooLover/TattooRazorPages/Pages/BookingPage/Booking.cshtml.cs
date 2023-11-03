@@ -9,14 +9,16 @@ namespace TattooRazorPages.Pages.BookingPage
     {
         private readonly IBookingRepository _bookingRepo;
         private readonly IArtistRepository _artistRepo;
+        private readonly IStudioRepository _studioRepo;
 
         [TempData]
         public string SignupMessage { get; set; }
 
-        public BookingModel(IBookingRepository bookingRepo, IArtistRepository artistRepo)
+        public BookingModel(IBookingRepository bookingRepo, IArtistRepository artistRepo, IStudioRepository studioRepo)
         {
             _bookingRepo = bookingRepo;
             _artistRepo = artistRepo;
+            _studioRepo = studioRepo;
         }
 
         [BindProperty]
@@ -24,12 +26,16 @@ namespace TattooRazorPages.Pages.BookingPage
         [BindProperty]
         public IList<Artist> Artists { get; set; } = default!;
 
+        [BindProperty]
+        public IList<Service> Services { get; set; } = default!;
+
         public void OnGet()
         {
                 Artists = _artistRepo.GetArtists();
+                Services = _studioRepo.GetServices();
         }
 
-        public async Task<IActionResult> OnPostAsync(double Price,DateTime BookingDate, DateTime BookingDateTime, string Note, int ArtistId, int Status)
+        public async Task<IActionResult> OnPostAsync()
         {
 
             int? customerId = HttpContext.Session.GetInt32("customerId");
@@ -43,6 +49,7 @@ namespace TattooRazorPages.Pages.BookingPage
             {
                 CustomerId = customerId.Value,
                 ArtistId = Booking.ArtistId,
+                ServiceId = Booking.ServiceId,
                 Price = Booking.Price,
                 BookingDate = Booking.BookingDate,
                 BookingDateTime = Booking.BookingDateTime, 
