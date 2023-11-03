@@ -29,7 +29,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.ServiceId" class="control-label">Sẻvice Name</label>
+                <label asp-for="Booking.ServiceId" class="control-label">Service Name</label>
                 <select asp-for="Booking.ServiceId" class="form-control" asp-items="ViewBag.ServiceId">
                     <option value="">-- Chọn dịch vụ --</option>
                     @foreach (var service in Model.Services)
@@ -61,14 +61,16 @@
 
             <div class="form-group">
                 <input type="submit" value="Booking" class="btn btn-primary" />
+                <a asp-page="/CustomerPage/CustomerDetail" class="btn btn-secondary">Back</a>
             </div>
+@*             <div class="customer-actions">
+                <a asp-page="/CustomerPage/CustomerDetail" class="btn btn-secondary">Customer</a>
+            </div> *@
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{
