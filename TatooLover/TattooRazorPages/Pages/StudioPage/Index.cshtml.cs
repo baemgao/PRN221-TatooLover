@@ -44,6 +44,7 @@ namespace TattooRazorPages.Pages.StudioPage
                 {
                     ViewData["Message"] = "No bookings found for the selected date!";
                 }
+                today = DateTime.Today;
             }
             return Page();
         }

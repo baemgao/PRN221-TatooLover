@@ -13,7 +13,7 @@ namespace TattooRazorPages.Pages.StudioPage
         public IArtistRepository artistRepository = new ArtistRepository();
 
         public Studio studio { get; set; } = default!;
-        public List<Booking> bookingList { get; set; } = default!;
+        public IList<Booking> bookingList { get; set; } = default!;
         public DateTime today { get; set; }
 
         public IActionResult OnGet()

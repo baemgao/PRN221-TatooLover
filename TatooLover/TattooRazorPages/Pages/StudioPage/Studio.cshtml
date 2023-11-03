@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = Model;
     Layout = "_StudioLayout";
+    var msg = ViewData["Message"];
 }
 
 <div class="studio">
@@ -50,3 +51,8 @@
 <div class="customer-actions">
     <a asp-page="./StudioEdit" asp-route-id="@Model.studio.StudioId" class="btn btn-primary">Edit</a>
 </div>
+
+@if (msg != null)
+{
+    <div class="alert alert-danger">@ViewData["MessagePassword"]</div>
+}

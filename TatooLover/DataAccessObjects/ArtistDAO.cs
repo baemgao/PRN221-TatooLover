@@ -77,6 +77,8 @@ namespace DataAccessObjects
         }
         public int AddArtist(Artist artist)
         {
+            artist.Password = "Password@1";
+            artist.Status = 1;
             db.Artists.Add(artist);
             return db.SaveChanges();
         }

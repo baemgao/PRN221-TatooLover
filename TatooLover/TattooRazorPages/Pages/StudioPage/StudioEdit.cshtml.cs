@@ -1,6 +1,7 @@
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
 
@@ -49,7 +50,8 @@ namespace TattooRazorPages.Pages.StudioPage
             studio.OpenHour = openHour;
             studio.CloseHour = closeHour;
             studioRepository.UpdateStudio(studio);
-            return Page();
+            ViewData["Message"] = "Edit Successfully";
+            return RedirectToPage("Studio");
         }
     }
 

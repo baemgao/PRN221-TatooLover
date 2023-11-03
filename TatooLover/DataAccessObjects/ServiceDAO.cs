@@ -20,7 +20,7 @@ namespace DataAccessObjects
                 {
                     services = context.Services
                         .Include(s => s.Studio)
-                        .OrderByDescending(s => s.Status == 1)
+                        .OrderByDescending(s => s.Status)
                         .ToList();
                 }
             }
@@ -107,7 +107,6 @@ namespace DataAccessObjects
             {
                 throw new Exception(ex.Message);
             }
-            return services;
         }
 
     }
