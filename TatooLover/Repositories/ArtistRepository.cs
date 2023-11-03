@@ -16,5 +16,6 @@ namespace Repositories
         public Artist? GetArtistById(int? id) => artistDAO.GetArtistById(id);
         public void UpdateArtist(Artist artist) => artistDAO.UpdateArtist(artist);
         public List<Artist> GetArtistByStudioId(int StudioId) => artistDAO.GetArtistByStudioId(StudioId);
+        public int AddArtist(Artist artist) => artistDAO.AddArtist(artist);
     }
 }

@@ -9,24 +9,24 @@ namespace DataAccessObjects
     public class BookingDAO
     {
         Prn221TatooLoverContext db = new Prn221TatooLoverContext();
-        ArtistDAO artistDAO = new ArtistDAO();
-
 
         public List<Booking> GetBookingInDayByArtistId(DateTime date, int id) => db.Bookings
             .Where(b => b.ArtistId == id && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include(s => s.Service)
             .ToList();
         public List<Booking> GetBookingByArtistId(int id) => db.Bookings
             .Where(b => b.ArtistId == id)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
-            .OrderByDescending(b => b.BookingDateTime)
+            .Include(b => b.Service)
             .ToList();
         public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings
             .Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include(b => b.Service)
             .Include(b => b.Bills)
             .ToList();
         public List<Booking> GetBookingByStudioId(int studioId) => db.Bookings
@@ -47,8 +47,8 @@ namespace DataAccessObjects
                 {
                     booking = context.Bookings
                         .Include(c => c.Artist)
+                        .Include(s => s.Service)
                         .Include(b => b.Customer)
-                        .Include(b => b.Service)
                         .SingleOrDefault(f => f.BookingId == id);
                 }
             }
@@ -89,8 +89,8 @@ namespace DataAccessObjects
                 {
                     bookings = context.Bookings
                         .Include(c => c.Artist)
+                        .Include(s => s.Service)
                         .Include(b => b.Customer)
-                        .Include(b => b.Service)
                         .Where(b => b.CustomerId == id)
                         .OrderByDescending(b => b.BookingDateTime)
                         .ToList();

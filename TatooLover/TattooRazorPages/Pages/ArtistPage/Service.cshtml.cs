@@ -10,36 +10,26 @@ using Repositories;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
-    public class BookingDetailsModel : PageModel
+    public class ServiceModel : PageModel
     {
-        private readonly IBookingRepository _context;
+        private readonly IStudioRepository _context;
 
-        public BookingDetailsModel(IBookingRepository context)
+        public ServiceModel(IStudioRepository context)
         {
             _context = context;
         }
 
-      public Booking Booking { get; set; } = default!; 
+        public IList<Service> Service { get;set; } = default!;
 
-        public IActionResult OnGet(int? id)
+        public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("art_email") == null)
             {
                 return RedirectToPage("/Login");
             }
-            if (id == null || _context.GetBookings() == null)
+            if (_context.GetServices() != null)
             {
-                return NotFound();
-            }
-
-            var booking = _context.GetBookingById(id);
-            if (booking == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                Booking = booking;
+                Service = _context.GetServices();
             }
             return Page();
         }

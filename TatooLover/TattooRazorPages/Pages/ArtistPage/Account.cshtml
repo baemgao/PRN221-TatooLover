@@ -3,13 +3,12 @@
 
 @{
     ViewData["Title"] = "Account";
+    Layout = "_ArtistLayout";
 }
 
 <h1>@Html.DisplayFor(model => model.Artist.Studio.Name)</h1>
 
 <div>
-    <h4>Artist</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Artist.Code)

@@ -5,9 +5,11 @@ using Repositories;
 
 namespace TattooRazorPages.Pages.StudioPage
 {
-    public class ArtistModel : PageModel
+    public class ServiceDetailModel : PageModel
     {
+        StudioRepository studioRepository = new StudioRepository();
         ArtistRepository artistRepository = new ArtistRepository();
+        public Service service;
         public List<Artist> artists;
         public IActionResult OnGet()
         {

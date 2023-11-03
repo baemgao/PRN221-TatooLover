@@ -20,6 +20,7 @@ namespace DataAccessObjects
                 {
                     services = context.Services
                         .Include(s => s.Studio)
+                        .OrderByDescending(s => s.Status == 1)
                         .ToList();
                 }
             }
@@ -41,6 +42,8 @@ namespace DataAccessObjects
                 {
                     services = context.Services
                         .Include(s => s.Studio)
+                        .Include(s => s.ArtistDetails)
+                        .ThenInclude(s => s.Artist)
                         .Where(s => s.StudioId == studioId)
                         .ToList();
                 }
@@ -73,31 +76,37 @@ namespace DataAccessObjects
             }
         }
 
-        public static List<Service> GetServiceByName(string searchText, int studioId)
+        public int AddService(Service service, int artistId)
         {
-            List<Service> services = new List<Service>();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
                 {
-                    if (!string.IsNullOrEmpty(searchText))
+                    // Thêm dịch vụ (Service) vào CSDL
+                    Service service1 = GetServices().Where(s => s.Code == service.Code).FirstOrDefault();
+                    if (service1 != null)
                     {
-                        services = context.Services
-                            .Where(s => s.Name.Contains(searchText) && s.StudioId == studioId)
-                            .Include(s => s.Studio)
-                            .ToList();
+                        context.Services.Add(service);
+                        int serviceId = context.SaveChanges(); // Lưu thay đổi để lấy ServiceID sau khi thêm
+
+                        // Tạo một ArtistDetail mới để gán dịch vụ cho nghệ sĩ
+                        var artistDetail = new ArtistDetail();
+                        artistDetail.ArtistId = artistId;
+                        artistDetail.ServiceId = serviceId;
+
+                        context.ArtistDetails.Add(artistDetail);
+                        context.SaveChanges(); // Lưu thay đổi để gán dịch vụ cho nghệ sĩ
+                        
+                        return serviceId;
                     }
                     else
-                    {
-                        services = context.Services.ToList();
-                    }
+                        return -1;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return services;
         }
 
     }

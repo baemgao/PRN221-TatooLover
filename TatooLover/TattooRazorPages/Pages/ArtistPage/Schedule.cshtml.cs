@@ -29,5 +29,20 @@ namespace TattooRazorPages.Pages.ArtistPage
             }
             return Page();
         }
+        public IActionResult OnPost(DateTime searchDate)
+        {
+            if (HttpContext.Session.GetInt32("art_email") != null)
+            {
+                int artistId = HttpContext.Session.GetInt32("art_email").Value;
+                Schedule = _context.GetScheduleInDayByArtistId(searchDate, artistId)
+                    .ToList();
+
+                if (!Schedule.Any())
+                {
+                    ViewData["Message"] = "No Schedule found for the selected date!";
+                }
+            }
+            return Page();
+        }
     }
 }

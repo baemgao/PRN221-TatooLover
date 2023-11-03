@@ -63,6 +63,7 @@ namespace TattooRazorPages.Pages
 
             if (adminEmail == Email && adminPass == Password)
             {
+                HttpContext.Session.SetString("Email", Email);
                 return RedirectToPage("./Admin/AdminHome");
             } else
             {
