@@ -25,6 +25,7 @@ namespace TattooRazorPages.Pages.StudioPage
             {
                 return RedirectToPage("/Login");
             }
+            artist = new Artist();
             int studioId = HttpContext.Session.GetInt32("id").Value;
             artist.Code = code;
             artist.Name = name;
