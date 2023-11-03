@@ -34,7 +34,7 @@ namespace TattooRazorPages.Pages.BookingPage
             }
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int bookingId)
         {
             int? customerId = HttpContext.Session.GetInt32("customerId");
 
@@ -45,7 +45,7 @@ namespace TattooRazorPages.Pages.BookingPage
 
             Booking.CustomerId = customerId.Value;
 
-            var existingBooking = _bookingRepo.GetBookingById(Booking.BookingId);
+            var existingBooking = _bookingRepo.GetBookingById(bookingId);
 
             if (existingBooking == null || existingBooking.CustomerId != customerId)
             {
