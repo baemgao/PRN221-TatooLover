@@ -79,5 +79,22 @@ namespace DataAccessObjects
             }
             return customers;
         }
+
+        public static void CreateStudio(Studio studio)
+        {
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    // Thêm Studio mới vào cơ sở dữ liệu
+                    context.Studios.Add(studio);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

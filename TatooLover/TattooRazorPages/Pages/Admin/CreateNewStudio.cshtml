@@ -1,0 +1,64 @@
+﻿@page
+@model TattooRazorPages.Pages.Admin.CreateNewStudioModel
+@{
+}
+
+<h1>Create new Studio</h1>
+<h4>Studio</h4>
+<hr />
+
+<form method="post">
+    <div class="container justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Studio Edit</h1>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label for="name">Studio Name</label>
+                        </td>
+                        <td>
+                            <input name="name" asp-for="@Model.studio.Name" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="address">Address</label>
+                        </td>
+                        <td>
+                            <input name="address" asp-for="@Model.studio.Address" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="phone">Hotline</label>
+                        </td>
+                        <td>
+                            <input name="phone" asp-for="@Model.studio.Phone" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="openHour">Open Hour</label>
+                        </td>
+                        <td>
+                            <input name="openHour" asp-for="@Model.studio.OpenHour" type="time" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="closeHour">Close Hour</label>
+                        </td>
+                        <td>
+                            <input name="closeHour" asp-for="@Model.studio.CloseHour" type="time" class="form-control" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary" style="width: 100px">Edit</button>
+        </div>
+    </div>
+</form>
