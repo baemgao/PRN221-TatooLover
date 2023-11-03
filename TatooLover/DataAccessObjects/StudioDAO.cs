@@ -55,5 +55,29 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        public static List<Service> GetServiceByName(string searchText)
+        {
+            List<Service> customers = new List<Service>();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        customers = context.Services.Where(c => c.Name.Contains(searchText)).ToList();
+                    }
+                    else
+                    {
+                        customers = context.Services.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return customers;
+        }
     }
 }

@@ -60,11 +60,11 @@ namespace DataAccessObjects
                 Studio studio;
                 using (var context = new Prn221TatooLoverContext())
                 {
-                   Service service = GetServices().Where(s => s.ServiceId == serviceId).FirstOrDefault();
-                        int status = (service.Status == 1) ? 0 : 1;
-                        service.Status = status;
-                        context.Update(service);
-                        context.SaveChanges();
+                    Service service = GetServices().Where(s => s.ServiceId == serviceId).FirstOrDefault();
+                    int status = (service.Status == 1) ? 0 : 1;
+                    service.Status = status;
+                    context.Update(service);
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -72,5 +72,33 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        public static List<Service> GetServiceByName(string searchText, int studioId)
+        {
+            List<Service> services = new List<Service>();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    if (!string.IsNullOrEmpty(searchText))
+                    {
+                        services = context.Services
+                            .Where(s => s.Name.Contains(searchText) && s.StudioId == studioId)
+                            .Include(s => s.Studio)
+                            .ToList();
+                    }
+                    else
+                    {
+                        services = context.Services.ToList();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return services;
+        }
+
     }
 }
