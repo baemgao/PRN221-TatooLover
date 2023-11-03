@@ -16,5 +16,6 @@ namespace Repositories
         public List<Service> GetServiceByStudioId(int studioId);
         public void UpdateStudio(Studio studio);
         public void UpdateServiceStatus(int serviceId);
+        public void AddService(Service service, int artistId);
     }
 }

@@ -38,6 +38,7 @@
             <th>Service Description</th>
             <th>Duration</th>
             <th>Price</th>
+            <th>Artist</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -52,6 +53,12 @@
                 <td>@Model.services[i].Description</td>
                 <td>@Model.services[i].Time</td>
                 <td>@Model.services[i].Price</td>
+                <td>
+                @foreach (var artistDetail in Model.services[i].ArtistDetails)
+                 {
+                        <p>@artistDetail.Artist.Name</p>
+                 }
+                </td>
                 <td>
                     @switch (Model.services[i].Status)
                     {

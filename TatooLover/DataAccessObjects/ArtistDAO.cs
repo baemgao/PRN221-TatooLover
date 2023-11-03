@@ -75,5 +75,10 @@ namespace DataAccessObjects
             db.Entry<Artist>(artist).State = EntityState.Modified;
             db.SaveChanges();
         }
+        public int AddArtist(Artist artist)
+        {
+            db.Artists.Add(artist);
+            return db.SaveChanges();
+        }
     }
 }

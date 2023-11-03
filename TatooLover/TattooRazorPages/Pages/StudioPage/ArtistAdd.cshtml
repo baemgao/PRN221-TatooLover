@@ -1,0 +1,52 @@
+﻿@page
+@model TattooRazorPages.Pages.StudioPage.ArtistAddModel
+@{
+    ViewData["Title"] = "Artist Management";
+    Layout = "_StudioLayout";
+    var artist = Model.artist;
+}
+
+<style>
+    h1 {
+        color: blueviolet
+    }
+</style>
+
+<div>
+    <div><h1>Artist Management</h1></div>
+    <div><h3>Add Artist</h3></div>
+</div>
+
+<br />
+
+<form method="post">
+    <table class="table">
+        <tr>
+            <td><label for="Code">Artist Code:</label></td>
+            <td><input name="code" asp-for="@artist.Code" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label for="Name">Artist Name:</label></td>
+            <td><input name="name" asp-for="@artist.Name" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label for="Email">Email:</label></td>
+            <td><input name="email" type="email" asp-for="@artist.Email" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label for="Phone">Phone (minutes):</label></td>
+            <td><input name="phone" type="tel" asp-for="@artist.Phone" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label for="Address">Address:</label></td>
+            <td><input name="address" type="text" asp-for="@artist.Address" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td><label for="Certificate">Certificate:</label></td>
+            <td><input name="certLink" type="text" asp-for="@artist.Certificate" class="form-control" /></td>
+        </tr>
+        <tr>
+            <button type="submit" class="btn btn-primary" style="width: 100px">Add</button>
+        </tr>
+    </table>
+</form>
