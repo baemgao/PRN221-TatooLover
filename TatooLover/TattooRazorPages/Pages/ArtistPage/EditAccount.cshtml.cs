@@ -51,7 +51,7 @@ namespace TattooRazorPages.Pages.ArtistPage
 
             _art.UpdateArtist(Artist);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Schedule");
         }
 
         private bool ArtistExists(int id)
