@@ -10,12 +10,12 @@ namespace DataAccessObjects
 {
     public class ArtistDAO
     {
-        
+        Prn221TatooLoverContext db = new Prn221TatooLoverContext();
         public List<Artist> GetArtistByStudioId(int StudioId)
         {
             List<Artist> artistList = GetArtists();
 
-            return artistList
+            return GetArtists()
               .Where(a => a.StudioId == StudioId)
               .ToList();
         }
@@ -28,6 +28,8 @@ namespace DataAccessObjects
                 using (var context = new Prn221TatooLoverContext())
                 {
                     artists = context.Artists
+                        .Include(a => a.ArtistDetails)
+                        .ThenInclude(a => a.Service)
                         .Include(s => s.Studio)
                         .ToList();
                 }
@@ -41,18 +43,18 @@ namespace DataAccessObjects
 
         public static List<Artist> GetArtistByName(string searchText)
         {
-            List<Artist> customers = new List<Artist>();
+            List<Artist> artists = new List<Artist>();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
                 {
                     if (!string.IsNullOrEmpty(searchText))
                     {
-                        customers = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
+                        artists = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
                     }
                     else
                     {
-                        customers = context.Artists.ToList();
+                        artists = context.Artists.ToList();
                     }
                 }
             }
@@ -60,7 +62,18 @@ namespace DataAccessObjects
             {
                 throw new Exception(ex.Message);
             }
-            return customers;
+            return artists;
+        }
+        public Artist? GetArtistById(int? id)
+        {
+            return db.Artists
+              .Include(s => s.Studio)
+              .SingleOrDefault(a => a.ArtistId == id);
+        }
+        public void UpdateArtist(Artist artist)
+        {
+            db.Entry<Artist>(artist).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }

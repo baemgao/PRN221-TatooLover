@@ -1,7 +1,6 @@
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 namespace TattooRazorPages.Pages.StudioPage

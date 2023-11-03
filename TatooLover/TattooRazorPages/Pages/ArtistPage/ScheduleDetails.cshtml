@@ -1,0 +1,49 @@
+﻿@page
+@model TattooRazorPages.Pages.ArtistPage.ScheduleDetailsModel
+
+@{
+    ViewData["Title"] = "ScheduleDetails";
+}
+
+<h1>ScheduleDetails</h1>
+
+<div>
+    <h4>Schedule</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.TimeFrom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.TimeFrom)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.TimeTo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.TimeTo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Schedule.Artist)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Schedule.Artist.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="EditSchedule" asp-route-id="@Model.Schedule?.ScheduleId">Edit</a> |
+    <a asp-page="Schedule">Back to Schedule</a>
+</div>

@@ -1,0 +1,118 @@
+﻿@page
+@model TattooRazorPages.Pages.ArtistPage.HomeModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Home</h1>
+
+<div style="display: inline-block;">
+    <a asp-page="Schedule">Schedule</a>
+</div>
+<div style="display: inline-block;">
+    <a asp-page="Account">Profile</a>
+</div>
+<div style="display: inline-block;">
+    <a asp-page="Index">All Booking</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].BookingDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Point)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].ArtistFeedBack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].ServiceFeedBack)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Artist)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Booking[0].Service)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Booking) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Point)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtistFeedBack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceFeedBack)
+            </td>
+            <td>
+                    @switch (item.Status)
+                    {
+                        case 0:
+                            <span style="color: blue">Pending</span>
+                            break;
+                        case 1:
+                            <span style="color: green">Check-in</span>
+                            break;
+                        case 2:
+                            <span style="color: green">Done</span>
+                            break;
+                        case 3:
+                            <span style="color: green">Check-out</span>
+                            break;
+                        case 4:
+                            <span style="color: green">Finished</span>
+                            break;
+                        default:
+                            <span style="color: red">Unknown Status</span>
+                            break;
+                    }
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Artist.Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Service.Name)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

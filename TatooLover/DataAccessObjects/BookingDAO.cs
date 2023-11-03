@@ -1,5 +1,4 @@
-﻿using BusinessObjects.DTO;
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
@@ -23,38 +22,22 @@ namespace DataAccessObjects
             .Include(b => b.Customer)
             .Include(c => c.Artist)
             .ToList();
-        public List<Booking> GetDay(DateTime date) => db.Bookings
-           .Where(b => b.BookingDate.Date == date.Date)
-           .ToList();
-        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings.Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
+        public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings
+            .Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include(b => b.Bills)
+            .ToList();
+        public List<Booking> GetBookingByStudioId(int studioId) => db.Bookings
+            .Where(s => s.Artist.StudioId == studioId)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
             .ToList();
-        public List<Booking> GetBookingByStudioId(int id)
-        {
-            List<Booking> bookings = new List<Booking>();
-            try
-            {
-                using (var context = new Prn221TatooLoverContext())
-                {
-                    bookings = context.Bookings
-                        .Include(c => c.Artist)
-                        .Include(b => b.Customer)
-                        .Where(w => w.Artist.StudioId == id)
-                        .ToList();
-                }
-            } catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return bookings;
-        }
+        
 
-        public static Booking GetBookingById(int id)
+        public static Booking? GetBookingById(int? id)
         {
-            Booking booking = new Booking();
+            Booking? booking = new Booking();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
@@ -80,6 +63,7 @@ namespace DataAccessObjects
                 {
                     bookings = context.Bookings
                         .Include(c => c.Artist)
+                        .Include(s => s.Service)
                         .Include(b => b.Customer)
                         .OrderByDescending(b => b.BookingDateTime)
                         .ToList();
@@ -158,5 +142,15 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        //Only get bill of booking where booking status in (2;4] => after done
+        public List<Bill> GetBillByStudioId(int id) => db.Bills
+            .Where(b => b.Booking.Artist.Studio.StudioId == id)
+            .Include(b => b.Booking)
+            .Include (b => b.Booking.Customer)
+            .Include(b => b.Booking.Artist)
+            .Where(b => b.Booking.Status <= 4 && b.Booking.Status > 2)
+            .ToList();
+
     }
 }

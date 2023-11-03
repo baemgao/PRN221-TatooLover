@@ -24,10 +24,7 @@
     }
     
 </style>
-@if (Model.studio != null)
-{
-    <h1>Hello @Model.studio.Code - @Model.studio.Name comeback</h1>
-}
+ <h1>Hello @Model.studio.Code - @Model.studio.Name comeback, </h1>
  <h3 style="color: green">@Model.today.ToString("dd-MM-yyyy")</h3>
 <br />
 
@@ -136,7 +133,7 @@
                     }
                 </td>
                 <td>
-                    <a asp-page="./Details" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-primary">Details</a>
+                    <a asp-page="./BookingDetails" asp-route-id="@Model.bookingList[i].BookingId" class="btn btn-primary">Details</a>
                 </td>
             </tr>
         }
