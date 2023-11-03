@@ -21,6 +21,7 @@ namespace DataAccessObjects
             .Where(b => b.ArtistId == id)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .OrderByDescending(b => b.BookingDateTime)
             .ToList();
         public List<Booking> GetBookingInDayByStudioId(DateTime date, int studioId) => db.Bookings
             .Where(b => b.Artist.StudioId == studioId && b.BookingDateTime.Date == date.Date)
@@ -32,6 +33,8 @@ namespace DataAccessObjects
             .Where(s => s.Artist.StudioId == studioId)
             .Include(b => b.Customer)
             .Include(c => c.Artist)
+            .Include (b => b.Service)
+            .OrderByDescending(b => b.BookingDateTime)
             .ToList();
         
 
@@ -45,6 +48,7 @@ namespace DataAccessObjects
                     booking = context.Bookings
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
+                        .Include(c => c.Service)
                         .SingleOrDefault(f => f.BookingId == id);
                 }
             }
@@ -87,6 +91,7 @@ namespace DataAccessObjects
                         .Include(c => c.Artist)
                         .Include(b => b.Customer)
                         .Where(b => b.CustomerId == id)
+                        .OrderByDescending(b => b.BookingDateTime)
                         .ToList();
                 }
             }
@@ -150,7 +155,7 @@ namespace DataAccessObjects
             .Include (b => b.Booking.Customer)
             .Include(b => b.Booking.Artist)
             .Where(b => b.Booking.Status <= 4 && b.Booking.Status > 2)
+            .OrderByDescending(b => b.Booking.BookingDateTime)
             .ToList();
-
     }
 }
