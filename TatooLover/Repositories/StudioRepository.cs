@@ -24,5 +24,7 @@ namespace Repositories
         public List<Service> GetServices() => serviceDAO.GetServices();
 
         public List<Service> GetServiceByStudioId(int studioId) => serviceDAO.GetServiceByStudioId(studioId);
+        public void UpdateStudio(Studio studio) => StudioDAO.UpdateStudio(studio);
+        public void UpdateServiceStatus(int serviceId) => serviceDAO.UpdateServiceStatus(serviceId);
     }
 }

@@ -53,6 +53,26 @@ namespace DataAccessObjects
             return services;
         }
 
+        public void UpdateServiceStatus(int serviceId)
+        {
+            try
+            {
+                Studio studio;
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    Service service = GetServices().Where(s => s.ServiceId == serviceId).FirstOrDefault();
+                    int status = (service.Status == 1) ? 0 : 1;
+                    service.Status = status;
+                    context.Update(service);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static List<Service> GetServiceByName(string searchText, int studioId)
         {
             List<Service> services = new List<Service>();
@@ -79,5 +99,6 @@ namespace DataAccessObjects
             }
             return services;
         }
+
     }
 }
