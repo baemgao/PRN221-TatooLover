@@ -1,0 +1,52 @@
+﻿@page
+@model TattooRazorPages.Pages.StudioPage.StudioModel
+@{
+    ViewData["Title"] = Model;
+    Layout = "_StudioLayout";
+}
+
+<div class="studio">
+    <h3>@Model.studio.Name</h3>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">
+            Studio Code:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.studio.Code
+        </dd>
+
+        <dt class="col-sm-3">
+            Studio Name:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.studio.Name
+        </dd>
+
+        <dt class="col-sm-3">
+            Address:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.studio.Address
+        </dd>
+
+        <dt class="col-sm-3">
+            Hotline:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.studio.Phone
+        </dd>
+
+        <dt class="col-sm-3">
+            Working Hour:
+        </dt>
+        <dd class="col-sm-9">
+            @Model.studio.OpenHour - @Model.studio.CloseHour
+        </dd>
+    </dl>
+</div>
+
+<div class="customer-actions">
+    <a asp-page="./StudioEdit" asp-route-id="@Model.studio.StudioId" class="btn btn-primary">Edit</a>
+</div>

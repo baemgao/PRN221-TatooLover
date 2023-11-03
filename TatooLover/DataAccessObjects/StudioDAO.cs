@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,25 @@ namespace DataAccessObjects
     public class StudioDAO
     {
         Prn221TatooLoverContext db = new Prn221TatooLoverContext();
-        public List<Studio> GetStudios() => db.Studios.ToList();
+        public List<Studio> GetStudios() => db.Studios
+            .Include(s => s.Services)
+            .Include(s => s.Artists)
+            .ToList();
 
         public static List<Studio> GetStudioByName(string searchText)
         {
-            List<Studio> customers = new List<Studio>();
+            List<Studio> studios = new List<Studio>();
             try
             {
                 using (var context = new Prn221TatooLoverContext())
                 {
                     if (!string.IsNullOrEmpty(searchText))
                     {
-                        customers = context.Studios.Where(c => c.Name.Contains(searchText)).ToList();
+                        studios = context.Studios.Where(c => c.Name.Contains(searchText)).ToList();
                     }
                     else
                     {
-                        customers = context.Studios.ToList();
+                        studios = context.Studios.ToList();
                     }
                 }
             }
@@ -33,7 +37,23 @@ namespace DataAccessObjects
             {
                 throw new Exception(ex.Message);
             }
-            return customers;
+            return studios;
+        }
+
+        public static void UpdateStudio(Studio studio)
+        {
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    context.Update(studio);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

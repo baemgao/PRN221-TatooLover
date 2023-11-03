@@ -6,27 +6,32 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Repositories;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
     public class ServiceModel : PageModel
     {
-        private readonly BusinessObjects.Models.Prn221TatooLoverContext _context;
+        private readonly IStudioRepository _context;
 
-        public ServiceModel(BusinessObjects.Models.Prn221TatooLoverContext context)
+        public ServiceModel(IStudioRepository context)
         {
             _context = context;
         }
 
         public IList<Service> Service { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            if (_context.Services != null)
+            if (HttpContext.Session.GetInt32("art_email") == null)
             {
-                Service = await _context.Services
-                .Include(s => s.Studio).ToListAsync();
+                return RedirectToPage("/Login");
             }
+            if (_context.GetServices() != null)
+            {
+                Service = _context.GetServices();
+            }
+            return Page();
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Repositories
         public List<Schedule> GetSchedules();
         public Schedule? GetSchedulesById(int? id);
         public List<Schedule> GetListScheduleByArtistId(int? artistId);
+        public List<Schedule> GetScheduleInDayByArtistId(DateTime date, int id);
         public void CreateSchedule(Schedule schedule);
         public void UpdateSchedule(Schedule schedule);
         public void DeleteSchedule(Schedule schedule);

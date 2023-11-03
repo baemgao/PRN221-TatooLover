@@ -30,5 +30,30 @@ namespace TattooRazorPages.Pages.StudioPage
                 }
             }
         }
+
+        public IActionResult OnPost(int serviceId)
+        {
+            var id = HttpContext.Session.GetInt32("id") != null ?
+                    (int)HttpContext.Session.GetInt32("id")! : -1;
+
+            if (id < 0)
+            {
+                NotFound(); 
+                return Page();
+            }
+            else
+            {
+                try
+                {
+                    studioRepository.UpdateServiceStatus(serviceId);
+                    services = studioRepository.GetServiceByStudioId(id);
+                }
+                catch (Exception ex)
+                {
+                    ViewData["Message"] = "Error getting data";
+                }
+            }
+            return Page();
+        }
     }
 }

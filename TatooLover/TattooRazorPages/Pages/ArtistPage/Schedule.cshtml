@@ -6,7 +6,29 @@
     Layout = "_ArtistLayout";
 }
 
+<style>
+    .error-message {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-danger">@ViewData["Message"]</div>
+}
 <h1>Schedule</h1>
+<form method="post">
+    <div class="form-group row">
+        <label for="searchDate" class="col-sm-2 col-form-label">Date:</label>
+        <div class="col-sm-6">
+            <input type="date" name="searchDate" id="searchDate" class="form-control" />
+        </div>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
 <p>
     <a asp-page="CreateSchedule" class="btn btn-primary">Create New</a>
 </p>
@@ -32,29 +54,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Schedule) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeFrom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TimeTo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Artist.Name)
-            </td>
-            <td>
-                    <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> |
-                    <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
-                    <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
-            </td>
-        </tr>
-}
+        @if (Model.Schedule != null)
+        {
+            @foreach (var item in Model.Schedule)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeFrom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TimeTo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Artist.Name)
+                    </td>
+                    <td>
+                        <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> |
+                        <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
+                        <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <p class="error-message">Please enter the date!</p>
+        }
     </tbody>
 </table>
+<script src="~/js/searchDate.js"></script>
