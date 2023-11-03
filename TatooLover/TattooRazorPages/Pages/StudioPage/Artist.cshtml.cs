@@ -9,15 +9,15 @@ namespace TattooRazorPages.Pages.StudioPage
     {
         ArtistRepository artistRepository = new ArtistRepository();
         public List<Artist> artists;
-        public IActionResult OnGet()
-        {
-            if (HttpContext.Session.GetInt32("id") == null || HttpContext.Session.GetInt32("id") < 0)
-            {
-                return RedirectToPage("/Login");
-            }
-            int studioId = HttpContext.Session.GetInt32("id").Value;
-            artists = artistRepository.GetArtistsByStudioId(studioId);
-            return Page();
-        }
+        //public IActionResult OnGet()
+        //{
+        //    if (HttpContext.Session.GetInt32("id") == null || HttpContext.Session.GetInt32("id") < 0)
+        //    {
+        //        return RedirectToPage("/Login");
+        //    }
+        //    int studioId = HttpContext.Session.GetInt32("id").Value;
+        //    artists = artistRepository.GetArtistsByStudioId(studioId);
+        //    return Page();
+        //}
     }
 }
