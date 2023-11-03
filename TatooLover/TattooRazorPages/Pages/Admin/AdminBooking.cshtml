@@ -12,10 +12,17 @@
 <br />
 <div class="navbar-right col-6 justify-content-end">
     <form class="d-flex" role="search" method="get">
-        @* <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchText"> *@
-        <button class="btn btn-info" style="color: #fff" type="submit">Search</button>
+        <div class="input-group">
+            <select asp-for="SearchType" class="form-control" style="background-color: yellowgreen; text-align: center">
+                <option value="CustomerName">Customer</option>
+                <option value="ArtistName">Artist</option>
+            </select>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" asp-for="SearchText">
+            <button class="btn btn-info" style="color: #fff" type="submit">Search</button>
+        </div>
     </form>
 </div>
+
 <br />
 <div class="row">
     <div class="col-12">
@@ -50,7 +57,21 @@
                         <td style="text-align: center">@Html.DisplayFor(modelItem => item.Point)</td>
                         <td>@Html.DisplayFor(modelItem => item.ArtistFeedBack)</td>
                         <td>@Html.DisplayFor(modelItem => item.ServiceFeedBack)</td>
-                        <td style="text-align: center">@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td style="text-align: center">
+                            @switch (item.Status)
+                            {
+                                case 0:
+                                    {
+                                        <span style="color:red">In-active</span>
+                                    }
+                                    break;
+                                case 1:
+                                    {
+                                        <span style="color:green">Active</span>
+                                    }
+                                    break;
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

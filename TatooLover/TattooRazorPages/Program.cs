@@ -11,7 +11,7 @@ builder.Services.AddScoped<IStudioRepository, StudioRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
 
-
+builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePageTar2", ""));
 
 var app = builder.Build();
 
