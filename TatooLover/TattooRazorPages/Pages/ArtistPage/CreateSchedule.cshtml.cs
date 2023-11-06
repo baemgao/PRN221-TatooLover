@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
 using Repositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
     public class CreateScheduleModel : PageModel
     {
         private readonly IScheduleRepository _sch;
-        private readonly IArtistRepository _art;
 
-        public CreateScheduleModel(IScheduleRepository sch, IArtistRepository art)
+        public CreateScheduleModel(IScheduleRepository sch)
         {
-            _art = art;
             _sch = sch;
         }
 
@@ -27,24 +21,58 @@ namespace TattooRazorPages.Pages.ArtistPage
             {
                 return RedirectToPage("/Login");
             }
-            ViewData["ArtistId"] = new SelectList(_art.GetArtists(), "ArtistId", "Code");
             return Page();
         }
-
         [BindProperty]
-        public Schedule Schedule { get; set; } = default!;
-        
+        public ScheduleModel scheduleModel { get; set; }
 
         public IActionResult OnPost()
         {
-          if (!ModelState.IsValid || _sch.GetSchedules() == null || Schedule == null)
+          if (!ModelState.IsValid || _sch.GetSchedules() == null)
             {
                 return Page();
             }
-            Schedule.Status = 0;
-            _sch.CreateSchedule(Schedule);
+            int artistId = HttpContext.Session.GetInt32("art_email").Value;
+            DateTime today = DateTime.Now;
+
+            if (scheduleModel.Date < today.Date)
+            {
+                ModelState.AddModelError("ScheduleModel.Date", "Do not import past!");
+                return Page();
+            }
+            TimeSpan minTime = new TimeSpan(8, 0, 0);
+            TimeSpan maxTime = new TimeSpan(17, 0, 0);
+            if (scheduleModel.TimeFrom < minTime | scheduleModel.TimeTo > maxTime)
+            {
+                ModelState.AddModelError("ScheduleModel.TimeFrom", "Hours must be from 8:00 AM to 5:00 PM.");
+                ModelState.AddModelError("ScheduleModel.TimeTo", "Hours must be from 8:00 AM to 5:00 PM.");
+                return Page();
+            }
+            Schedule schedule = new Schedule
+            {
+                Date = scheduleModel.Date,
+                TimeFrom = scheduleModel.TimeFrom,
+                TimeTo = scheduleModel.TimeTo,
+                Status = scheduleModel.Status
+            };
+            _sch.CreateSchedule(schedule, artistId);
 
             return RedirectToPage("./Schedule");
+        }
+        public class ScheduleModel
+        {
+            [Required(ErrorMessage = "Date is required")]
+            [DataType(DataType.Date)]
+            public DateTime Date { get; set; }
+
+            [Required(ErrorMessage = "TimeFrom is required")]
+            [DataType(DataType.Time)]
+            public TimeSpan TimeFrom { get; set; }
+
+            [Required(ErrorMessage = "TimeTo is required")]
+            [DataType(DataType.Time)]
+            public TimeSpan TimeTo { get; set; }
+            public int Status { get; set; }
         }
     }
 }

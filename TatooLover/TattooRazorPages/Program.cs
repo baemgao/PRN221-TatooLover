@@ -1,15 +1,16 @@
 using Repositories;
+using TattooRazorPages.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
 builder.Services.AddSession();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddSignalR();
 
 builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePageTar2", ""));
 
@@ -29,5 +30,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

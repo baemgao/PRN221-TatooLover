@@ -72,6 +72,7 @@ namespace DataAccessObjects
         }
         public void UpdateArtist(Artist artist)
         {
+            artist.Password = "Password@1";
             db.Entry<Artist>(artist).State = EntityState.Modified;
             db.SaveChanges();
         }

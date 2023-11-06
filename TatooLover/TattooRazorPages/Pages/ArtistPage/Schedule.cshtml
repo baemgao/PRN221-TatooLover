@@ -69,7 +69,21 @@
                         @Html.DisplayFor(modelItem => item.TimeTo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
+                        @switch (item.Status)
+                        {
+                            case 0:
+                                <span style="color: blue">Pending</span>
+                                break;
+                            case 1:
+                                <span style="color: green">Accept</span>
+                                break;
+                            case 2:
+                                <span style="color: red">Not accepted</span>
+                                break;
+                            default:
+                                <span style="color: orange">Unknown Status</span>
+                                break;
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Artist.Name)

@@ -23,13 +23,16 @@ namespace DataAccessObjects
             .Where(b => b.ScheduleId == id && b.Date.Date == date.Date)
             .Include(c => c.Artist)
             .ToList();
-        public void CreateSchedule(Schedule schedule)
+        public void CreateSchedule(Schedule schedule, int artistId)
         {
+            schedule.Status = 0;
+            schedule.ArtistId = artistId;
             db.Schedules.Add(schedule);
             db.SaveChanges();
         }
         public void UpdateSchedule(Schedule schedule)
         {
+            schedule.Status = 0;
             db.Entry<Schedule>(schedule).State = EntityState.Modified;
             db.SaveChanges();
         }

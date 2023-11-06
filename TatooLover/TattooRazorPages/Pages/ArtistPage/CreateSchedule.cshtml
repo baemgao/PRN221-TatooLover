@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "CreateSchedule";
     Layout = "_ArtistLayout";
+    
 }
 
 <h1>CreateSchedule</h1>
@@ -15,28 +16,19 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Schedule.ArtistId" class="control-label">Artist Code</label>
-                <select asp-for="Schedule.ArtistId" class ="form-control" asp-items="ViewBag.ArtistId"></select>
+                <label asp-for="scheduleModel.Date" class="control-label"></label>
+                <input asp-for="scheduleModel.Date" class="form-control" value="@DateTime.Now.ToShortDateString()" />
+                <span asp-validation-for="scheduleModel.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Schedule.Date" class="control-label"></label>
-                <input asp-for="Schedule.Date" class="form-control" />
-                <span asp-validation-for="Schedule.Date" class="text-danger"></span>
+                <label asp-for="scheduleModel.TimeFrom" class="control-label"></label>
+                <input asp-for="scheduleModel.TimeFrom" class="form-control" value="08:00" />
+                <span asp-validation-for="scheduleModel.TimeFrom" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Schedule.TimeFrom" class="control-label"></label>
-                <input asp-for="Schedule.TimeFrom" class="form-control" />
-                <span asp-validation-for="Schedule.TimeFrom" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Schedule.TimeTo" class="control-label"></label>
-                <input asp-for="Schedule.TimeTo" class="form-control" />
-                <span asp-validation-for="Schedule.TimeTo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Schedule.Status" class="control-label"></label>
-                <input asp-for="Schedule.Status" class="form-control" disabled value="0"/>
-                <span asp-validation-for="Schedule.Status" class="text-danger"></span>
+                <label asp-for="scheduleModel.TimeTo" class="control-label"></label>
+                <input asp-for="scheduleModel.TimeTo" class="form-control" value="17:00" />
+                <span asp-validation-for="scheduleModel.TimeTo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

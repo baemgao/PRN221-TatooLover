@@ -2,7 +2,7 @@
 @model TattooRazorPages.Pages.ArtistPage.FeedbackModel
 @{
     ViewData["Title"] = "Feedback";
-    Layout = "_StudioLayout";
+    Layout = "_ArtistLayout";
 }
 
 <style>
@@ -52,7 +52,6 @@
         @for (int i = 0; i < Model.bookings.Count; i++)
         {
             var booking = Model.bookings[i];
-            int status;
 
             <tr table-secondary>
                 <td class="th-d">@(i + 1)</td>

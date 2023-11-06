@@ -8,22 +8,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Repositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace TattooRazorPages.Pages.ArtistPage
 {
     public class EditScheduleModel : PageModel
     {
         private readonly IScheduleRepository _sch;
-        private readonly IArtistRepository _art;
 
-        public EditScheduleModel(IScheduleRepository sch, IArtistRepository art)
+        public EditScheduleModel(IScheduleRepository sch)
         {
-            _art = art;
             _sch = sch;
         }
 
         [BindProperty]
-        public Schedule Schedule { get; set; } = default!;
+        public ScheduleModel Schedule { get; set; } = default!;
+        public Schedule s { get; set; }
 
         public IActionResult OnGet(int? id)
         {
@@ -41,8 +41,7 @@ namespace TattooRazorPages.Pages.ArtistPage
             {
                 return NotFound();
             }
-            Schedule = schedule;
-           ViewData["ArtistId"] = new SelectList(_art.GetArtists(), "ArtistId", "Code");
+            s = schedule;
             return Page();
         }
 
@@ -52,8 +51,28 @@ namespace TattooRazorPages.Pages.ArtistPage
             {
                 return Page();
             }
-
-            _sch.UpdateSchedule(Schedule);
+            DateTime today = DateTime.Now;
+            if (Schedule.Date < today.Date)
+            {
+                ModelState.AddModelError("ScheduleModel.Date", "Do not import past!");
+                return Page();
+            }
+            TimeSpan minTime = new TimeSpan(8, 0, 0);
+            TimeSpan maxTime = new TimeSpan(17, 0, 0);
+            if (Schedule.TimeFrom < minTime | Schedule.TimeTo > maxTime)
+            {
+                ModelState.AddModelError("ScheduleModel.TimeFrom", "Hours must be from 8:00 AM to 5:00 PM.");
+                ModelState.AddModelError("ScheduleModel.TimeTo", "Hours must be from 8:00 AM to 5:00 PM.");
+                return Page();
+            }
+            Schedule schedule = new Schedule
+            {
+                Date = Schedule.Date,
+                TimeFrom = Schedule.TimeFrom,
+                TimeTo = Schedule.TimeTo,
+                Status = Schedule.Status
+            };
+            _sch.UpdateSchedule(s);
 
 
             return RedirectToPage("/Schedule");
@@ -62,6 +81,25 @@ namespace TattooRazorPages.Pages.ArtistPage
         private bool ScheduleExists(int? id)
         {
           return (_sch.GetSchedules()?.Any(e => e.ScheduleId == id)).GetValueOrDefault();
+        }
+
+        public class ScheduleModel
+        {   
+            public int ScheduleId { get; set; }
+            [Required(ErrorMessage = "Date is required")]
+            [DataType(DataType.Date)]
+            public DateTime Date { get; set; }
+
+            [Required(ErrorMessage = "TimeFrom is required")]
+            [DataType(DataType.Time)]
+            public TimeSpan TimeFrom { get; set; }
+
+            [Required(ErrorMessage = "TimeTo is required")]
+            [DataType(DataType.Time)]
+            public TimeSpan TimeTo { get; set; }
+
+            [Required(ErrorMessage = "Status is required")]
+            public int Status { get; set; }
         }
     }
 }

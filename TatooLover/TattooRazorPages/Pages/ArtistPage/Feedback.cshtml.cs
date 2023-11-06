@@ -8,7 +8,7 @@ namespace TattooRazorPages.Pages.ArtistPage
     public class FeedbackModel : PageModel
     {
         BookingRepository bookingRepository = new BookingRepository();
-        public List<Booking> bookings;
+        public required List<Booking> bookings;
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("art_email") == null)

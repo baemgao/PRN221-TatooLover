@@ -11,7 +11,7 @@ namespace Repositories
         public Schedule? GetSchedulesById(int? id) => scheduleDAO.GetSchedulesById(id);
         public List<Schedule> GetListScheduleByArtistId(int? artistId) => scheduleDAO.GetListScheduleByArtistId(artistId);
         public List<Schedule> GetScheduleInDayByArtistId(DateTime date, int id) => scheduleDAO.GetScheduleInDayByArtistId(date, id);
-        public void CreateSchedule(Schedule schedule) => scheduleDAO.CreateSchedule(schedule);
+        public void CreateSchedule(Schedule schedule, int artistId) => scheduleDAO.CreateSchedule(schedule, artistId);
         public void UpdateSchedule(Schedule schedule) => scheduleDAO.UpdateSchedule(schedule);
         public void DeleteSchedule(Schedule schedule) => scheduleDAO.DeleteSchedule(schedule);
     }
