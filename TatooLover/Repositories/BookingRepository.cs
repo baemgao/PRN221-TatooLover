@@ -26,5 +26,6 @@ namespace Repositories
         public void DeleteBooking(Booking c) => BookingDAO.DeleteBooking(c);
         public List<Booking> GetBookingsByCustomerId(int customerId) => BookingDAO.GetBookingsByCustomerId(customerId);
         public List<Bill> GetBillByStudioId(int studioId) => bookingDAO.GetBillByStudioId(studioId);
+        public double GetServicePriceByName(string serviceName) => StudioDAO.GetServicePriceByName(serviceName);
     }
 }
