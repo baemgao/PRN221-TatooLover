@@ -149,6 +149,26 @@ namespace DataAccessObjects
             }
         }
 
+        public static void UpdateBookingPrice(int bookingId, double price)
+        {
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    var booking = context.Bookings.FirstOrDefault(b => b.BookingId == bookingId);
+                    if (booking != null)
+                    {
+                        booking.Price = price;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         //Only get bill of booking where booking status in (2;4] => after done
         public List<Bill> GetBillByStudioId(int id) => db.Bills
             .Where(b => b.Booking.Artist.Studio.StudioId == id)

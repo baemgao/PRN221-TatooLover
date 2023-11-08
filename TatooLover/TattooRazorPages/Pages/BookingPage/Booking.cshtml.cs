@@ -1,4 +1,5 @@
 using BusinessObjects.Models;
+using DataAccessObjects;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories;
@@ -50,12 +51,15 @@ namespace TattooRazorPages.Pages.BookingPage
                 CustomerId = customerId.Value,
                 ArtistId = Booking.ArtistId,
                 ServiceId = Booking.ServiceId,
-                Price = Booking.Price,
+                Price = _studioRepo.GetServiceById(Booking.ServiceId).Price,
                 BookingDate = Booking.BookingDate,
                 BookingDateTime = Booking.BookingDateTime, 
                 Note = Booking.Note,
-                //Status = Booking.Status
+
             };
+            //double servicePrice = _studioRepo.GetServicePriceByName(Booking.Price);
+            //Booking.Price = servicePrice;
+
             _bookingRepo.SaveBooking(booking);
             TempData["BookingSuccess"] = "Booking thành công!";
 
