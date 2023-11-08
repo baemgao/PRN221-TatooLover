@@ -96,5 +96,24 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+        public static double GetServicePriceByName(string serviceName)
+        {
+            double price = 0;
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    price = context.Services
+                        .Where(s => s.Name == serviceName)
+                        .Select(s => s.Price)
+                        .FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return price;
+        }
     }
 }
