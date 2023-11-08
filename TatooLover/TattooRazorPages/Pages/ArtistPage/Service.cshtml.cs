@@ -13,13 +13,17 @@ namespace TattooRazorPages.Pages.ArtistPage
     public class ServiceModel : PageModel
     {
         private readonly IStudioRepository _context;
+        private readonly IArtistRepository _art;
 
-        public ServiceModel(IStudioRepository context)
+
+        public ServiceModel(IStudioRepository context, IArtistRepository art)
         {
             _context = context;
+            _art = art;
         }
 
         public IList<Service> Service { get;set; } = default!;
+        public string ArtistName { get; set; }
 
         public IActionResult OnGet()
         {
@@ -27,10 +31,13 @@ namespace TattooRazorPages.Pages.ArtistPage
             {
                 return RedirectToPage("/Login");
             }
+            int artistId = HttpContext.Session.GetInt32("art_email").Value;
+            var artist = _art.GetArtistById(artistId);
             if (_context.GetServices() != null)
             {
-                Service = _context.GetServices();
+                Service = _art.GetServiceByArtistId(artistId);
             }
+            ArtistName = artist.Name;
             return Page();
         }
     }

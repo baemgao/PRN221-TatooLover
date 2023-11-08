@@ -41,15 +41,13 @@ namespace TattooRazorPages.Pages
         {
             if (string.IsNullOrEmpty(Email))
             {
-                ViewData["MessageEmail"] = "Please enter your email!";
-            }
-            if (string.IsNullOrEmpty(Password))
-            {
-                ViewData["MessagePassword"] = "Please enter your password!";
+                ViewData["Message"] = "Please enter your email.";
+                return Page();
             }
 
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(Password))
             {
+                ViewData["Message"] = "Please enter your password.";
                 return Page();
             }
 

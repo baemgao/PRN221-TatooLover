@@ -108,6 +108,27 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+        public List<Service> GetServiceByArtistId(int artistId)
+        {
+            List<Service> services = new List<Service>();
 
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    services = context.Services
+                        .Include(s => s.Studio)
+                        .Include(s => s.ArtistDetails)
+                        .Where(s => s.ArtistDetails.Any(ad => ad.ArtistId == artistId))
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return services;
+        }
     }
 }

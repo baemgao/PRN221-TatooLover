@@ -10,7 +10,6 @@ builder.Services.AddScoped<IArtistRepository, ArtistRepository>();
 builder.Services.AddScoped<IStudioRepository, StudioRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
-builder.Services.AddSignalR();
 
 builder.Services.AddRazorPages(options => options.Conventions.AddPageRoute("/HomePageTar2", ""));
 
@@ -30,7 +29,5 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
-
-app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

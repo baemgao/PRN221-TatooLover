@@ -11,11 +11,13 @@ namespace Repositories
     public class ArtistRepository : IArtistRepository
     {
         ArtistDAO artistDAO = new ArtistDAO();
+        ServiceDAO serviceDAO = new ServiceDAO();
         public List<Artist> GetArtists() => ArtistDAO.GetArtists();
         public List<Artist> GetArtistByName(string name) => ArtistDAO.GetArtistByName(name);
         public Artist? GetArtistById(int? id) => artistDAO.GetArtistById(id);
         public void UpdateArtist(Artist artist) => artistDAO.UpdateArtist(artist);
         public List<Artist> GetArtistByStudioId(int StudioId) => artistDAO.GetArtistByStudioId(StudioId);
         public int AddArtist(Artist artist) => artistDAO.AddArtist(artist);
+        public List<Service> GetServiceByArtistId(int artistId) => serviceDAO.GetServiceByArtistId(artistId);
     }
 }
