@@ -32,6 +32,23 @@ namespace DataAccessObjects
             return services;
         }
 
+        public static Service GetServiceById(int id)
+        {
+            Service service = new Service();
+            try
+            {
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    service = context.Services.SingleOrDefault(f => f.ServiceId == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return service;
+        }
+
         public List<Service> GetServiceByStudioId(int studioId)
         {
             List<Service> services = new List<Service>();

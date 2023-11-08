@@ -21,5 +21,6 @@ namespace Repositories
         void DeleteBooking(Booking c);
         void UpdateBooking(Booking c);
         public List<Bill> GetBillByStudioId(int studioId);
+        double GetServicePriceByName(string serviceName);
     }
 }
