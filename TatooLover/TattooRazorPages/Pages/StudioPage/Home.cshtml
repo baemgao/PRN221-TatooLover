@@ -28,27 +28,27 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <div class="small-box">
-                <h3>Member</h3>
-                <p>40</p>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="small-box">
-                <h3>Studio</h3>
-                <p>40</p>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="small-box">
-                <h3>Artist</h3>
-                <p>40</p>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="small-box">
+            <div class="small-box" href="Index">
                 <h3>Booking</h3>
-                <p>40</p>
+                <p>@Model.booking</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box" href="Artist">
+                <h3>Artist</h3>
+                <p>@Model.artist</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box" href="Service">
+                <h3>Service</h3>
+                <p>@Model.service</p>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="small-box" href="Feedback">
+                <h3>Feedback</h3>
+                <p>@Model.feedback</p>
             </div>
         </div>
     </div>

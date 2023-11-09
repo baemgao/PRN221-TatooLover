@@ -15,6 +15,7 @@ namespace TattooRazorPages.Pages.StudioPage
         public Studio studio { get; set; } = default!;
         public IList<Booking> bookingList { get; set; } = default!;
         public DateTime today { get; set; }
+        public int booking, service, feedback, artist;
 
         public IActionResult OnGet()
         {
@@ -26,6 +27,10 @@ namespace TattooRazorPages.Pages.StudioPage
             today = DateTime.Today;
             studio = studioRepository.GetStudioById(id);
             bookingList = bookingRepository.GetBookingInDayByStudioId(today, id);
+            booking = bookingRepository.GetBookingByStudioId(id).Count();
+            artist = artistRepository.GetArtistByStudioId(id).Count();
+            service = studioRepository.GetServiceByStudioId(id).Count();
+            feedback = bookingRepository.GetBookingByStudioId(id).Count();
             return Page();
         }
     }
