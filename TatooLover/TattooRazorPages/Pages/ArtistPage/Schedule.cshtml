@@ -5,7 +5,12 @@
     ViewData["Title"] = "Schedule";
     Layout = "_ArtistLayout";
 }
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <style>
     .error-message {
         color: red;
@@ -69,15 +74,32 @@
                         @Html.DisplayFor(modelItem => item.TimeTo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
+                        @switch (item.Status)
+                        {
+                            case 0:
+                                <span style="color: blue">Pending</span>
+                                break;
+                            case 1:
+                                <span style="color: green">Accept</span>
+                                break;
+                            case 2:
+                                <span style="color: red">Not accepted</span>
+                                break;
+                            default:
+                                <span style="color: orange">Unknown Status</span>
+                                break;
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Artist.Name)
                     </td>
                     <td>
-                        <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> |
-                        <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
-                        <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
+                       @if (item.Date >= DateTime.Today)
+                       {
+                            <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> 
+                       } |
+                       <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
+                       <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
                     </td>
                 </tr>
             }

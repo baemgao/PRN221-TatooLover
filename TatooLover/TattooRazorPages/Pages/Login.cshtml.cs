@@ -32,24 +32,24 @@ namespace TattooRazorPages.Pages
         }
 
         [BindProperty]
-        public string Email { get; set; }
+        public string Email { get; set; } = default!;
 
         [BindProperty]
-        public string Password { get; set; }
+        public string Password { get; set; } = default!;
+        [BindProperty]
+        public bool RememberMe { get; set; }
 
         public IActionResult OnPost()
         {
             if (string.IsNullOrEmpty(Email))
             {
-                ViewData["MessageEmail"] = "Please enter your email!";
-            }
-            if (string.IsNullOrEmpty(Password))
-            {
-                ViewData["MessagePassword"] = "Please enter your password!";
+                ViewData["Message"] = "Please enter your email.";
+                return Page();
             }
 
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Password))
+            if (string.IsNullOrEmpty(Password))
             {
+                ViewData["Message"] = "Please enter your password.";
                 return Page();
             }
 

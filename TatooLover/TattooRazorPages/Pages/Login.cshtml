@@ -7,18 +7,7 @@
 }
 
 <!-- Trang Login content -->
-@if (ViewData["Message"] != null)
-{
-    <div class="alert alert-danger">@ViewData["Message"]</div>
-}
-@if (ViewData["MessageEmail"] != null)
-{
-    <div class="alert alert-danger">@ViewData["MessageEmail"]</div>
-}
-@if (ViewData["MessagePassword"] != null)
-{
-    <div class="alert alert-danger">@ViewData["MessagePassword"]</div>
-}
+
 <style>
 
     * {
@@ -184,7 +173,18 @@
         <div class="content">
 
             <h2>Sign In</h2>
-
+            @if (ViewData["Message"] != null)
+            {
+                <div class="alert alert-danger">@ViewData["Message"]</div>
+            }
+            @if (ViewData["MessageEmail"] != null)
+            {
+                <div class="alert alert-danger">@ViewData["MessageEmail"]</div>
+            }
+            @if (ViewData["MessagePassword"] != null)
+            {
+                <div class="alert alert-danger">@ViewData["MessagePassword"]</div>
+            }
             <div class="form">
 
                 <form method="post">
@@ -200,7 +200,10 @@
                         <input type="password" id="Password" name="password" class="form-control" />
 
                     </div>
-
+                    <div class="form-group form-check">
+                        <input asp-for="RememberMe" class="form-check-input" />
+                        <label class="form-check-label" asp-for="RememberMe">Remember Me</label>
+                    </div>
                     <div class="links">
                         <a href="#">Forgot Password</a> <a href="Signup">Signup</a>
 

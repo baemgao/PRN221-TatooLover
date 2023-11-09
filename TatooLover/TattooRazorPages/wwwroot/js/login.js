@@ -17,3 +17,7 @@ window.onload = function () {
         document.getElementById("Password").value = savedPassword;
     }
 };
+window.addEventListener("beforeunload", function () {
+    localStorage.removeItem("savedEmail");
+    localStorage.removeItem("savedPassword");
+});

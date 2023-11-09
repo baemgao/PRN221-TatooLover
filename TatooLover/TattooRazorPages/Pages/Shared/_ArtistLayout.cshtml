@@ -22,7 +22,7 @@
         }
 
         .footer {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
             white-space: nowrap;
@@ -57,6 +57,9 @@
                     <li class="nav-item">
                         <a class="nav-link" style="color: #fff;" href="Service">Service</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #fff;" href="Feedback">Feedback</a>
+                    </li>
                 </ul>
             </div>
             <div class="navbar-right">
@@ -69,11 +72,12 @@
     <!-- Main body -->
     <div class="container">
         <main role="main" class="pb-3">
-            </br></br>
+            <br/>
             @RenderBody()
-            </br></br>
+            <br/>
         </main>
     </div>
+
 
     <!-- Footer -->
     <footer class="border-top footer text-muted">

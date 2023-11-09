@@ -52,9 +52,10 @@ namespace TattooRazorPages.Pages.ArtistPage
             if (schedule != null)
             {
                 Schedule = schedule;
-                _context.DeleteSchedule(Schedule);              
+                _context.DeleteSchedule(Schedule);
+                TempData["SuccessMessage"] = "Delete schedule successfully.";
             }
-            return RedirectToPage("/Schedule");
+            return RedirectToPage("Schedule");
         }
     }
 }

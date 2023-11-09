@@ -8,3 +8,6 @@ window.onload = function () {
         document.getElementById("searchDate").value = savedDate;
     }
 };
+window.addEventListener("beforeunload", function () {
+    localStorage.removeItem("savedDate");
+});
