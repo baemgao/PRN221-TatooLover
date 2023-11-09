@@ -1,6 +1,7 @@
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using Repositories;
 
 namespace TattooRazorPages.Pages.Admin
@@ -13,6 +14,24 @@ namespace TattooRazorPages.Pages.Admin
         public IStudioRepository studioRepository = new StudioRepository();
         public List<Studio> studioList = new List<Studio>();
         public void OnGet() {}
+        public IActionResult OnPost(String code, String name, String address, String phone, TimeSpan openHour, TimeSpan closeHour) {
+            if(HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Email").IsNullOrEmpty()) {
+                RedirectToPage("Login");
+            }
+            Studio studio = new Studio()
+            {
+                Code = code,
+                Name = name,
+                Address = address,
+                Phone = phone,
+                OpenHour = openHour,
+                CloseHour = closeHour,
+                Status = 1,
+                Password = "Password@1",
+            };
+            studioRepository.CreateStudio(studio);
+            return RedirectToPage("AdminStudio");
+        }
     }
 
     internal static class Validation

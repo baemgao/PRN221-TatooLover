@@ -31,6 +31,7 @@ namespace DataAccessObjects
                         .Include(a => a.ArtistDetails)
                         .ThenInclude(a => a.Service)
                         .Include(s => s.Studio)
+                        .OrderByDescending(s => s.Status)
                         .ToList();
                 }
             }
@@ -50,7 +51,7 @@ namespace DataAccessObjects
                 {
                     if (!string.IsNullOrEmpty(searchText))
                     {
-                        artists = context.Artists.Where(c => c.Name.Contains(searchText)).ToList();
+                        artists = context.Artists.Where(c => c.Name.Contains(searchText)).Include(s => s.Studio).ToList();
                     }
                     else
                     {
