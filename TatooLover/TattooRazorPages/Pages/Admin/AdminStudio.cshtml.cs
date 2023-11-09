@@ -14,6 +14,10 @@ namespace TattooRazorPages.Pages.Admin
         public List<Studio> studioList = new List<Studio>();
         public void OnGet()
         {
+            if (HttpContext.Session.GetInt32("Email") == null)
+            {
+                RedirectToPage("/Login");
+            }
             studioList = studioRepository.GetStudios();
             studioList = studioRepository.GetStudioByName(SearchText);
         }

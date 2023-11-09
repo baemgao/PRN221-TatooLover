@@ -12,7 +12,13 @@ namespace TattooRazorPages.Pages.Admin
 
         public IStudioRepository studioRepository = new StudioRepository();
         public List<Studio> studioList = new List<Studio>();
-        public void OnGet() {}
+        public void OnGet() 
+        {
+            if (HttpContext.Session.GetInt32("Email") == null)
+            {
+                RedirectToPage("/Login");
+            }
+        }
     }
 
     internal static class Validation

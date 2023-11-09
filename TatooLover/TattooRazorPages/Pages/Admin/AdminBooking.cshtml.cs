@@ -19,6 +19,10 @@ namespace TattooRazorPages.Pages.Admin
 
         public void OnGet()
         {
+            if (HttpContext.Session.GetInt32("Email") == null)
+            {
+                RedirectToPage("/Login");
+            }
             bookingList = bookingRepository.GetBookings();
         }
     }

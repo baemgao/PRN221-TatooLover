@@ -14,6 +14,10 @@ namespace TattooRazorPages.Pages.Admin
         public List<Customer> customerList = new List<Customer>();
         public void OnGet()
         {
+            if (HttpContext.Session.GetInt32("Email") == null)
+            {
+                RedirectToPage("/Login");
+            }
             customerList = customerRepository.GetCustomers();
             customerList = customerRepository.GetCustomerByName(SearchText);
         }
