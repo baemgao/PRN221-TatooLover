@@ -56,7 +56,7 @@ namespace TattooRazorPages.Pages.ArtistPage
                 Status = scheduleModel.Status
             };
             _sch.CreateSchedule(schedule, artistId);
-
+            TempData["SuccessMessage"] = "Register schedule successfully.";
             return RedirectToPage("./Schedule");
         }
         public class ScheduleModel
@@ -71,8 +71,23 @@ namespace TattooRazorPages.Pages.ArtistPage
 
             [Required(ErrorMessage = "TimeTo is required")]
             [DataType(DataType.Time)]
+            [TimeToGreaterThanTimeFrom]
             public TimeSpan TimeTo { get; set; }
             public int Status { get; set; }
+        }
+        public class TimeToGreaterThanTimeFromAttribute : ValidationAttribute
+        {
+            protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
+            {
+                var scheduleModel = (CreateScheduleModel.ScheduleModel)validationContext.ObjectInstance;
+
+                if (scheduleModel.TimeTo <= scheduleModel.TimeFrom)
+                {
+                    return new ValidationResult("TimeTo must be greater than TimeFrom.");
+                }
+
+                return ValidationResult.Success;
+            }
         }
     }
 }

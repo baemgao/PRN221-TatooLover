@@ -5,55 +5,54 @@
     ViewData["Title"] = "EditAccount";
     Layout = "_ArtistLayout";
 }
-
-<h1>Edit Profile</h1>
-
-<h4>@Model.a.Name</h4>
-<hr />
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+<h1>@Model.a.Studio.Name</h1>
+<br/>
+<h3>@Model.a.Name</h3>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="artist.ArtistId" />
             <div class="form-group">
-                <label asp-for="artist.StudioId" class="control-label">Studio Address</label>
-                <select asp-for="artist.StudioId" class="form-control" asp-items="ViewBag.StudioId"></select>
-                <span asp-validation-for="artist.StudioId" class="text-danger"></span>
+                <label asp-for="Art.Name" class="control-label"></label>
+                <input asp-for="Art.Name" class="form-control" placeholder="@Model.a.Name" />
+                <span asp-validation-for="Art.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Name" class="control-label"></label>
-                <input asp-for="artist.Name" class="form-control"/>
-                <span asp-validation-for="artist.Name" class="text-danger"></span>
+                <label asp-for="Art.Email" class="control-label"></label>
+                <input asp-for="Art.Email" class="form-control" placeholder="@Model.a.Email" />
+                <span asp-validation-for="Art.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Email" class="control-label"></label>
-                <input asp-for="artist.Email" class="form-control" />
-                <span asp-validation-for="artist.Email" class="text-danger"></span>
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" type="password" value="*****" disabled />
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <a asp-page="./ChangePassword" class="btn btn-primary">Change Password</a>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Password" class="control-label"></label>
-                <input asp-for="artist.Password" class="form-control" type="password" value="*****" disabled />
-                <span asp-validation-for="artist.Password" class="text-danger"></span>
+                <label asp-for="Art.Phone" class="control-label"></label>
+                <input asp-for="Art.Phone" class="form-control" placeholder="@Model.a.Phone" />
+                <span asp-validation-for="Art.Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Phone" class="control-label"></label>
-                <input asp-for="artist.Phone" class="form-control" />
-                <span asp-validation-for="artist.Phone" class="text-danger"></span>
+                <label asp-for="Art.Address" class="control-label"></label>
+                <input asp-for="Art.Address" class="form-control" placeholder="@Model.a.Address" />
+                <span asp-validation-for="Art.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Address" class="control-label"></label>
-                <input asp-for="artist.Address" class="form-control" />
-                <span asp-validation-for="artist.Address" class="text-danger"></span>
+                <label asp-for="Art.Avatar" class="control-label"></label>
+                <input asp-for="Art.Avatar" class="form-control" placeholder="Enter the image link" />
+                <span asp-validation-for="Art.Avatar" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="artist.Avatar" class="control-label"></label>
-                <input asp-for="artist.Avatar" class="form-control" placeholder="Enter the image link" />
-                <span asp-validation-for="artist.Avatar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="artist.Certificate" class="control-label"></label>
-                <input asp-for="artist.Certificate" class="form-control" placeholder="Enter the image link" />
-                <span asp-validation-for="artist.Certificate" class="text-danger"></span>
+                <label asp-for="Art.Certificate" class="control-label"></label>
+                <input asp-for="Art.Certificate" class="form-control" placeholder="Enter the image link" />
+                <span asp-validation-for="Art.Certificate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -67,6 +66,8 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 

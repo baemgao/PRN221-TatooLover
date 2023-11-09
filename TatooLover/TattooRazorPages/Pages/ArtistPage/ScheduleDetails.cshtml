@@ -34,7 +34,21 @@
             @Html.DisplayNameFor(model => model.Schedule.Status)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Schedule.Status)
+            @switch (Model.Schedule.Status)
+            {
+                case 0:
+                    <span style="color: blue">Pending</span>
+                    break;
+                case 1:
+                    <span style="color: green">Accept</span>
+                    break;
+                case 2:
+                    <span style="color: red">Not accepted</span>
+                    break;
+                default:
+                    <span style="color: orange">Unknown Status</span>
+                    break;
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Schedule.Artist)

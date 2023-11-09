@@ -32,10 +32,12 @@ namespace TattooRazorPages.Pages
         }
 
         [BindProperty]
-        public string Email { get; set; }
+        public string Email { get; set; } = default!;
 
         [BindProperty]
-        public string Password { get; set; }
+        public string Password { get; set; } = default!;
+        [BindProperty]
+        public bool RememberMe { get; set; }
 
         public IActionResult OnPost()
         {

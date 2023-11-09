@@ -1,5 +1,4 @@
 using Repositories;
-using TattooRazorPages.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 

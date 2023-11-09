@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
 using Repositories;
 using System.ComponentModel.DataAnnotations;
@@ -10,17 +9,16 @@ namespace TattooRazorPages.Pages.ArtistPage
     public class EditAccountModel : PageModel
     {
         private readonly IArtistRepository _art;
-        private readonly IStudioRepository _stu;
 
-        public EditAccountModel(IArtistRepository art, IStudioRepository stu)
+        public EditAccountModel(IArtistRepository art)
         {
             _art = art;
-            _stu = stu;
         }
 
         [BindProperty]
-        public ArtistModel artist { get; set; } = default!;
+        public ArtistModel Art { get; set; } = default!;
         public Artist a { get; set; } = default!;
+        public string Password { get; set; } = default!;
         public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("art_email") == null)
@@ -39,20 +37,48 @@ namespace TattooRazorPages.Pages.ArtistPage
                 return NotFound();
             }           
             a = artist;
-           ViewData["StudioId"] = new SelectList(_stu.GetStudios(), "StudioId", "Address");
+            Art = new ArtistModel
+            {
+                Name = a.Name,
+                Email = a.Email,
+                Phone = a.Phone,
+                Address = a.Address,
+                Avatar = a.Avatar,
+                Certificate = a.Certificate
+            };
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            int artistId = HttpContext.Session.GetInt32("art_email").Value;
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError(string.Empty, "Please fix the errors and try again.");
                 return Page();
             }
-            
-            _art.UpdateArtist(a);
+            var existingArtist = _art.GetArtistById(artistId);
+            if (existingArtist == null)
+            {
+                return NotFound();
+            }
 
-            return RedirectToPage("/Schedule");
+            existingArtist.Name = Art.Name;
+            existingArtist.Email = Art.Email;
+            existingArtist.Phone = Art.Phone;
+            existingArtist.Address = Art.Address;
+            existingArtist.Avatar = Art.Avatar;
+            existingArtist.Certificate = Art.Certificate;
+            bool updateSuccess = _art.UpdateArtist(existingArtist);
+            if (!updateSuccess)
+            {
+                TempData["ErrorMessage"] = "Failed to update profile. Please try again.";
+                return Page();
+            }
+            a = existingArtist;
+            TempData["SuccessMessage"] = "Change profile successfully.";
+
+            return RedirectToPage("Account");
         }
 
         private bool ArtistExists(int id)
@@ -62,9 +88,6 @@ namespace TattooRazorPages.Pages.ArtistPage
     }
     public class ArtistModel
     {
-        public string? ArtistId { get; set; }
-        public string? StudioId { get; set; }
-
         [Required(ErrorMessage = "The Name field is required.")]
         [RegularExpression(@"^[^\d]{6,30}$", ErrorMessage = "The name must be between 6 and 30 characters and should not contain numbers.")]
         public string? Name { get; set; }
@@ -72,7 +95,6 @@ namespace TattooRazorPages.Pages.ArtistPage
         [Required(ErrorMessage = "The Email field is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string? Email { get; set; }
-        public string? Password { get; set; }
 
         [Required(ErrorMessage = "The Phone field is required.")]
         [RegularExpression(@"^[0-9]{8,15}$", ErrorMessage = "Phone must be between 8 and 15 numbers, no letters must be entered.")]
@@ -86,6 +108,6 @@ namespace TattooRazorPages.Pages.ArtistPage
         public string? Avatar { get; set; }
         [RegularExpression(@"^(|http(s)?://[\w./?=#-]*)$", ErrorMessage = "The certificate must be in the format of a link.")]
         public string? Certificate { get; set; }
-        public string? Status { get; set; }
     }
+
 }

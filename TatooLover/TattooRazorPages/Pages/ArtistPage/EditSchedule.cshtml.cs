@@ -23,7 +23,7 @@ namespace TattooRazorPages.Pages.ArtistPage
 
         [BindProperty]
         public ScheduleModel Schedule { get; set; } = default!;
-        public Schedule s { get; set; }
+        public Schedule s { get; set; } = default!;
 
         public IActionResult OnGet(int? id)
         {
@@ -42,27 +42,25 @@ namespace TattooRazorPages.Pages.ArtistPage
                 return NotFound();
             }
             s = schedule;
+            Schedule = new ScheduleModel
+            {
+                Date = s.Date,
+                TimeFrom = s.TimeFrom,
+                TimeTo = s.TimeTo
+            };
             return Page();
         }
 
         public IActionResult OnPost()
         {
+            
+            var validationResults = Schedule.Validate(new ValidationContext(Schedule));
+            foreach (var validationResult in validationResults)
+            {
+                ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
+            }
             if (!ModelState.IsValid)
             {
-                return Page();
-            }
-            DateTime today = DateTime.Now;
-            if (Schedule.Date < today.Date)
-            {
-                ModelState.AddModelError("ScheduleModel.Date", "Do not import past!");
-                return Page();
-            }
-            TimeSpan minTime = new TimeSpan(8, 0, 0);
-            TimeSpan maxTime = new TimeSpan(17, 0, 0);
-            if (Schedule.TimeFrom < minTime | Schedule.TimeTo > maxTime)
-            {
-                ModelState.AddModelError("ScheduleModel.TimeFrom", "Hours must be from 8:00 AM to 5:00 PM.");
-                ModelState.AddModelError("ScheduleModel.TimeTo", "Hours must be from 8:00 AM to 5:00 PM.");
                 return Page();
             }
             Schedule schedule = new Schedule
@@ -70,12 +68,10 @@ namespace TattooRazorPages.Pages.ArtistPage
                 Date = Schedule.Date,
                 TimeFrom = Schedule.TimeFrom,
                 TimeTo = Schedule.TimeTo,
-                Status = Schedule.Status
             };
             _sch.UpdateSchedule(s);
-
-
-            return RedirectToPage("/Schedule");
+            TempData["SuccessMessage"] = "Change schedule successfully.";
+            return RedirectToPage("Schedule");
         }
 
         private bool ScheduleExists(int? id)
@@ -83,9 +79,8 @@ namespace TattooRazorPages.Pages.ArtistPage
           return (_sch.GetSchedules()?.Any(e => e.ScheduleId == id)).GetValueOrDefault();
         }
 
-        public class ScheduleModel
-        {   
-            public int ScheduleId { get; set; }
+        public class ScheduleModel : IValidatableObject
+        {
             [Required(ErrorMessage = "Date is required")]
             [DataType(DataType.Date)]
             public DateTime Date { get; set; }
@@ -98,8 +93,27 @@ namespace TattooRazorPages.Pages.ArtistPage
             [DataType(DataType.Time)]
             public TimeSpan TimeTo { get; set; }
 
-            [Required(ErrorMessage = "Status is required")]
-            public int Status { get; set; }
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                if (Date < DateTime.Now.Date)
+                {
+                    yield return new ValidationResult("Do not import past!", new[] { nameof(Date) });
+                }
+
+                if (TimeTo < TimeFrom)
+                {
+                    yield return new ValidationResult("TimeTo must not be earlier than TimeFrom.", new[] { nameof(TimeTo) });
+                }
+
+                TimeSpan minTime = new TimeSpan(8, 0, 0);
+                TimeSpan maxTime = new TimeSpan(17, 0, 0);
+                if (TimeFrom < minTime || TimeTo > maxTime)
+                {
+                    yield return new ValidationResult("Hours must be from 8:00 AM to 5:00 PM.", new[] { nameof(TimeFrom), nameof(TimeTo) });
+                }
+            }
         }
+
+
     }
 }

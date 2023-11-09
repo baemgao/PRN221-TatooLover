@@ -16,7 +16,7 @@ namespace DataAccessObjects
             .Include(a => a.Artist)
             .SingleOrDefault(a => a.ScheduleId == id);
         public List<Schedule> GetListScheduleByArtistId(int? artistId) => db.Schedules
-            .Where(a => a.ScheduleId == artistId)
+            .Where(a => a.ArtistId == artistId)
             .Include(a => a.Artist)
             .ToList();
         public List<Schedule> GetScheduleInDayByArtistId(DateTime date, int id) => db.Schedules
@@ -32,7 +32,6 @@ namespace DataAccessObjects
         }
         public void UpdateSchedule(Schedule schedule)
         {
-            schedule.Status = 0;
             db.Entry<Schedule>(schedule).State = EntityState.Modified;
             db.SaveChanges();
         }

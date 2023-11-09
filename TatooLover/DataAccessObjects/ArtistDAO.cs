@@ -70,11 +70,25 @@ namespace DataAccessObjects
               .Include(s => s.Studio)
               .SingleOrDefault(a => a.ArtistId == id);
         }
-        public void UpdateArtist(Artist artist)
+        public bool UpdateArtist(Artist artist)
         {
-            artist.Password = "Password@1";
-            db.Entry<Artist>(artist).State = EntityState.Modified;
-            db.SaveChanges();
+            try
+            {
+                if (artist == null)
+                {
+                    return false;
+                }
+                using (var context = new Prn221TatooLoverContext())
+                {
+                    context.Entry<Artist>(artist).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public int AddArtist(Artist artist)
         {
@@ -82,6 +96,16 @@ namespace DataAccessObjects
             artist.Status = 1;
             db.Artists.Add(artist);
             return db.SaveChanges();
+        }
+        public void ChangePassword(int artistId, string? newPassword)
+        {
+            var existingArtist = GetArtistById(artistId);
+            if (existingArtist != null)
+            {
+                existingArtist.Password = newPassword;
+                db.Entry(existingArtist).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
     }
 }

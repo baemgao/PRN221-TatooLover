@@ -5,7 +5,12 @@
     ViewData["Title"] = "Schedule";
     Layout = "_ArtistLayout";
 }
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <style>
     .error-message {
         color: red;
@@ -89,9 +94,12 @@
                         @Html.DisplayFor(modelItem => item.Artist.Name)
                     </td>
                     <td>
-                        <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> |
-                        <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
-                        <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
+                       @if (item.Date >= DateTime.Today)
+                       {
+                            <a asp-page="EditSchedule" asp-route-id="@item.ScheduleId">Edit</a> 
+                       } |
+                       <a asp-page="ScheduleDetails" asp-route-id="@item.ScheduleId">Details</a> |
+                       <a asp-page="DeleteSchedule" asp-route-id="@item.ScheduleId">Delete</a>
                     </td>
                 </tr>
             }

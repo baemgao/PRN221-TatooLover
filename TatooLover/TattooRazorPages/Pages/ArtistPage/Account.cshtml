@@ -5,7 +5,12 @@
     ViewData["Title"] = "Account";
     Layout = "_ArtistLayout";
 }
-
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
 <h1>@Html.DisplayFor(model => model.Artist.Studio.Name)</h1>
 
 <div>
@@ -57,12 +62,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Artist.Certificate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Artist.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Artist.Status)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Artist.Studio)
