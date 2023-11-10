@@ -21,11 +21,11 @@ namespace TattooRazorPages.Pages.Admin
         public int StudioCount { get; set; }
         public int ArtistCount { get; set; }
         public int BookingCount { get; set; }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             if (HttpContext.Session.GetInt32("Email") == null)
             {
-                RedirectToPage("/Login");
+                return RedirectToPage("/Login");
             }
             customerList = customerRepository.GetCustomers();
             bookingList = bookingRepository.GetBookings();
@@ -37,6 +37,7 @@ namespace TattooRazorPages.Pages.Admin
             StudioCount = studioList.Count;
             ArtistCount = artistList.Count;
             BookingCount = bookingList.Count;
+            return Page();
         }
     }
 }

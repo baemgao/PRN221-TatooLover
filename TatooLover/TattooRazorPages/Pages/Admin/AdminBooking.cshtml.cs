@@ -17,13 +17,14 @@ namespace TattooRazorPages.Pages.Admin
         private IBookingRepository bookingRepository = new BookingRepository();
         public List<Booking> bookingList = new List<Booking>();
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("Email") == null)
+            if (HttpContext.Session.GetString("Email") == null)
             {
-                RedirectToPage("/Login");
+                return RedirectToPage("/Login");
             }
             bookingList = bookingRepository.GetBookings();
+            return Page();
         }
     }
 }

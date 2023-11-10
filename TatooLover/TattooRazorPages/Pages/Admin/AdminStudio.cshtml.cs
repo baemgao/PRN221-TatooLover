@@ -12,14 +12,15 @@ namespace TattooRazorPages.Pages.Admin
 
         public IStudioRepository studioRepository = new StudioRepository();
         public List<Studio> studioList = new List<Studio>();
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("Email") == null)
+            if (HttpContext.Session.GetString("Email") == null)
             {
-                RedirectToPage("/Login");
+                return RedirectToPage("/Login");
             }
             studioList = studioRepository.GetStudios();
             studioList = studioRepository.GetStudioByName(SearchText);
+            return Page();
         }
     }
 }

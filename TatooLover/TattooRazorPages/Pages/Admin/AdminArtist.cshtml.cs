@@ -12,14 +12,15 @@ namespace TattooRazorPages.Pages.Admin
 
         public IArtistRepository artistRepository = new ArtistRepository();
         public List<Artist> artistList = new List<Artist>();
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            if (HttpContext.Session.GetInt32("Email") == null)
+            if (HttpContext.Session.GetString("Email") == null)
             {
-                RedirectToPage("/Login");
+                return RedirectToPage("/Login");
             }
             artistList = artistRepository.GetArtists();
             artistList = artistRepository.GetArtistByName(SearchText);
+            return Page();
         }
     }
 }
