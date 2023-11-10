@@ -14,7 +14,7 @@ namespace Repositories
 
         List<Artist> GetArtistByName(string name);
         bool UpdateArtist(Artist artistId);
-        //List<Artist> GetArtistByStudioId(int StudioId);
+        List<Artist> GetArtistByStudioId(int StudioId);
         int AddArtist(Artist artist);
         public List<Service> GetServiceByArtistId(int artistId);
         void ChangePassword(int artistId, string? newPassword);

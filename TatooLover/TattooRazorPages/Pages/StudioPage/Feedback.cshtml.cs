@@ -7,7 +7,7 @@ namespace TattooRazorPages.Pages.StudioPage
 {
     public class FeedbackModel : PageModel
     {
-        BookingRepository bookingRepository = new BookingRepository();
+        IBookingRepository bookingRepository = new BookingRepository();
         public List<Booking> bookings;
         public IActionResult OnGet()
         {

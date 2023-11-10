@@ -1,4 +1,4 @@
-using BusinessObjects.Models;
+﻿using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories;
@@ -27,12 +27,12 @@ namespace TattooRazorPages.Pages.StudioPage
             }
             artist = new Artist();
             int studioId = HttpContext.Session.GetInt32("id").Value;
-            artist.Code = code;
-            artist.Name = name;
-            artist.Phone = phone;
-            artist.Address = address;
-            artist.Email = email;
-            artist.Certificate = certLink;
+            artist.Code = code.Trim();
+            artist.Name = name.Trim();
+            artist.Phone = phone.Trim();
+            artist.Address = address.Trim();
+            artist.Email = email.Trim();
+            artist.Certificate = certLink.Trim();
             artist.StudioId = studioId;
             artistRepository.AddArtist(artist);
 

@@ -7,7 +7,7 @@ namespace TattooRazorPages.Pages.StudioPage
 {
     public class ArtistModel : PageModel
     {
-        ArtistRepository artistRepository = new ArtistRepository();
+        IArtistRepository artistRepository = new ArtistRepository();
         public List<Artist> artists;
         public IActionResult OnGet()
         {

@@ -8,7 +8,7 @@ public partial class Artist
     public int ArtistId { get; set; }
 
     public int StudioId { get; set; }
-
+    
     public string Code { get; set; } = null!;
 
     public string? Name { get; set; } = null!;

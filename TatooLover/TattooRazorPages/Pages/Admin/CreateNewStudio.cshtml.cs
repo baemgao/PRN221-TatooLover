@@ -1,6 +1,7 @@
 using BusinessObjects.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using Repositories;
 
 namespace TattooRazorPages.Pages.Admin
@@ -14,10 +15,25 @@ namespace TattooRazorPages.Pages.Admin
         public List<Studio> studioList = new List<Studio>();
         public IActionResult OnGet() 
         {
-            if (HttpContext.Session.GetString("Email") == null)
-            {
+            if(HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Email").IsNullOrEmpty()) {
                 return RedirectToPage("/Login");
             }
+            return Page();
+        }
+        public IActionResult OnPost(String code, String name, String address, String phone, TimeSpan openHour, TimeSpan closeHour) 
+        {
+            Studio studio = new Studio()
+            {
+                Code = code,
+                Name = name,
+                Address = address,
+                Phone = phone,
+                OpenHour = openHour,
+                CloseHour = closeHour,
+                Status = 1,
+                Password = "Password@1",
+            };
+            studioRepository.CreateStudio(studio);
             return Page();
         }
     }

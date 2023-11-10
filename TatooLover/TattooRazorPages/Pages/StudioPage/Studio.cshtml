@@ -4,6 +4,7 @@
     ViewData["Title"] = Model;
     Layout = "_StudioLayout";
     var msg = ViewData["Message"];
+    var add = "https://www.google.com/maps/search/?api=1&query=" + Model.studio.Address;
 }
 
 <div class="studio">
@@ -29,7 +30,7 @@
             Address:
         </dt>
         <dd class="col-sm-9">
-            @Model.studio.Address
+            <a href="@add" target="_blank" style="color:white;text-decoration: none;">@Model.studio.Address</a>
         </dd>
 
         <dt class="col-sm-3">
