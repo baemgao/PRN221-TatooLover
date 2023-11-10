@@ -12,10 +12,15 @@ namespace TattooRazorPages.Pages.Admin
 
         public ICustomerRepository customerRepository = new CustomerRepository();
         public List<Customer> customerList = new List<Customer>();
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("Email") == null)
+            {
+                return RedirectToPage("/Login");
+            }
             customerList = customerRepository.GetCustomers();
             customerList = customerRepository.GetCustomerByName(SearchText);
+            return Page();
         }
     }
 }

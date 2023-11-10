@@ -13,11 +13,15 @@ namespace TattooRazorPages.Pages.Admin
 
         public IStudioRepository studioRepository = new StudioRepository();
         public List<Studio> studioList = new List<Studio>();
-        public void OnGet() {}
-        public IActionResult OnPost(String code, String name, String address, String phone, TimeSpan openHour, TimeSpan closeHour) {
+        public IActionResult OnGet() 
+        {
             if(HttpContext.Session.GetString("Email") == null || HttpContext.Session.GetString("Email").IsNullOrEmpty()) {
-                RedirectToPage("Login");
+                return RedirectToPage("/Login");
             }
+            return Page();
+        }
+        public IActionResult OnPost(String code, String name, String address, String phone, TimeSpan openHour, TimeSpan closeHour) 
+        {
             Studio studio = new Studio()
             {
                 Code = code,
@@ -30,7 +34,7 @@ namespace TattooRazorPages.Pages.Admin
                 Password = "Password@1",
             };
             studioRepository.CreateStudio(studio);
-            return RedirectToPage("AdminStudio");
+            return Page();
         }
     }
 
